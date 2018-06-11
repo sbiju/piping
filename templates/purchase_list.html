@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% endblock %}
+
+
+{% block content %}
+<div class="row">
+<div class="col-sm-12">
+
+ <div class="table-boardered">
+     <h3>ISO Based Material List</h3>
+  <table class="table">
+      <tr>
+      <th>Sl.No</th>
+      <th>ISO NO./ LINE NO.</th>
+      <th>Material</th>
+      <th>Size</th>
+      <th>Quantiy</th>
+      <th>Price</th>
+      <th>Total Price</th>
+      <th>Edit</th>
+      <th>Purchased</th>
+
+      </tr>
+      {% for item in mat_list %}
+      <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ item.iso__iso_no }}</td>
+          <td><a href="{% url 'detail' pk=item.pk %}">{{ item.name }}</a></td>
+          <td>{{ item.size }}"</td>
+          <td>{{ item.total_quantity }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.total_price }}</td>
+          <td><a href="{% url 'purchase_update' pk=item.pk %}">Edit</a></td>
+          <td>{% if not item.purchased %}Not Purchased {% else %}Purchased{% endif %}</td>
+      </tr>
+      {% endfor %}
+  </table>
+</div>
+
+</div>
+
+<div class="col-sm-12">
+
+ <div class="table-boardered">
+     <h3>Total Material List</h3>
+  <table class="table">
+      <tr>
+      <th>Sl.No</th>
+      <th>Material</th>
+      <th>Size</th>
+      <th>Quantiy</th>
+
+      </tr>
+      {% for item in tot_list %}
+      <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.size }}"</td>
+          <td>{{ item.total_quantity }} Nos</td>
+      </tr>
+      {% endfor %}
+  </table>
+</div>
+
+</div>
+</div>
+
+{% endblock %}

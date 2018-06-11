@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+<div class="col-sm-12">
+
+ <div class="table-boardered">
+     <h3>ISO Based Material List</h3>
+  <table class="table">
+      <tr>
+
+      <th>ISO NO./ LINE NO.</th>
+      <th>Material</th>
+      <th>Size</th>
+      <th>Quantiy</th>
+      <th>Price</th>
+      <th>Total</th>
+      <th>Purchased</th>
+
+      </tr>
+
+      <tr>
+
+          <td>{{ object.iso.iso_no }}</td>
+          <td>{{ object.name }}</td>
+
+          <td>{{ object.size }}"</td>
+          <td>{{ object.quantity }}</td>
+          <td>{{ object.price }}</td>
+          <td>{{ object.total_price }}</td>
+          <td>{% if not object.purchased %}Not Purchased {% else %}Purchased{% endif %}</td>
+      </tr>
+
+  </table>
+</div>
+
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% endblock %}
+
+
+{% block content %}
+<div class="row">
+<div class="col-sm-12">
+
+     <div class="table-boardered">
+         <h3>ISO Based Material List (Design Dept..)</h3>
+              <table class="table">
+                  <tr>
+                  <th>Sl.No</th>
+                  <th>ISO NO./ LINE NO.</th>
+                  <th>Material</th>
+                  <th>Size</th>
+                  <th>Quantiy</th>
+                  <th>Edit</th>
+
+                  </tr>
+                  {% for item in mat_list %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ item.iso__iso_no }}</td>
+                      <td><a href="{% url 'detail' pk=item.pk %}">{{ item.name }}</a></td>
+                      <td>{{ item.size }}"</td>
+                      <td>{{ item.quantity }}</td>
+                      <td><a href="{% url 'update' pk=item.pk %}">Edit</a></td>
+                  </tr>
+                  {% endfor %}
+              </table>
+
+    </div>
+
+</div>
+</div>
+
+{% endblock %}
