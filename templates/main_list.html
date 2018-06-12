@@ -23,6 +23,7 @@
                   <th>Total Price</th>
                   <th>Purchased</th>
                   <th>Fabricated</th>
+                  <th>Issued</th>
 
                   </tr>
                   {% for item in mat_list %}
@@ -45,6 +46,7 @@
 
                       <td>{% if not item.purchased %}Not Purchased {% else %}Purchased{% endif %}</td>
                       <td>{% if not item.fabricated %}Not Fabricated {% else %}Fabricated{% endif %}</td>
+                      <td>{% if not item.issued %}Not Issued {% else %}Issued{% endif %}</td>
                   </tr>
                   {% endfor %}
               </table>

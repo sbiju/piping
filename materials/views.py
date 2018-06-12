@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView, \
     CreateView, TemplateView
 from .mixins import LoginRequiredMixin
 from .models import MaterialData, Owner
-from .forms import MaterialForm, PurchaseForm
+from .forms import MaterialForm, PurchaseForm, DesignForm, StoreForm, FabForm
 
 
 class HomeView(TemplateView):
@@ -15,6 +15,9 @@ class HomeView(TemplateView):
     #     context = super(HomeView, self).get_context_data(**kwargs)
     #     context['info_list'] = Info.objects.all()
     #     return context
+
+class FabHomeView(TemplateView):
+    template_name = 'fab_home.html'
 
 
 class MainListView(LoginRequiredMixin, ListView):
@@ -52,8 +55,8 @@ class DesignlListView(ListView):
         user = self.request.user
         context['mat_list'] = MaterialData.objects.filter(owner__design=user).values('iso__iso_no','pk', 'name', 'size', 'quantity')\
             .order_by('iso__iso_no','name','pk', 'size', 'quantity').annotate(total_quantity=Sum('quantity'))
-        context['tot_list'] = MaterialData.objects.filter(owner__design=user).values('name', 'size').order_by('name', 'size') \
-            .annotate(total_quantity=Sum('quantity'))
+        # context['tot_list'] = MaterialData.objects.filter(owner__design=user).values('name', 'size').order_by('name', 'size') \
+        #     .annotate(total_quantity=Sum('quantity'))
         return context
 
 
@@ -69,6 +72,88 @@ class PurchaseListView(ListView):
             .order_by('iso__iso_no','name','pk', 'size','price', 'purchased', 'total_price').annotate(total_quantity=Sum('quantity'))
         # context['tot_list'] = MaterialData.objects.values('name', 'size').order_by('name', 'size') \
         #     .annotate(total_quantity=Sum('quantity'))
+        return context
+
+
+class StoreListView(ListView):
+    model = MaterialData
+    queryset = MaterialData.objects.all()
+    template_name = 'store_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(StoreListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['mat_list'] = MaterialData.objects.filter(owner__store=user)\
+            .values('iso__iso_no','pk', 'name', 'size', 'quantity', 'quantity_issued', 'stock')\
+            .order_by('iso__iso_no','name','pk', 'size', 'quantity', 'quantity_issued', 'stock')\
+            .annotate(total_quantity=Sum('quantity'))
+        return context
+
+
+class FabListView(ListView):
+    model = MaterialData
+    queryset = MaterialData.objects.all()
+    template_name = 'fab_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FabListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['mat_list'] = MaterialData.objects.filter(owner__fabrication=user) \
+            .values('iso__iso_no',
+                    'pk',
+                    'name',
+                    'size',
+                    'quantity',
+                    'quantity_issued',
+                    'stock',
+                    'quantity_used',
+                    'total_joints'
+
+                    )\
+            .annotate(total_quantity=Sum('quantity')) \
+            .order_by('iso__iso_no',
+                      'pk',
+                      'name',
+                      'size',
+                      'quantity',
+                      'quantity_issued',
+                      'stock',
+                      'quantity_used',
+                      'total_joints'
+                      )\
+            .annotate(total_quantity=Sum('quantity'))
+        return context
+
+
+class FabStausView(ListView):
+    model = MaterialData
+    queryset = MaterialData.objects.all()
+    template_name = 'fab_status.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FabStausView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['mat_list'] = MaterialData.objects.filter(owner__fabrication=user) \
+            .values('iso__iso_no',
+                    'pk',
+                    'total_joints',
+                    'completed_joints',
+                    'balance',
+                    'ndt_status',
+                    'hydrotest_status',
+                    'date_completed',
+                    ) \
+            .annotate(total_quantity=Sum('quantity')) \
+            .order_by('iso__iso_no',
+                      'pk',
+                      'total_joints',
+                      'completed_joints',
+                      'balance',
+                      'ndt_status',
+                      'hydrotest_status',
+                      'date_completed',
+                      ) \
+            .annotate(total_quantity=Sum('quantity'))
         return context
 
 
@@ -88,7 +173,6 @@ class MaterialCreateView(CreateView):
         owner = Owner.objects.get(user=self.request.user)
         form.instance.owner = owner
         valid_data = super(MaterialCreateView, self).form_valid(form)
-        # form.instance.designer.add(user)
         return valid_data
 
 
@@ -116,8 +200,29 @@ class MaterialUpdateView(UpdateView):
     #         raise Http404
 
 
+class DesignUpdateView(UpdateView):
+    model = MaterialData
+    form_class = DesignForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('design_list')
+
+
 class PurchaseUpdateView(UpdateView):
     model = MaterialData
     form_class = PurchaseForm
     template_name = 'form.html'
     success_url = reverse_lazy('purchase_list')
+
+
+class StoreUpdateView(UpdateView):
+    model = MaterialData
+    form_class = StoreForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('store_list')
+
+
+class FabUpdateView(UpdateView):
+    model = MaterialData
+    form_class = FabForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('fab_list')

@@ -5,6 +5,12 @@ from django.db.models.signals import pre_save
 
 User = settings.AUTH_USER_MODEL
 
+NDT_CHOICES = (
+                ('opt1', 'Not Started'),
+                ('opt2', 'Started'),
+                ('opt3', 'Completed'),
+                  )
+
 
 class Iso(models.Model):
     iso_no = models.CharField(verbose_name='iso no/line no', max_length=200, blank=True, null=True)
@@ -30,6 +36,9 @@ class MaterialData(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     size = models.CharField(max_length=200,blank=True, null=True)
     quantity = models.IntegerField(blank=True, null=True)
+    quantity_issued = models.IntegerField(blank=True, null=True)
+    quantity_used = models.IntegerField(blank=True, null=True)
+    stock = models.IntegerField(blank=True, null=True)
     active = models.BooleanField(default=True)
     purchased = models.BooleanField(default=False)
     fabricated = models.BooleanField(default=False)
@@ -37,6 +46,13 @@ class MaterialData(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     total_price = models.DecimalField(max_digits=25, decimal_places=2, blank=True, null=True)
+
+    total_joints = models.IntegerField(blank=True, null=True)
+    completed_joints = models.IntegerField(blank=True, null=True)
+    balance = models.IntegerField(blank=True, null=True)
+    ndt_status = models.CharField(max_length=180, choices=NDT_CHOICES)
+    hydrotest_status = models.CharField(max_length=180, choices=NDT_CHOICES)
+    date_completed = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -51,6 +67,10 @@ class MaterialData(models.Model):
 def total_reciever(sender, instance, *args, **kwargs):
     quantity = instance.quantity
     price = instance.price
+    quantity_issued = instance.quantity_issued
+    quantity_used = instance.quantity_used
+    stock = quantity - quantity_issued
+    instance.stock = stock
     try:
         total_price = quantity * price
     except:

@@ -3,13 +3,13 @@ from django.contrib import admin
 from django.conf import settings
 
 from django.conf.urls.static import static
-from calculations.views import HomeView
+from materials.views import HomeView
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='home'),
-    url(r'^', include('calculations.urls')),
+    url(r'^', include('materials.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -11,7 +11,7 @@
 <div class="col-sm-12">
 
      <div class="table-boardered">
-         <h3>ISO Based Material List (Design Dept..)</h3>
+         <h3>Material List (Fab Dept..)</h3>
               <table class="table">
                   <tr>
                   <th>Sl.No</th>
@@ -19,6 +19,10 @@
                   <th>Material</th>
                   <th>Size</th>
                   <th>Quantiy</th>
+                  <th>Issued Quantiy</th>
+                  <th>Stock</th>
+                  <th>Total Joints</th>
+                  <th>Completed Joints</th>
                   <th>Edit</th>
 
                   </tr>
@@ -29,7 +33,11 @@
                       <td><a href="{% url 'detail' pk=item.pk %}">{{ item.name }}</a></td>
                       <td>{{ item.size }}"</td>
                       <td>{{ item.quantity }}</td>
-                      <td><a href="{% url 'design_update' pk=item.pk %}">Edit</a></td>
+                      <td>{{ item.quantity_issued }}</td>
+                      <td>{{ item.stock }}</td>
+                      <td>{{ item.total_joints }}</td>
+                      <td>{{ item.completed_joints }}</td>
+                      <td><a href="{% url 'fab_update' pk=item.pk %}">Edit</a></td>
                   </tr>
                   {% endfor %}
               </table>
