@@ -1,8 +1,7 @@
 from django.contrib import admin
 
-from .models import MaterialData, Iso, Owner
+from .models import MaterialData, Iso
 
 
-admin.site.register(Owner)
 admin.site.register(MaterialData)
 admin.site.register(Iso)

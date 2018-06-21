@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="table-responsive">
+             <h3>Fabrication Report based on Date</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                          <th>Sl.No</th>
+                          <th>DATE</th>
+                          <th>Completed Inch Dia</th>
+                      </tr>
+
+                      {% for item in date_report %}
+                      <tr>
+
+                          <td>{{ forloop.counter }}</td>
+                          <td><h5>{{ item.joint__date_completed }}</h5></td>
+                          <td>{{ item.completed_inch_dia }}</td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+
+         <div class="table-responsive">
+             <h3>Fabrication Report based on ISO</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                          <th>Sl.No</th>
+                          <th>ISO NO./ LINE NO.</th>
+                          <th>Total Inch Dia</th>
+                          <th>Completed Inch Dia</th>
+                          <th>Report Date</th>
+
+                      </tr>
+                      {% for item in report %}
+
+                      <tr>
+
+                          <td>{{ forloop.counter }}</td>
+                          <td><h5>{{ item.iso_no }}</h5></td>
+                          <td>{{ item.inch_dia }}</td>
+                          <td>{{ item.completed_inch_dia }}</td>
+
+                          <td>{{ joint.date_completed }}</td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+        <div class="table-responsive">
+             <h3>Summary</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                          <!--<th>Sl.No</th>-->
+                          <th>Project Name</th>
+                          <th>Total</th>
+                          <th>Total Inch Dia Completed</th>
+
+                      </tr>
+                      {% for item in sum_list %}
+
+                      <tr>
+                          <td><h5>{{ item.project__name|title }}</h5></td>
+                          <td>{{ item.total_inch_dia }}</td>
+                          <td>{{ item.completed_inch_dia }}</td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

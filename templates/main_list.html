@@ -10,9 +10,9 @@
 <div class="row">
 <div class="col-sm-12">
 
-     <div class="table-boardered">
+     <div class="table-responsive">
          <h3>ISO Based Material List</h3>
-              <table class="table">
+              <table class="table table-bordered">
                   <tr>
                   <th>Sl.No</th>
                   <th>ISO NO./ LINE NO.</th>
@@ -29,7 +29,7 @@
                   {% for item in mat_list %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.iso__iso_no }}</td>
+                      <td>{{ item.iso.iso_no }}</td>
                       <td><a href="{% url 'detail' pk=item.pk %}">{{ item.name }}</a></td>
                       <td>{{ item.size }}"</td>
                       <td>{{ item.quantity }}</td>
@@ -53,32 +53,49 @@
 
 
     </div>
-
-<!--<div class="col-sm-12">-->
-
- <!--<div class="table-boardered">-->
-     <!--<h3>Total Material List</h3>-->
-  <!--<table class="table">-->
-      <!--<tr>-->
-      <!--<th>Sl.No</th>-->
-      <!--<th>Material</th>-->
-      <!--<th>Size</th>-->
-      <!--<th>Quantiy</th>-->
-
-      <!--</tr>-->
-      <!--{% for item in tot_list %}-->
-      <!--<tr>-->
-          <!--<td>{{ forloop.counter }}</td>-->
-          <!--<td>{{ item.name }}</td>-->
-          <!--<td>{{ item.size }}"</td>-->
-          <!--<td>{{ item.total_quantity }} Nos</td>-->
-      <!--</tr>-->
-      <!--{% endfor %}-->
-  <!--</table>-->
-<!--</div>-->
-
-<!--</div>-->
 </div>
 </div>
+<div class="row">
+    <div class="col-sm-12">
+         <div class="table-responsive">
+             <h3>Joint Report</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                      <th>Sl.No</th>
+                      <th>ISO NO./ LINE NO.</th>
+                      <th>Joint No.</th>
+                      <th>Size</th>
+                      <th>Schedule</th>
+
+                      <th>Welder Name</th>
+                      <th>Fabricator Name</th>
+                      <th>Time taken</th>
+                      <th>Work Status</th>
+                      <th>NDT Status</th>
+                      <th>Report Date</th>
+
+                      </tr>
+                      {% for item in joint_report %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ item.iso.iso_no }}</td>
+                          <td>{{ item.joint_no }}</td>
+                          <td>{{ item.size }}</td>
+                          <td>{{ item.sch }}</td>
+
+                          <td>{{ item.welder|title }}</td>
+                          <td>{{ item.fabricator|title }}</td>
+                          <td>{{ item.hours_worked }} hrs</td>
+                          <td>{{ item.work_status }}</td>
+                          <td>{{ item.ndt_status }}</td>
+                          <td>{{ item.date_completed }}</td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+
+    </div>
+</div>
+
 
 {% endblock %}

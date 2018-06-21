@@ -9,40 +9,48 @@
 {% block content %}
 
 <div class="row">
-<div class="col-sm-12">
+    <div class="col-sm-12">
+         <div class="table-boardered">
+             <h3>Fabrication Status</h3>
+                  <table class="table">
+                      <tr>
+                          <th>Sl.No</th>
+                          <th>ISO NO./ LINE NO.</th>
+                          <th>Total Joints</th>
+                          <th>Completed Joints</th>
+                          <th>Balance Joints</th>
 
-     <div class="table-boardered">
-         <h3>Fabrication Status</h3>
-              <table class="table">
-                  <tr>
-                  <th>Sl.No</th>
-                  <th>ISO NO./ LINE NO.</th>
-                  <th>Total Joints</th>
-                  <th>Completed Joints</th>
-                  <th>Balance to be Completed</th>
-                  <th>NDT Status</th>
-                  <th>Hydrotest Status</th>
-                  <th>Mechanical Completion Date</th>
-                  <th>Edit</th>
+                          <th>Total Inch Dia</th>
+                          <th>Completed Inch Dia</th>
+                          <th>Balance Inch Dia</th>
 
-                  </tr>
-                  {% for item in mat_list %}
-                  <tr>
-                      <td>{{ forloop.counter }}</td>
-                      <td>{{ item.iso__iso_no }}</td>
-                      <td>{{ item.total_joints }}"</td>
-                      <td>{{ item.completed_joints }}</td>
-                      <td>{{ item.balance }}</td>
-                      <td>{{ item.ndt_status }}</td>
-                      <td>{{ item.hydrotest_status }}</td>
-                      <td>{{ item.date_completed }}</td>
-                      <td><a href="{% url 'fab_update' pk=item.pk %}">Edit</a></td>
-                  </tr>
-                  {% endfor %}
-              </table>
+                          <th>NDT Status</th>
+                          <th>Hydrotest Status</th>
+                          <th>Mechanical Completion Date</th>
+                          <th>Edit</th>
+
+                      </tr>
+                      {% for item in mat_list %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ item.iso__iso_no }}</td>
+                          <td>{{ item.total_joints }}</td>
+                          <td>{{ item.joint__joint_no }}</td>
+                          <td>{{ item.balance_joints }}</td>
+
+                          <td>{{ item.total_inch_dia }}</td>
+                          <td>{{ item.completed_inch_dia }}</td>
+                          <td>{{ item.balance_inch_dia }}</td>
+
+                          <td>{{ item.ndt_status }}</td>
+                          <td>{{ item.hydrotest_status }}</td>
+                          <td>{{ item.date_completed }}</td>
+                          <td><a href="{% url 'fab_status_update' pk=item.pk %}">Edit</a></td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
 
     </div>
-
-</div>
 </div>
 {% endblock %}

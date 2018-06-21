@@ -20,9 +20,9 @@
                   <th>Size</th>
                   <th>Quantiy</th>
                   <th>Issued Quantiy</th>
-                  <th>Stock</th>
-                  <th>Total Joints</th>
-                  <th>Completed Joints</th>
+                  <th> Present Stock</th>
+                  <th>Quantity Used</th>
+                  <th>Balance to be Used</th>
                   <th>Edit</th>
 
                   </tr>
@@ -35,8 +35,8 @@
                       <td>{{ item.quantity }}</td>
                       <td>{{ item.quantity_issued }}</td>
                       <td>{{ item.stock }}</td>
-                      <td>{{ item.total_joints }}</td>
-                      <td>{{ item.completed_joints }}</td>
+                      <td>{{ item.quantity_used }}</td>
+                      <td>{{ item.balance_used }}</td>
                       <td><a href="{% url 'fab_update' pk=item.pk %}">Edit</a></td>
                   </tr>
                   {% endfor %}

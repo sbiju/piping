@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+         <div class="table-responsive">
+             <h3>Joint Status</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                      <th>Sl.No</th>
+                      <th>ISO NO./ LINE NO.</th>
+                      <th>Joint No.</th>
+                      <th>Size</th>
+                      <th>Schedule</th>
+
+                      <th>Welder Name</th>
+                      <th>Fabricator Name</th>
+                      <th>Time taken</th>
+                      <th>Work Status</th>
+                      <th>NDT Status</th>
+                      <th>Edit</th>
+
+                      </tr>
+                      {% for item in mat_list %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ item.iso.iso_no }}</td>
+                          <td>{{ item.joint_no }}</td>
+                          <td>{{ item.size }}</td>
+                          <td>{{ item.sch }}</td>
+
+                          <td>{{ item.welder|title }}</td>
+                          <td>{{ item.fabricator|title }}</td>
+                          <td>{{ item.hours_worked }} hrs</td>
+                          <td>{{ item.work_status }}</td>
+                          <td>{{ item.ndt_status }}</td>
+                          <td><a href="{% url 'joint_update' pk=item.pk %}">Edit</a></td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

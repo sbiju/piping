@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block head_title %}{% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="table-responsive">
+             <h3>Supervisor Performance</h3>
+              <table class="table table-bordered">
+                  <tr>
+                      <th>NO.</th>
+                      <th>Supervisor</th>
+                      <th>Total Inch</th>
+                      <th>Actual Total Inch</th>
+                      <th>Man Hours Taken</th>
+                  </tr>
+                  {% for item in supervisor %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ item.joint__supervisor }}</td>
+                      <td>{{ item.total_inch }}</td>
+                      <td>{{ item.actual_inch }}</td>
+                      <td>{{ item.avg_man_hours|floatformat:2 }}</td>
+                  </tr>
+                  {% endfor %}
+              </table>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="table-responsive">
+             <h3>Engineer Performance</h3>
+              <table class="table table-bordered">
+                  <tr>
+                      <th>NO.</th>
+                      <th>Engineer</th>
+                      <th>Total Inch</th>
+                      <th>Actua Total Inch</th>
+                      <th>Man Hours Taken</th>
+
+                  </tr>
+                  {% for item in engineer %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ item.joint__engineer }}</td>
+                      <td>{{ item.total_inch }}</td>
+                      <td>{{ item.actual_inch }}</td>
+                      <td>{{ item.avg_man_hours|floatformat:2 }}</td>
+                  </tr>
+                  {% endfor %}
+              </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="table-responsive">
+             <h3>Welder Performance</h3>
+              <table class="table table-bordered">
+                  <tr>
+                  <th>NO.</th>
+                  <th>Welder</th>
+                  <th>Total Inch</th>
+                  <th>Actual Total Inch</th>
+
+
+                  </tr>
+                  {% for item in welder %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ item.joint__welder }}</td>
+                      <td>{{ item.total_inch }}</td>
+                      <td>{{ item.actual_inch }}</td>
+
+                  </tr>
+                  {% endfor %}
+              </table>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="table-responsive">
+             <h3>Fabricator Performance</h3>
+              <table class="table table-bordered">
+                  <tr>
+                  <th>NO.</th>
+                  <th>Fabricator</th>
+                  <th>Total Inch</th>
+                  <th>Actua Total Inch</th>
+
+                  </tr>
+                  {% for item in fabricator %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ item.joint__fabricator }}</td>
+                      <td>{{ item.total_inch }}</td>
+                      <td>{{ item.actual_inch }}</td>
+                  </tr>
+                  {% endfor %}
+              </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
