@@ -2,11 +2,10 @@ from django.conf.urls import url
 from .views import MaterialCreateView, DesignlListView, MaterialUpdateView, MaterialDetailView, \
     PurchaseListView, PurchaseUpdateView, AdminListView, DesignUpdateView, StoreListView, StoreUpdateView,\
     FabListView, FabUpdateView, FabHomeView, AdminHomeView, JointReportView, FabReportView, \
-    PerformReportView, IsoCreateView
+    PerformReportView
 
 
 urlpatterns = [
-    url(r'^add_iso/$', IsoCreateView.as_view(), name='add_iso'),
     url(r'^add/$', MaterialCreateView.as_view(), name='add'),
     url(r'^add/(?P<pk>[\w-]+)/$', MaterialUpdateView.as_view(), name='update'),
     url(r'^design/$', DesignlListView.as_view(), name='design_list'),

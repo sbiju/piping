@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container employees">
+<div class="row">
+
+     <div class="table-responsive">
+         <h3 style="margin-left: 50px; margin-bottom:15px;">{{ headline }}</h3>
+              <table class="table table-striped emp-list">
+                  <tr>
+
+                      <th>Sl No.</th>
+                      <th>Full Name</th>
+                      <th>Employee No.</th>
+                      <th>Designation</th>
+                      <th>Date of Joining</th>
+                  </tr>
+                  {% for emp in object_list %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ emp.first_name }} {{ emp.last_name }} </td>
+                      <td>{{ emp.emplyee_no }}</td>
+                      <td>{{ emp.designation }}</td>
+                      <td>{{ emp.joined_date }}</td>
+
+                  </tr>
+                  {% endfor %}
+              </table>
+           
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

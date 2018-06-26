@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<br/><br/>
+<div class="container">
+    <div class="jumbotron">
+        <h2>Verify Your E-mail Address</h2><br/>
+
+        <h5>We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process.
+        Please <a href="{% url 'profiles:contact_us' %}"><b>contact us</b></a>  if you do not receive it within a few minutes.</h5>
+    </div>
+</div>
+
+{% endblock %}

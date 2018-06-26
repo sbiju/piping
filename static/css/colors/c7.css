@@ -1,0 +1,527 @@
+/*===============================
+	Color
+=================================*/
+
+.carna_services .single_carna_service.service_1:hover .service_icon,
+.bordered .navbar-default.animated:not(.primary) .navbar-nav > li.current > a,
+.carna_services.carna_service_12 .single_carna_service .title i,
+a:focus, .opacity-header .navbar-nav > li > a:hover,
+a:hover, .opacity-header .navbar-nav > li > a:focus,
+.transparent-head .navbar-nav > li > a:hover,
+.transparent-head .navbar-nav > li.current > a,
+.hover-left:hover, .cart-and-search a, .sc_cta.primary a,
+.hover-left:focus, .cart-and-search a > i,
+.gradient-head .navbar-nav > li > a:hover,
+.gradient-head .navbar-nav > li > a:focus,
+.hover-right:hover, .home21 .banner-caption h1,
+.dropdown3 ul.sub-menu li:hover > a, .privacy-inner .privacy-terms a,
+.navbar-nav > li .sub-menu > li a:hover,
+.hover-right:focus, .bgslide .banner-caption h1,
+.banner-3 .banner-caption h1, #success, .segmentInfo.primary:before,
+.banner-6 .slide-left h1, .quote-form div.success,
+.section-head.style_3 h2, .app-feature .feature-item .icon,
+.navbar-nav > li.current > a, .accordion-default .panel-title a,
+.navbar-nav > li.current > a:hover, .mag-ticker > span,
+.navbar-nav > li.current > a:focus, .breadcrumb > li.active,
+.header19 .navbar-nav > li > a:hover, .highlight-color,
+.header19 .navbar-nav > li > a:focus,
+.header19.animated .navbar-nav > li.current > a,
+.header19.animated .navbar-nav > li > a:hover,
+.sidebar-nav li a:hover, .service-item h4 a:hover,
+.header21 .search-sub, .service-desc h4 a:hover,
+.header21 .side-nav, .portfolio-item .entry-meta a,
+.nav25 .navbar-nav > li.current > a,
+.nav25 .navbar-nav > li > a:hover, .cause-item .donation-goal p,
+.nav25 .navbar-nav > li > a:focus,
+.header28.animated .navbar-nav > li.current > a,
+.header28.animated .navbar-nav > li > a:hover,
+.header28 .navbar-nav > li.current > a,
+.header28 .navbar-nav > li > a:hover,
+.header-top.primary .quick-contact:hover > i,
+.header-top.primary .social-links li a:hover,
+.navbar-nav > li .dropdown > li a:hover,
+.home-banner.banner-3 .banner-caption h1,
+.slide6 .slidecaption h1, .next-prev-post.pagi2 a:hover,
+.slide6 .slidecaption h2, .next-prev-post.pagi2 a:focus,
+.home-banner.banner-4 .banner-caption h3,
+.home-banner.banner-4 .banner-caption ul li i,
+.coming-soon.update .mail-submit, .text-box h3,
+.banner-7 .sform7 .mail-submit, .support-block:hover span,
+.banner-3 .sform7 .mail-submit, .service3 .icon,
+.banner-8 .left-content h3, .service_tiem:hover,
+.banner-8 .content-item .icon, .flight-tab-nav li a:hover,
+.cnstrctn .slide-item h4, .drop-cap.tp,
+.service-four .service-item .service-icon,
+.service-four .service-desc span, .twitter-list .twitter-tweet a,
+.service-3 .service-icon, .dark-head .navbar-nav > li > a:hover,
+.product-overview h3, .service_tiem:hover .sicon i,
+.carna_services.carna_service_3 .service_icon,
+.carna_services.carna_service_9 .service_icon i,
+.gallery-filter li a.active, .references-block figcaption i,
+.price-table .value span, .corporate .service-item:hover .service-icon,
+.parallax-subs .psubs-submit, .promo-form .success,
+.testimonial-item .date b, .traveltav-nav li.active a,
+.tweet-item a, .feature2 .col-xs-12 ul li:first-child,
+.testimonial-item .test-entry span strong,
+#teatimonial .panel-title a, .tabbed-post .tab-list li.active a,
+.tweet-slider .tweet-item span, .segment:hover .hex-inner,
+.nws-item .news-head > span, .navbar-nav > li .sub-menu > li a:hover,
+.footer-navigation .footer-nav ul li a:hover,
+.footer .social-links li a:hover,
+.posts-section .post-entry .post-meta a:hover,
+.post-entry .post-media .link-post:hover,
+.about_psot_author h2, .entry-post .link-post:hover a,
+.about_psot_author div h3 a:hover,
+.post_comment_area > h2, .tweet-carousel .media-body p a:hover,
+.coment_text > div h2 a:hover,
+.coment_text > div span + a:hover,
+.search-head h1 span, .shop-quick-login h5 a,
+.terms-conditions a, .checkout-quick-coupon h5 a,
+.similar-project .project-hover a:hover,
+.service-round .servc-icon,
+.service-round:hover h4,
+.progress-set-two .progress-value, 
+.service-section .serv-icon,
+.service-gradient .single-service:hover .serv-icon,
+.service-gradient .single-service:hover .serv-icon i,
+.custom-service .csi,
+.counter-item > i, .carna_services .single_carna_service:hover  h2,
+.member-profile h3,
+.contact.parallax .section-head h2,
+.coming-soon .coming-text h1 span,
+.coming-soon .go-down a, .service6 .service-item:hover h4,
+.controls-wrapper .controls:hover,
+.boxed-mode .footer-top a, .spn_carousel_post_info a:hover,
+.shortcode-widget li a:hover,
+.sc_toggle2 .panel-title a,
+.sc_accordion2 .panel-title a,
+.spn_alert_yellow, .app-features .feature-item:hover .fi-icon,
+.carna_service_17 .single_carna_service  .readmore,
+.carna_service_11 .single_carna_service  .readmore,
+.carna_service_12 .single_carna_service  .readmore,
+.single_carna_service.service_2  .readmore,
+.bordered .navbar-default.animated .navbar-nav > li.current > a,
+.spn_sc_list_area ul.list_style_02 li span,
+.sc_ttp > p > a, .testimonial-synced .reviewer-desc > a:hover,
+.spn_sc_iconbox_area .single_icon_box .iconbox_icon,
+.spn_sc_iconbox_area .single_icon_box .iconbox_text a,
+.dropcap:first-letter, .score span.achieved,
+.sc_animated_banner.sc_animation_3 div h2,
+.sc_counter .pixelcoder_counter,
+.sc_blog_post .tags a:hover,
+.sc_blog_post h2 a:hover, .post-rating,
+.sc_blog_post a.link_more:hover, .footer .copyright a:hover,
+.blog_2 .tags a, .service6 .service-icon,
+.sc_blog_post.sc_recent_post a.link_more:hover,
+.sc_content_slider .flexslider .slides li .slider_text a,
+.sc_social div a, .testimonial-fullwidth .reviewer-desc a:hover,
+.footer-item a:hover, .testimonial-synced .reviewer-desc a:hover,
+.sc_testimonial .sc_single_testimonial span,
+.sc_code .panel-body .btn-group button {
+	color: #F37259;
+}
+
+
+/*===============================
+	Background Color
+=================================*/
+
+*::-moz-selection {
+    background-color: #F37259;
+    color: #fff;
+}
+*::-selection {
+    background-color: #F37259;
+    color: #fff;
+}
+.spinner > div, .header-top.primary,
+.btn-blue, .btn-ash:hover,
+.quick-contact:hover > i,
+.header-top .social-links li a:hover,
+.header-top.primary, .btn-transparent:hover,
+.btn-transparent:focus, .primary-bg,
+.header-top.primary + .slide-top .hide-top,
+.navbar-nav > li > a:after, .relatedPdHover,
+.section-head.style_2 h2:before,
+.navbar-nav > li.current > a:before,
+.navbar-nav > li > a:hover:before,
+.navbar-nav > li > a:focus:before,
+.social-links li a:hover, .sep-fullwidth,
+.header19 .search-sub, .title-sep h2:after,
+.cart-and-search > a:hover,
+ul.page-numbers li a:hover, .control-one .flex-direction-nav a:hover,
+.compare-basket.compare-active .btn-ash,
+.compare-basket.compare-active .btn-ash:hover,
+ul.page-numbers li .current, .bn-title,
+ul.page-numbers li .current:hover,
+.page-head-title .bx-controls-direction a:hover,
+.slide-wrapper .bx-controls-direction a:hover,
+.nav20 .navbar-nav > li.current > a, .sc_cta.primary,
+.nav20 .navbar-nav > li > a:hover,
+.nav20 .navbar-nav > li > a:focus,
+.nav21 .navbar-nav > li.current > a, .table-typography th,
+.nav21 .navbar-nav > li > a:hover, .sc_parallax_bg .text > a,
+.nav21 .navbar-nav > li > a:focus, .blog-search .search-sub,
+.nav22 .navbar-nav > li.current > a, .control-one .nivo-directionNav a:hover,
+.nav22 .navbar-nav > li > a:hover, .control-one .camera_next span:hover,
+.nav22 .navbar-nav > li > a:focus, .control-one .camera_prev span:hover,
+.nav23 .navbar-nav > li.current > a, .sc_cta a,
+.nav23 .navbar-nav > li > a:hover, .segment.day .hex-inner:before,
+.nav23 .navbar-nav > li > a:focus, .segmentInfo.primary,
+.nav25 .navbar-nav > li.current > a, .lunch .hex-inner:before,
+.nav25 .navbar-nav > li > a:hover, .schedule-carousel-nav li.active,
+.nav25 .navbar-nav > li > a:focus, .newsletter .news-sub:hover,
+.carna_service_17 .single_carna_service  .title i,
+.carna_service_11 .single_carna_service  .title i, .donate--form .amount-button:hover,
+.carna_service_12 .single_carna_service  .title i, .be-a-volunteer,
+.carousel_service_section .carousel_service_thumb .flex-active-slide .single_service_thumb,
+.carna_services.carna_service_13 .single_carna_service .readmore,
+.carna_services.carna_service_8 .single_carna_service .service_icon:after,
+.carna_services.carna_service_6 .single_carna_service .service_icon:after,
+.carna_services.carna_service_5 .single_carna_service .service_icon:after,
+.carna_services.carna_service_7 .single_carna_service .readmore,
+.carna_services.carna_service_10 .single_carna_service .readmore,
+.carna_services.carna_service_8 .single_carna_service .readmore,
+.carna_services.carna_service_6 .single_carna_service .readmore,
+.carna_services.carna_service_5 .single_carna_service .readmore,
+.carna_services.carna_service_4 .single_carna_service .readmore,
+.carna_services.carna_service_7 .single_carna_service .service_icon,
+.carna_services.carna_service_10 .single_carna_service .service_icon,
+.carna_services.carna_service_4 .single_carna_service .service_icon,
+.single_carna_service.service_2  .title i, .slide17 .item-inner h2,
+.top-search .search-submit, .loader:before, .grid-blog .blog-content,
+.home-banner.banner-2 .slide-controls a:hover, .donate--form .donate-sub,
+.banner-slider13 .owl-nav > div:hover, .glow-blue, .tp-price,
+.home-banner.banner-2 .carousel-indicators li:hover, .highlight-text,
+.home-banner.banner-2 .carousel-indicators li.active, .drop-cap:not(.tp),
+.slide-nav a:hover, .separator > span, .hotel-promo .promoHover,
+.banner-5 .calltoac, .navbar-nav span.coming, .search-tab-nav li a:hover i,
+.slide6 .slidecaption h3, .loader:after, .travel-item .details .ribbon,
+.banner-3 .home-social li a:hover, .block-overlay,
+.banner-8 .quote-form .quote-sub, .search-tab-nav li.active a,
+.sform .subs-sub, .navbar-default.primary .sticky-header,
+.service-four .service-item:hover .service-icon,
+.search-form .form-inner .search-sub, #buddypress div.generic-button a:hover,
+.service-four .service-item:hover .service-desc a:before,
+.service-3 .service-item:hover, .toggle-search .search-sub,
+.banner-10 .carna_service_14 .single_carna_service:hover i:before,
+.price-switcher a.active, .service-four .service-desc .more,
+.price-table:hover .package-title, .service5 .media-left span,
+.price-table .value:after, .boxed-hover .portfolio-desc span a:hover,
+.service-four .service-item:hover .service-desc .more:before,
+.team .member-thumb .mask li a:hover, .price-cat, .mag-post .img-cat,
+.team-mate:hover .about, .pizza-price .price-table:hover .package-title,
+.vtabs-nav li a:hover, .book-slider .flex-control-paging li a:after,
+.vtabs-nav li.active a, .accordion-default .panel-title a .icon,
+#faq .panel-title a .icon, .accordion-default .panel-heading.active a .icon:before,
+#faq .panel-heading.active a .icon:before, .control-one .bx-controls-direction a:hover,
+.twitter-feed .twitter-icon:after, .about-tab-nav li a:hover:after,
+.twitter-feed .twitter-icon > i, .about-tab-nav li.active a:after,
+.carna_services.carna_service_9 .single_carna_service, .callofaction,
+.carna_services.carna_service_3 .single_carna_service, .priceRange .ui-slider-handle,
+.carna_services.carna_service_9 .service_icon, .priceRange .ui-slider-range,
+.nws-item .post-meta:after, .bc_type.t5, .productBorder .productMetas a span,
+.timeline-blog .post-entry:hover:after, .productBorder .productMetas a,
+.contact4 .address, .more_service_box .hover_content_more_service,
+.accordion_area .panel-heading .panel-title a span.icon,
+.carna_services .single_carna_service.service_1 .service_icon,
+.bgslide .home-social li a:hover, .productViewToggle a.active,
+.banner-3 .home-social li a:hover, .social-section, .event-title,
+.post-entry .excerpt-btn:hover:before, .agency-portfolio .port-sep,
+.post-entry .excerpt-btn:hover:after, .traveltav-nav li.active:before,
+.post-entry .excerpt-btn a:hover, .service-block .sb-hover,
+.post-entry .excerpt-btn:hover a:after, .btn-white:hover,
+.posts-section .post-entry .post-share li a:hover, .primary-sec,
+.sidebar .bx-controls-direction a, .service3 .service-item:hover .icon,
+.entry-post .bx-controls-direction a, .support-block span,
+.post-entry .bx-controls-direction a, .service6 .service-item:hover .service-icon,
+.next-prev-post a:hover, .breadcrumb-area.bc-bg, .mag-title span,
+.next-prev-post a:focus, .block-itle.primary h4, .mag-post-pagi a:hover,
+.comment_form_box .comment-submit:hover, .flight-tab-nav li.active a,
+.carousel_service_slider .carousel_service_single_slide .readmore,
+.sidebar .blog-search .search-sub, .inner-content h2:before,
+.sidebar .social-links li a:hover, .inner-content h2:after,
+.sidebar .tagcloud a:hover, .address-box p:before,
+.search-page-sub, .custom_check + .custom_label:after,
+.single-postfolio-cat h1:after, .productCatNav li.active a,
+.blue-bg, .boxed-hover .portfolio-desc span a.link:hover,
+.feature-item .fi-icon, .order-status, .make-appoint,
+.progress-set-one .progress-bar, .appointment .submit:hover,
+.progress-set-7 .progress-wrapper, .hobbies .iconbox,
+.chart-inner-circle .circle-text, .references-block figure figcaption,
+.pie-chart.bg-color, .ui-datepicker .ui-datepicker-header,
+.service-section .single-service:hover .serv-icon,
+.service-section .servimg span, .widget-search .button,
+.service-gradient .col-xs-12:nth-child(even) .single-service,
+.custom-service .csi:after, .featured-entry .entry-post-info span,
+.custom-service:hover .csi, .carousel-event-title,
+.counter-style-2 > span, .portfolio-carousel .owl-nav > div:hover,
+.coming-soon .social-links ul li a:hover,
+.coming-soon .go-down .vrbox:after, .bdp-title,
+body.boxed-mode .footer, .edu-course .course-thumb a:hover,
+.boxed-slider-section .bx-controls-direction a:hover,
+#go-top:hover, .nws-item .separator span:before,
+.demo_head, .control-one .owl-nav > div:hover,
+.sc_toggle2 .panel-title a .icon, .control-one .owl-nav > div:hover,
+#search-members-form button[type="submit"],
+.sc_accordion2 .panel-title a .icon,
+.sc_toggle2 .panel-heading.active a .icon:before,
+.sc_accordion2 .panel-heading.active a .icon:before,
+.sc_accordion .panel-heading .panel-title a:before,
+.sc_toggle .panel-heading .panel-title a:before,
+.sc_accordion .panel-heading .panel-title a:after,
+.sc_toggle .panel-heading .panel-title a:after,
+.sc_modal_section .modal-header .close:hover,
+#sc_modal_5 .modal-header .modal-title:before,
+.hr4 span, .agency-prtflo .portfolio-desc span a:hover,
+.hr5 span, .control-one .owl-dot:hover,
+.hr7 span, .control-one .owl-dot.active,
+.spn_sc_list_area ul.list_style_01 li span,
+.spn_sc_list_area .list_style_06 li:after,
+.spn_sc_iconbox_area .single_icon_box .icon_image_circle,
+.sc_cta > a, .header19 .header-search.active .search-sub,
+.dropcap.dropcap_style1:first-letter,
+.sc_animated_banner.sc_animation_2,
+.sc_contact_info .social p a:hover,
+.sc_contact_info.contact_2 .title:before,
+.sc_contact_info.contact_2 .social h3:before,
+.sc_contact_info.contact_3 .title:before,
+.sc_contact_info.contact_3 .social h3:before,
+.sc_contact_info.contact_5 .title:before,
+.sc_contact_info.contact_5 .social h3:before,
+.sc_contact_info.contact_6 .title:before,
+.sc_contact_info.contact_6 .social h3:before,
+.sc_blog_post .date span:after,
+.sc_content_slider .flexslider .slides li .slider_text a:hover,
+.sc_box_title.style2:after,
+.sc_box_title.style2:before,
+.sc_social.style2 a:hover, .groups--dir .groups-tab,
+.sc_social.style7 div a:before,
+.sc_number_section .number p,
+.sc_code .panel-heading, .entry-content .social-sharer li a:hover,
+.sc_code .panel-body .btn-group button:hover,
+.progress-bar, .service-block:hover .sb-inner,
+.service-gradient .single-service,
+.header-top .social-links li a:hover,
+#product .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.post-pagination ul li:first-child a:hover,
+.post-pagination ul li:last-child a:hover,
+.member-profile .social-links li a:hover {
+    background-color: #F37259;
+}
+
+.service-section.service-gradient .single-service:hover .serv-icon {
+    background-color: #fff;
+}
+
+.service-gradient .col-xs-12:nth-child(2n+1) .single-service {
+    background-color: #EE6D54;
+}
+
+.product-desc a:before {
+    background-color: #E4634A;
+}
+
+.team .bx-controls-direction a.bx-prev:after {
+    background-color: #F37259!important;
+}
+
+.service-gradient {
+    background: -webkit-linear-gradient(90deg, #EE6D54 50%, #F37259 50%) no-repeat scroll center center transparent;
+    background: -o-linear-gradient(90deg, #EE6D54 50%, #F37259 50%) no-repeat scroll center center transparent;
+    background: linear-gradient(90deg, #EE6D54 50%, #F37259 50%) no-repeat scroll center center transparent;
+}
+
+.caption-top,
+.gallery-filterable .portfolio-thumb .mask,
+.service-item .service-thumb .mask,
+.sc_cta a:hover, .sc_cta a:focus,
+.sform .subs-sub:hover,
+.primary-hover .portfolio-desc,
+.event-thumb span,
+.btn-blue:hover,
+.btn-blue:focus,
+.sc_cta > a:hover,
+.sc_cta > a:focus {
+	background-color: rgba(243,114,89,0.8);
+}
+
+.banner-10 .carna_service_14 .single_carna_service i:after {
+    background-color: rgba(255, 82, 94, 0.3);
+}
+
+.page-head .overlay {
+    background: -webkit-linear-gradient(90deg, rgba(0,0,0,0.5), rgba(243,114,89,0.6) 40%);
+    background: -o-linear-gradient(90deg, rgba(0,0,0,0.5), rgba(243,114,89,0.6) 40%);
+    background: linear-gradient(90deg, rgba(0,0,0,0.5), rgba(243,114,89,0.6) 40%);
+}
+
+.client-carousel .overlay {
+    background: -webkit-linear-gradient(0deg, rgba(243,114,89,0.6) 40%,  rgba(0,0,0,0.5));
+    background: -o-linear-gradient(0deg, rgba(243,114,89,0.6) 40%,  rgba(0,0,0,0.5));
+    background: linear-gradient(0deg, rgba(243,114,89,0.6) 40%,  rgba(0,0,0,0.5));
+}
+
+.spn_sc_list_area .list_style_03 li:after {
+    background: none repeat scroll 0 0 rgba(243,114,89, 0.2);
+}
+
+.spn_sc_list_area .list_style_05 li:nth-child(even) {
+    background: none repeat scroll 0 0 rgba(243,114,89, 0.1);
+}
+
+/*===============================
+	Border Color
+=================================*/
+
+.loader-spinner, .btn-transparent,
+.header-top .social-links li a:hover,
+.quick-contact:hover > i,
+.header-top.primary + .slide-top,
+.home-banner.banner-2 .carousel-indicators li:hover,
+.home-banner.banner-2 .carousel-indicators li.active,
+.book-review .bx-wrapper .bx-pager.bx-default-pager a,
+.banner-3 .home-social li a:hover,
+.service-four .service-desc a, .sicon:before,
+.service-3 .service-icon, .header-top.primary + .slide-top,
+.social-links li a:hover,
+.header26 .social-links li > a:hover,
+.header28.animated .navbar-nav > li.current > a,
+.header28.animated .navbar-nav > li > a:hover,
+.header28 .navbar-nav > li.current > a,
+.header28 .navbar-nav > li > a:hover,
+.team .member-thumb .mask li a:hover,
+.vtabs-nav li a:hover, 
+.vtabs-nav li.active a,
+.quote-form .input:focus,
+#teatimonial .panel-default .panel-heading:hover,
+.bx-wrapper .bx-controls-direction a.bx-prev:hover:before,
+.bx-wrapper .bx-controls-direction a.bx-next:hover:after,
+.footer-navigation, .boxed-hover .portfolio-desc span a:hover,
+blockquote, .bgslide .home-social li a:hover,
+.banner-3 .home-social li a:hover,
+.post-entry .excerpt-btn a:hover,
+.posts-section .post-entry .post-share li a:hover,
+.comment_form_box .comment-submit:hover,
+.comment_form_box .form-control:focus,
+.sidebar .social-links li a:hover,
+.sidebar .tagcloud a:hover,
+.footer-top, .boxed-hover .portfolio-desc span a.link:hover,
+.progress-set-two .progress-value,
+.service-section .single-service:hover .serv-icon,
+.custom-service .csi, .service6 .service-item:hover .service-icon,
+.custom-service:hover .csi,
+.client-carousel2 .bx-controls-direction a.bx-prev:hover:before,
+.client-carousel2 .bx-controls-direction a.bx-next:hover:after,
+.coming-soon .social-links ul li a:hover,
+.coming-soon .go-down .vrbox,
+.form-control:focus,
+.sc_toggle2 .panel-default .panel-heading:hover,
+.sc_accordion2 .panel-default .panel-heading:hover,
+.spn_sc_list_area .list_style_03 li:after,
+.spn_sc_slider_1 .owl-prev:hover:before,
+.spn_sc_slider_1 .owl-next:hover:after,
+.sc_contact_info .social p a:hover,
+.sc_blog_post .date, .entry-content .social-sharer li a:hover,
+#buddypress div.generic-button a:hover,
+.sc_box_title.style3:after,
+.sc_box_title.style4 h2,
+.sc_box_title.style3 h2,
+.sc_box_title.style4 h2:after,
+.sc_box_title.style4 h2:before,
+.sc_box_title.style5 h2:after,
+.sc_social.style2 a:hover,
+.sc_social.style4 a:after,
+.sc_social.style5 a:before,
+.sc_social.style5 a:after,
+.sc_social.style6 a:before,
+.sc_social.style6 a:after, .segment:hover .speaker img,
+.sc_social.style7 div a, .edu-course .course-thumb a:hover,
+.post-tab-nav li a:hover, .mag-post-pagi a:hover,
+.post-tab-nav li a:focus, .productCatNav li.active a,
+.post-tab-nav li.active a, .productViewToggle a.active,
+.sc_testimonial .flex-direction-nav .flex-prev:after,
+.sc_testimonial .flex-direction-nav .flex-next:after,
+.similar-projects .bx-controls-direction a.bx-prev:hover:before,
+.similar-projects .bx-controls-direction a.bx-next:hover:after,
+.carna_services .single_carna_service.service_1:hover .service_icon,
+.sc_number_section .number, .dark-head .social-links li > a:hover,
+.app-features .feature-item:hover .fi-icon:after,
+.sc_quote blockquote,ul.page-numbers li a:hover,
+ul.page-numbers li .current, .support-block:hover span,
+.corporate .service-item:hover .service-icon,
+ul.page-numbers li .current:hover,
+.sc_code .panel, .loader-spinner,
+.sc_code .panel-heading, .service-block:hover .sb-inner,
+.sc_code .panel-body .btn-group, .support-block:hover span,
+.sc_code .panel-body .btn-group button,
+.header-top .social-links li a:hover,
+#product .bx-wrapper .bx-pager.bx-default-pager a,
+#product .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.member-profile .social-links li a:hover {
+	border-color: #F37259;
+}
+
+
+.team .bx-controls-direction a:before,
+.team .bx-controls-direction a:after,
+.team .bx-controls-direction a:hover:before,
+.team .bx-controls-direction a:hover:after,
+.team .bx-controls-direction a:before,
+.team .bx-controls-direction a:after,
+.team .bx-controls-direction a:hover:before,
+.team .bx-controls-direction a:hover:after,
+.agency-prtflo .portfolio-desc span a:hover,
+.book-slider .flex-control-paging li a {
+    border-color: #F37259 !important;
+}
+
+.top-bar-inner, .footer-top,
+.travel-item .details .ribbon:after, .sc_quote.style_5 blockquote,
+.carousel_service_section .carousel_service_thumb .single_service_thumb:after,
+.service-four .service-desc .more,
+.slide6 .slidecaption h3:before {
+    border-top-color: #F37259;
+}
+
+.navbar-nav > li.current a > .drpdownSign:after,
+.navbar-nav span.coming:before,
+.sc_box_title.style2,
+.travel-item .details .ribbon:before,
+.grid-blog .blog-content:before,
+.slide6 .slidecaption h3:before {
+    border-right-color: #F37259;
+}
+
+.accordion-default .panel-default .panel-heading:hover,
+.sc_box_title.style5:before, .service_more>h2,
+.mag-title,
+.navbar-nav > li.current a > .drpdownSign:after {
+    border-bottom-color: #F37259;
+}
+
+.grid-blog.blog-img-right .blog-content:before,
+.contact4 .address:before,
+.traveltav-nav li.active:after,
+.sc_box_title.style2 {
+    border-left-color: #F37259;
+}
+
+
+/*===============================
+	Box Shadow
+=================================*/
+
+
+.bx-wrapper .bx-pager.bx-default-pager a:after {
+    box-shadow: inset 0 0 0 5px #F37259;
+}
+
+.comment_form_box .form-control:focus {
+  	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 
+                0 0 8px rgba(243,114,89,0.8);
+}
+
+.spn_sc_list_area .list_style_06 li:after {
+    box-shadow: 0 0 0 4px rgba(243,114,89, 0.4);
+}

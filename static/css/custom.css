@@ -1,11 +1,30 @@
-.navbar-right {
+
+.form-class{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.wrap{
+    padding: 50px;
+}
+.employees{
+    margin-top:25px;
+    margin-bottom:30px;
+    padding-left:20px;
+    margin-right:20px;
+
+}
+.emp-list > tr > td{
+    padding:10px;
+    padding-left:50px;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding:10px;
+    padding-left:50px;
     text-transform: uppercase;
-    padding-top:12px;
-}
-.navbar-default {
-    background-color: #138d84;
-    border-color: #1a1616;
-}
-.navbar-default .navbar-nav > li > a {
-    color: #ffffff;
+
 }

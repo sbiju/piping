@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container employees">
+<div class="row">
+
+     <div class="table-responsive">
+         <h3 style="margin-left: 50px; margin-bottom:15px;">{{ headline }}</h3>
+              <table class="table table-striped emp-list">
+                  <tr>
+
+                      <th>Full Name</th>
+                      <th>Employee No.</th>
+                      <th>Date of Joining</th>
+                  </tr>
+                  {% for emp in object_list %}
+                  <tr>
+
+                      <td>{{ emp.employee.first_name }} {{ emp.employee.last_name }} </td>
+                      <td>{{ emp.employee.emplyee_no }}</td>
+                      <td>{{ emp.employee.joined_date }}</td>
+
+                  </tr>
+                  {% endfor %}
+              </table>
+
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

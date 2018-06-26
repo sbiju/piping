@@ -1,14 +1,120 @@
 from django import forms
-from .models import Owner
+from .models import Employee, Welder, Fabricator, Supervisor, Engineer
+from control_centre.models import Owner
+from dal import autocomplete
 
 
-class OwnerCreateForm(forms.ModelForm):
+class SupervisorCreateForm(forms.ModelForm):
+    employee = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='employee_auto')
+    )
 
     class Meta:
-        model = Owner
-        fields = ['user', 'design', 'purchase', 'store', 'fabrication']
+        model = Supervisor
+        fields = ['employee']
+
+    def clean_employee(self):
+        employee = self.cleaned_data.get('employee')
+        qs = Welder.objects.filter(employee=employee)
+        if qs.exists():
+            raise forms.ValidationError("Error, This username already assigned as Welder")
+        qs_2 = Fabricator.objects.filter(employee=employee)
+        if qs_2.exists():
+            raise forms.ValidationError("Error, This username already assigned as Fabricator")
+        qs_3 = Supervisor.objects.filter(employee=employee)
+        if qs_3.exists():
+            raise forms.ValidationError("Error, This username already assigned as Supervisor")
+        qs_4 = Engineer.objects.filter(employee=employee)
+        if qs_4.exists():
+            raise forms.ValidationError("Error, This username already assigned as Engineer")
+        return employee
 
 
-class UserForm(forms.Form):
-    user_name = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+class EngineerCreateForm(forms.ModelForm):
+    employee = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='employee_auto')
+    )
+
+    class Meta:
+        model = Engineer
+        fields = ['employee']
+
+    def clean_employee(self):
+        employee = self.cleaned_data.get('employee')
+        qs = Welder.objects.filter(employee=employee)
+        if qs.exists():
+            raise forms.ValidationError("Error, This username already assigned as Welder")
+        qs_2 = Fabricator.objects.filter(employee=employee)
+        if qs_2.exists():
+            raise forms.ValidationError("Error, This username already assigned as Fabricator")
+        qs_3 = Supervisor.objects.filter(employee=employee)
+        if qs_3.exists():
+            raise forms.ValidationError("Error, This username already assigned as Supervisor")
+        qs_4 = Engineer.objects.filter(employee=employee)
+        if qs_4.exists():
+            raise forms.ValidationError("Error, This username already assigned as Engineer")
+        return employee
+
+
+class FabricatorCreateForm(forms.ModelForm):
+    employee = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='employee_auto')
+    )
+
+    class Meta:
+        model = Fabricator
+        fields = ['employee']
+
+    def clean_employee(self):
+        employee = self.cleaned_data.get('employee')
+        qs = Welder.objects.filter(employee=employee)
+        if qs.exists():
+            raise forms.ValidationError("Error, This username already assigned as Welder")
+        qs_2 = Fabricator.objects.filter(employee=employee)
+        if qs_2.exists():
+            raise forms.ValidationError("Error, This username already assigned as Fabricator")
+        qs_3 = Supervisor.objects.filter(employee=employee)
+        if qs_3.exists():
+            raise forms.ValidationError("Error, This username already assigned as Supervisor")
+        qs_4 = Engineer.objects.filter(employee=employee)
+        if qs_4.exists():
+            raise forms.ValidationError("Error, This username already assigned as Engineer")
+        return employee
+
+
+class WelderCreateForm(forms.ModelForm):
+    employee = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='employee_auto')
+    )
+
+    class Meta:
+
+        model = Welder
+        fields = ['employee']
+
+    def clean_employee(self):
+        employee = self.cleaned_data.get('employee')
+        qs = Welder.objects.filter(employee=employee)
+        if qs.exists():
+            raise forms.ValidationError("Error, This username already assigned as Welder")
+        qs_2 = Fabricator.objects.filter(employee=employee)
+        if qs_2.exists():
+            raise forms.ValidationError("Error, This username already assigned as Fabricator")
+        qs_3 = Supervisor.objects.filter(employee=employee)
+        if qs_3.exists():
+            raise forms.ValidationError("Error, This username already assigned as Supervisor")
+        qs_4 = Engineer.objects.filter(employee=employee)
+        if qs_4.exists():
+            raise forms.ValidationError("Error, This username already assigned as Engineer")
+        return employee
+
+
+class EmployeeCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Employee
+        fields = ['first_name', 'last_name', 'emplyee_no', 'designation', 'joined_date', ]

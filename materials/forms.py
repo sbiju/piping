@@ -54,27 +54,6 @@ class FabForm(forms.ModelForm):
         fields = ['name', 'size', 'quantity_issued', 'quantity_used','fabricated']
 
 
-# class FabStatusForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = Fabrication
-#         fields = ['iso',
-#                   'total_joints',
-#                   'completed_joints',
-#                   'total_inch_dia',
-#                   'completed_inch_dia',
-#                   'joint',
-#                   'ndt_status',
-#                   'hydrotest_status',
-#                   ]
-
-
-class IsoForm(forms.ModelForm):
-
-    class Meta:
-        model = Iso
-        fields = ['project', 'iso_no', 'no_of_joints', 'inch_dia']
-
 
 class MaterialForm(forms.ModelForm):
 

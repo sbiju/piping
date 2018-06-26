@@ -3,17 +3,18 @@ from django.db.models import Count, Sum, Avg
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, TemplateView
 from .mixins import LoginRequiredMixin
-from .models import MaterialData, Iso
-from .forms import MaterialForm, PurchaseForm, DesignForm, StoreForm, FabForm, IsoForm
-from hr.models import Owner
+from .models import MaterialData
+from .forms import MaterialForm, PurchaseForm, DesignForm, StoreForm, FabForm
+from control_centre.models import Owner, Iso
+
 
 class HomeView(TemplateView):
     template_name = 'home.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(HomeView, self).get_context_data(**kwargs)
-    #     context['info_list'] = Info.objects.all()
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        # context['user_add'] = Owner.objects.filter(user=self.request.user)
+        return context
 
 
 class AdminHomeView(TemplateView):
@@ -61,6 +62,8 @@ class FabHomeView(TemplateView):
 #             'iso__materialdata__size', ).annotate(total_quantity=Sum('iso__materialdata__quantity'))
 #         return context
 
+
+# administration
 class AdminListView(LoginRequiredMixin, ListView):
     model = MaterialData
     queryset = MaterialData.objects.all()
@@ -78,6 +81,7 @@ class AdminListView(LoginRequiredMixin, ListView):
             'name',
             'size', ).annotate(total_quantity=Sum('quantity'))
         return context
+
 
 # administration
 class FabReportView(LoginRequiredMixin, ListView):
@@ -178,20 +182,6 @@ class MaterialCreateView(CreateView):
         return valid_data
 
 
-# Design
-class IsoCreateView(CreateView):
-    model = Iso
-    form_class = IsoForm
-    template_name = 'form.html'
-    success_url = reverse_lazy('home')
-
-    def form_valid(self, form):
-        owner = Owner.objects.get(design=self.request.user)
-        form.instance.owner = owner
-        valid_data = super(IsoCreateView, self).form_valid(form)
-        return valid_data
-
-
 class PurchaseListView(ListView):
     model = MaterialData
     queryset = MaterialData.objects.all()
@@ -200,7 +190,7 @@ class PurchaseListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(PurchaseListView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['mat_list'] = MaterialData.objects.filter(owner__purchase=user)\
+        context['mat_list'] = MaterialData.objects.filter(iso__project__owner__purchase=user)\
             .values('iso__iso_no',
                     'pk',
                     'name',
@@ -229,7 +219,7 @@ class StoreListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(StoreListView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['mat_list'] = MaterialData.objects.filter(owner__store=user)\
+        context['mat_list'] = MaterialData.objects.filter(iso__project__owner__purchase=user)\
             .values('iso__iso_no','pk', 'name', 'size', 'quantity', 'quantity_issued', 'stock')\
             .order_by('iso__iso_no','name','pk', 'size', 'quantity', 'quantity_issued', 'stock')\
             .annotate(total_quantity=Sum('quantity'))
@@ -244,7 +234,7 @@ class FabListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(FabListView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['mat_list'] = MaterialData.objects.filter(owner__fabrication=user) \
+        context['mat_list'] = MaterialData.objects.filter(iso__project__owner__purchase=user) \
             .values('iso__iso_no',
                     'pk',
                     'name',
@@ -268,48 +258,6 @@ class FabListView(ListView):
                       )\
             .annotate(total_quantity=Sum('quantity'))
         return context
-
-
-# class FabStausView(ListView):
-#     model = Fabrication
-#     queryset = Fabrication.objects.all()
-#     template_name = 'fab_status.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(FabStausView, self).get_context_data(**kwargs)
-#         user = self.request.user
-#         context['mat_list'] = Fabrication.objects.filter(owner__fabrication=user) \
-#             .values('iso__iso_no',
-#                     'pk',
-#                     'total_joints',
-#                     'completed_joints',
-#                     'balance_joints',
-#                     'ndt_status',
-#                     'hydrotest_status',
-#                     'date_completed',
-#                     'total_inch_dia',
-#                     'completed_inch_dia',
-#                     'balance_inch_dia',
-#                     'joint__joint_no',
-#                     ) \
-#             .annotate() \
-#             .order_by('iso__iso_no',
-#                       'pk',
-#                       'total_joints',
-#                       'completed_joints',
-#                       'balance_joints',
-#                       'ndt_status',
-#                       'hydrotest_status',
-#                       'date_completed',
-#                       'total_inch_dia',
-#                       'completed_inch_dia',
-#                       'balance_inch_dia',
-#                       'joint__joint_no',
-#                       ) \
-#             .annotate()
-#         return context
-
-
 
 
 class MaterialDetailView(DetailView):
@@ -358,10 +306,5 @@ class FabUpdateView(UpdateView):
     template_name = 'form.html'
     success_url = reverse_lazy('fab_list')
 
-# class FabStatusUpdateView(UpdateView):
-#     model = Fabrication
-#     form_class = FabStatusForm
-#     template_name = 'form.html'
-#     success_url = reverse_lazy('fab_status')
 
 

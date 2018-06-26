@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.db.models.signals import pre_save
 from django.utils import timezone
-from hr.models import Employee, Iso
+from control_centre.models import Iso
 
 UNIT_CHOICES = (
                 ('Nos', 'Nos'),

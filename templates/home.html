@@ -1,34 +1,518 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% load crispy_forms_tags %}
-
-{% block head_title %}{% endblock %}
-
-
 {% block content %}
-<nav class="navbar navbar-default sidebar" role="navigation">
-    <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+        <!--
+            Home Banner
+            ==================================== -->
+            <div id="start" class="home26">
+                <div class="slide26 wedding">
+                    <div class="item" style="background-image: url(static/img/industry/piping1.jpg);">
+                        <div class="overlay"></div>
+                        <div class="container">
+                            <div class="item-inner">
+                                <h1>We Are Professional, Competitive And</h1>
+                                <h2>Competent In Our Service</h2>
+                                <div class="slide-button">
+                                    <a href="{% url 'account_signup' %}">Make a Trial</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(static/img/industry/slider-head1.jpg);">
+                        <div class="overlay"></div>
+                        <div class="container">
+                            <div class="item-inner">
+                                <h1>We Have a Team Of Leaders And Professionals</h1>
+                                <h2>That Know Their Job And Do It Well</h2>
+                                <div class="slide-button">
+                                    <a href="{% url 'account_signup' %}">Make a Trial</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            End Home Banner
+            ==================================== -->
 
-        <li ><a href="{% url 'admin_home' %}">Admin<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
-        <li ><a href="{% url 'design_list' %}">Design Dept<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
-        <li ><a href="{% url 'purchase_list' %}">Purchase Dept<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
-        <li ><a href="{% url 'store_list' %}">Stores Dept<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
-        <li ><a href="{% url 'fab_home' %}">Fabrication Dept<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
-        <!--<li ><a href="#">Tags<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a></li>-->
-      </ul>
-    </div>
-  </div>
-</nav>
+            <!--
+            Services
+            ==================================== -->
+            <section id="service" class="">
+                <div class="container">
+                    <div class="row">
+                        <header class="col-lg-12 section-head text-center item_top">
+                            <h2>what we are doing</h2>
+                            <p>We are always passionate on new idea generation and development</p>
+                        </header>
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4 col-md-4 text-center item_left">
+                                    <div class="service-item">
+                                        <span class="service-icon">
+                                            <i class="icon-light"></i>
+                                        </span>
+                                        <h4><a href="service-single.php">Project Management</a></h4>
+                                        <p>Management and control over the project effectively.</p>
+                                    </div>
+                                </div> <!-- end .service-item -->
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 text-center item_bottom">
+                                    <div class="service-item">
+                                        <span class="service-icon">
+                                            <i class="icon-cog5"></i>
+                                        </span>
+                                        <h4><a href="service-single.php">Resource Allocation</a></h4>
+                                        <p>Efficient and effective resource allocation and co-ordination.</p>
+                                    </div>
+                                </div> <!-- end .service-item -->
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 text-center item_right">
+                                    <div class="service-item">
+                                        <span class="service-icon">
+                                            <i class="icon-pen4"></i>
+                                        </span>
+                                        <h4><a href="service-single.php">Performance Evaluation</a></h4>
+                                        <p>Precise monitoring, evaluation of entire project and graphs.</p>
+                                    </div>
+                                </div> <!-- end .service-item -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--
+            End Services
+            ==================================== -->
+
+            <section class="pt0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                            <article class="post-entry">
+                                <div class="post-media">
+                                    <img class="img-responsive" alt="post thumb" src="{% static 'img/industry/welcome.jpg' %}">
+                                </div>
+                                <div class="post-excerpt">
+                                    <h2>Welcome to PMAPP</h2>
+                                    <p>
+                                        PMAPP is developed to manage prject jobs in oil and gas industry. This application
+                                        will help to manage the projects and co-ordinate the work effectively among all the
+                                        departments. Please click the link below to know more.
+                                    </p>
+                                    <div class="excerpt-btn">
+                                        <a href="#">Read More</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
+                            <div class="section-head text-left item_top">
+                                <h2>Our Idea</h2>
+                                <p>Idea behind this application is mainly to ease the management of
+                                    construction activities and get the reports with minimum user input.
+                                </p>
+                            </div>
+                            <div class="product-carousel3">
+                                <div class="service-carousel">
+                                    <div class="item">
+                                        <div class="product-single">
+                                            <div class="product-image">
+                                                <img class="img-responsive" alt="" src="{% static 'img/industry/product1.jpg' %}">
+                                            </div>
+                                            <div class="product-title">
+                                                <div class="title-wrap">
+                                                    <span class="quick-view">
+                                                        <a class="ajax-view" href="product-wed.html">Quick View</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="product-single">
+                                            <div class="product-image">
+                                                <img class="img-responsive" alt="" src="{% static 'img/industry/product2.jpg' %}">
+                                            </div>
+                                            <div class="product-title">
+                                                <div class="title-wrap">
+                                                    <span class="quick-view">
+                                                        <a class="ajax-view" href="product-wed.html">Quick View</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="product-single">
+                                            <div class="product-image">
+                                                <img class="img-responsive" alt="" src="{% static 'img/industry/product3.jpg' %}">
+                                            </div>
+                                            <div class="product-title">
+                                                <div class="title-wrap">
+                                                    <span class="quick-view">
+                                                        <a class="ajax-view" href="product-wed.html">Quick View</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="product-single">
+                                            <div class="product-image">
+                                                <img class="img-responsive" alt="" src="{% static 'img/industry/product2.jpg' %}">
+                                            </div>
+                                            <div class="product-title">
+                                                <div class="title-wrap">
+                                                    <span class="quick-view">
+                                                        <a class="ajax-view" href="product-wed.html">Quick View</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt0">
+                <div class="container">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <div class="tabpanel tab-one">
+                                    <!-- Nav tabs -->
+                                    <ul class="tab-nav" role="tablist">
+                                        <li class="active">
+                                            <a href="#indus1" data-toggle="tab">
+                                                <i class="fa fa-briefcase "></i>
+                                                Company Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#indus2" data-toggle="tab">
+                                                <i class="fa fa-folder"></i>
+                                                Company Magazine
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#indus3" data-toggle="tab">
+                                                <i class="fa fa-heart"></i>
+                                                Corporate values
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="indus1">
+                                            <img src="{% static 'img/industry/tab1.jpg' %}" alt="Human">
+                                            <h4>Lorem ipsum dolor sit amet.</h4>
+                                            <p><strong>Consec tetuer adipicing it. Praesebul.</strong></p>
+                                            <p>Integer vel nulla ut erat faucibus auctor in in felis. Proin a justo arcu. Sed commodo dolor vel velit elementum eget volutpat nisi placerat. In tellus nulla, lacinia a vestibulum at, dapibus sed lorem. Nunc porta pharetra sollicitudin.</p>
+                                            <p>Nunc varius mauris leo, ut facilisis orci. Praesent vehicula, lectus id condimentum suscipit, ipsum mauris vulputate elit, quis auctor turpis magna fringilla justo.</p>
+                                        </div>
+                                        <div class="tab-pane" id="indus2">
+                                            <img src="{% static 'img/industry/tab2.jpg' %}" alt="Human">
+                                            <h4>Lorem ipsum dolor sit amet.</h4>
+                                            <p><strong>Consec tetuer adipicing it. Praesebul.</strong></p>
+                                            <p>Integer vel nulla ut erat faucibus auctor in in felis. Proin a justo arcu. Sed commodo dolor vel velit elementum eget volutpat nisi placerat. In tellus nulla, lacinia a vestibulum at, dapibus sed lorem. Nunc porta pharetra sollicitudin.</p>
+                                            <p>Nunc varius mauris leo, ut facilisis orci. Praesent vehicula, lectus id condimentum suscipit, ipsum mauris vulputate elit, quis auctor turpis magna fringilla justo.</p>
+                                        </div>
+                                        <div class="tab-pane" id="indus3">
+                                            <img src="{% static 'img/industry/tab3.jpg' %}" alt="Human">
+                                            <h4>Lorem ipsum dolor sit amet.</h4>
+                                            <p><strong>Consec tetuer adipicing it. Praesebul.</strong></p>
+                                            <p>Integer vel nulla ut erat faucibus auctor in in felis. Proin a justo arcu. Sed commodo dolor vel velit elementum eget volutpat nisi placerat. In tellus nulla, lacinia a vestibulum at, dapibus sed lorem. Nunc porta pharetra sollicitudin.</p>
+                                            <p>Nunc varius mauris leo, ut facilisis orci. Praesent vehicula, lectus id condimentum suscipit, ipsum mauris vulputate elit, quis auctor turpis magna fringilla justo.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 control2">
+                                <h3 class="subtitle2">Quick Steps</h3>
+                                <div class="testimonial2">
+                                    <div class="item">
+                                        <div class="eydia-ac panel-group sc_accordion" id="sc_accordion" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading active" role="tab" id="headingOne">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#sc_accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                            Collapsible Group Item #1
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At voluptatibus rerum quas debitis aspernatur libero illum, hic. Dignissimos deserunt cum, distinctio eveniet!</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingTwo">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                            Collapsible Group Item #2
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquam, amet magni molestias, quae excepturi, magnam iusto autem maiores quam nesciunt? Quasi.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingThree">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                            Collapsible Group Item #3
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate doloribus adipisci, delectus asperiores minus natus exercitationem earum accusamus ipsam non id ad?</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="eydia-ac panel-group sc_accordion" id="sc_accordion2" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading active" role="tab" id="hd1">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#sc_accordion2" href="#a1" aria-expanded="true" aria-controls="a1">
+                                                            Collapsible Group Item #1
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="a1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="hd1">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At voluptatibus rerum quas debitis aspernatur libero illum, hic. Dignissimos deserunt cum, distinctio eveniet!</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="hd2">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion2" href="#a2" aria-expanded="false" aria-controls="a2">
+                                                            Collapsible Group Item #2
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="a2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="hd2">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquam, amet magni molestias, quae excepturi, magnam iusto autem maiores quam nesciunt? Quasi.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="hd3">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion2" href="#a3" aria-expanded="false" aria-controls="a3">
+                                                            Collapsible Group Item #3
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="a3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="hd3">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate doloribus adipisci, delectus asperiores minus natus exercitationem earum accusamus ipsam non id ad?</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="eydia-ac panel-group sc_accordion" id="sc_accordion3" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading active" role="tab" id="hd4">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#sc_accordion3" href="#b1" aria-expanded="true" aria-controls="b1">
+                                                            Collapsible Group Item #1
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="b1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="hd4">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At voluptatibus rerum quas debitis aspernatur libero illum, hic. Dignissimos deserunt cum, distinctio eveniet!</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="hd5">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion3" href="#b2" aria-expanded="false" aria-controls="b2">
+                                                            Collapsible Group Item #2
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="b2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="hd5">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquam, amet magni molestias, quae excepturi, magnam iusto autem maiores quam nesciunt? Quasi.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="hd6">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion3" href="#b3" aria-expanded="false" aria-controls="b3">
+                                                            Collapsible Group Item #3
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="b3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="hd6">
+                                                    <div class="panel-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate doloribus adipisci, delectus asperiores minus natus exercitationem earum accusamus ipsam non id ad?</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <h3 class="subtitle2">Latest News and Events</h3>
+                            <div class="service-carousel">
+                                <div class="item">
+                                    <div class="nws-item">
+                                        <img src="{% static 'img/industry/news1.jpg' %}" alt="" class="{% static 'img-responsive">
+                                        <div class="news-head">
+                                            <h4><a href="#">Post Title</a></h4>
+                                            <div class="post-meta">
+                                                <span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="nws-item">
+                                        <img src="{% static 'img/industry/news2.jpg' %}" alt="" class="{% static 'img-responsive">
+                                        <div class="news-head">
+                                            <h4><a href="#">Post Title</a></h4>
+                                            <div class="post-meta">
+                                                <span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="nws-item">
+                                        <img src="{% static 'img/industry/news1.jpg' %}" alt="" class="{% static 'img-responsive">
+                                        <div class="news-head">
+                                            <h4><a href="#">Post Title</a></h4>
+                                            <div class="post-meta">
+                                                <span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="nws-item">
+                                        <img src="{% static 'img/industry/news3.jpg' %}" alt="" class="{% static 'img-responsive">
+                                        <div class="news-head">
+                                            <h4><a href="#">Post Title</a></h4>
+                                            <div class="post-meta">
+                                                <span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <h3 class="subtitle2">What Our Client's Say</h3>
+                            <div class="one-slide-control">
+                                <div class="testimonial-block">
+                                    <div class="testimonial-block-content">
+                                        <p>Aliquam a ipsum nulla. Fusce eu congue tellus, vitae ullamcorper dolor. Donec ut dapibus eros, id mattis enim. Donec eu auctor ipsum. Morbi ac aliquet neque. Praesent placerat aliquam elit. Etiam vitae tempus sem. Vivamus sit amet tellus sed sem lobortis vulputate. Nunc accumsan, velit pretium.</p>
+                                        <span class="testimonial-caret"></span>
+                                    </div>
+                                    <div class="testimonial-author-content">
+                                        <div class="testimonial-author-thumb">
+                                            <img alt="" src="{% static 'img/service/member.jpg' %}">
+                                            <div class="testimonial-author-meta">
+                                                <strong>Piter Parker</strong>
+                                                <a href="#">Jomuna Oil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-block">
+                                    <div class="testimonial-block-content">
+                                        <p>Aliquam a ipsum nulla. Fusce eu congue tellus, vitae ullamcorper dolor. Donec ut dapibus eros, id mattis enim. Donec eu auctor ipsum. Morbi ac aliquet neque. Praesent placerat aliquam elit. Etiam vitae tempus sem. Vivamus sit amet tellus sed sem lobortis vulputate. Nunc accumsan, velit pretium.</p>
+                                        <span class="testimonial-caret"></span>
+                                    </div>
+                                    <div class="testimonial-author-content">
+                                        <div class="testimonial-author-thumb">
+                                            <img alt="" src="{% static 'img/service/member.jpg' %}">
+                                            <div class="testimonial-author-meta">
+                                                <strong>Piter Parker</strong>
+                                                <a href="#">Jomuna Oil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-block">
+                                    <div class="testimonial-block-content">
+                                        <p>Aliquam a ipsum nulla. Fusce eu congue tellus, vitae ullamcorper dolor. Donec ut dapibus eros, id mattis enim. Donec eu auctor ipsum. Morbi ac aliquet neque. Praesent placerat aliquam elit. Etiam vitae tempus sem. Vivamus sit amet tellus sed sem lobortis vulputate. Nunc accumsan, velit pretium.</p>
+                                        <span class="testimonial-caret"></span>
+                                    </div>
+                                    <div class="testimonial-author-content">
+                                        <div class="testimonial-author-thumb">
+                                            <img alt="" src="{% static 'img/service/member.jpg' %}">
+                                            <div class="testimonial-author-meta">
+                                                <strong>Piter Parker</strong>
+                                                <a href="#">Jomuna Oil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--
+            Our Client
+            ==================================== -->
+            <section id="client" class="client">
+                <div class="container">
+                    <ul class="client-list text-center item_bottom">
+                        <li><a href="#"><img src="{% static 'img/client/codecanyon.png' %}" alt="graphicriver"></a></li>
+                        <li><a href="#"><img src="{% static 'img/client/audiojungle.png' %}" alt="graphicriver"></a></li>
+                        <li><a href="#"><img src="{% static 'img/client/themeforest.png' %}" alt="graphicriver"></a></li>
+                        <li><a href="#"><img src="{% static 'img/client/graphicriver.png' %}" alt="graphicriver"></a></li>
+                        <li><a href="#"><img src="{% static 'img/client/codecanyon.png' %}" alt="graphicriver"></a></li>
+                        <li><a href="#"><img src="{% static 'img/client/audiojungle.png' %}" alt="graphicriver"></a></li>
+                        <li><a href="#"><img src="{% static 'img/client/themeforest.png' %}" alt="graphicriver"></a></li>
+                        <li><a href="#"><img src="{% static 'img/client/graphicriver.png' %}" alt="graphicriver"></a></li>
+                    </ul>
+                </div>
+            </section>
+            <!--
+            End Our Client
+            ==================================== -->
 {% endblock %}
