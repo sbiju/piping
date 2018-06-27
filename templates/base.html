@@ -154,6 +154,12 @@
                                 <a href="#">Admin</a>
                                 <ul class="sub-menu">
                                     <li>
+                                        <a href="{% url 'add_user' %}">Add Users</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'add_owner' %}">Assign Department Heads</a>
+                                    </li>
+                                    <li>
                                         <a href="#">Reports</a>
                                         <ul>
                                             <li><a href="{% url 'daily_fab_report' %}">Daily Fab Report</a></li>
@@ -339,8 +345,11 @@ footer widget
         <div class="row with-border">
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                 <div class="footer-item">
-                    <img alt="Eydia" src="{% static 'img/icons/logo.png' %}">
-                    <p>Multi-Purpose and amazingly fast WordPress theme. Build outstanding websites without coding skills. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, quis.</p>
+                    <img alt="Pmapp" src="{% static 'img/icons/logo.png' %}">
+                    <p>
+                        This application helps to manage construction projects in oil and gas industry.
+                        Very effective as a reporting tool, performance evaluation tool and much more...
+                    </p>
                     <a href="#">Get Started</a>
                 </div>
             </div>
@@ -353,30 +362,37 @@ footer widget
                         <li><i class="fa fa-phone"></i><span>410-800-900</span></li>
                         <li><i class="fa fa-envelope-o"></i><span><a href="mailto:info@yourmail.com">info@yourmail.com</a></span></li>
                         <li><i class="fa fa-globe"></i><span><a href="#" target="_blank">yoursite.com</a></span></li>
-                        <li><i class="fa fa-skype"></i><span><a href="skype:eydia?call">eydia</a></span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="footer-item recent-posts">
-                    <h4>Recent Posts</h4>
+                <div class="footer-item contact-info">
+                    <h4>contact info</h4>
                     <ul>
-                        <li><a href="#">Standard Post <i class="fa fa-angle-right"></i></a></li>
-                        <li><a href="#">Media Post <i class="fa fa-angle-right"></i></a></li>
-                        <li><a href="#">Gallery Post <i class="fa fa-angle-right"></i></a></li>
-                        <li><a href="#">Youtube Post <i class="fa fa-angle-right"></i></a></li>
-                        <li><a href="#">Audio Post <i class="fa fa-angle-right"></i></a></li>
-                        <li><a href="#">Quote Post <i class="fa fa-angle-right"></i></a></li>
+                        <li><i class="fa fa-building-o"></i><span>Your Company</span></li>
+                        <li><i class="fa fa-map-marker"></i><span>1 Liberty St New York, NY 5006</span></li>
+                        <li><i class="fa fa-phone"></i><span>410-800-900</span></li>
+                        <li><i class="fa fa-envelope-o"></i><span><a href="mailto:info@yourmail.com">info@yourmail.com</a></span></li>
+                        <li><i class="fa fa-globe"></i><span><a href="#" target="_blank">yoursite.com</a></span></li>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="footer-item recent-posts">
-                    <h4>Flickr Stream</h4>
-                    <ul class="flickr-widget clearfix"></ul>
+                <div class="footer-item contact-info">
+                    <h4>contact info</h4>
+                    <ul>
+                        <li><i class="fa fa-building-o"></i><span>Your Company</span></li>
+                        <li><i class="fa fa-map-marker"></i><span>1 Liberty St New York, NY 5006</span></li>
+                        <li><i class="fa fa-phone"></i><span>410-800-900</span></li>
+                        <li><i class="fa fa-envelope-o"></i><span><a href="mailto:info@yourmail.com">info@yourmail.com</a></span></li>
+                        <li><i class="fa fa-globe"></i><span><a href="#" target="_blank">yoursite.com</a></span></li>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

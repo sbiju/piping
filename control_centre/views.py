@@ -8,9 +8,19 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import UserForm, OwnerCreateForm, LoginForm, ProjectCreateForm, IsoCreateForm, ContactusForm
-from .models import Owner, Iso, Project
+from .models import Owner, Iso, Project, Post
 
 User = get_user_model()
+
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        post = Post.objects.all()
+        context['post'] = post
+        return context
 
 
 class ProjectCreateView(CreateView):
@@ -123,6 +133,7 @@ class IsoListView(ListView):
         context['obj_list'] = Iso.objects.filter(project__owner__user=user)
         return context
 
+
 class AboutUs(TemplateView):
     template_name = 'stat/about_us.html'
 
@@ -137,6 +148,14 @@ class Terms(TemplateView):
 
 class Faq(TemplateView):
     template_name = 'stat/faq.html'
+
+
+class ReadMore(TemplateView):
+    template_name = 'stat/read_more.html'
+
+
+class Instruction(TemplateView):
+    template_name = 'stat/instructions.html'
 
 
 def contact_us(request):

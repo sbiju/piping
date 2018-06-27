@@ -8,23 +8,6 @@ from .forms import MaterialForm, PurchaseForm, DesignForm, StoreForm, FabForm
 from control_centre.models import Owner, Iso
 
 
-class HomeView(TemplateView):
-    template_name = 'home.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        # context['user_add'] = Owner.objects.filter(user=self.request.user)
-        return context
-
-
-class AdminHomeView(TemplateView):
-    template_name = 'admn/admin_home.html'
-
-
-class FabHomeView(TemplateView):
-    template_name = 'fab_home.html'
-
-
 # administration
 # class AdminListView(LoginRequiredMixin, ListView):
 #     model = Iso

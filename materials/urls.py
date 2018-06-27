@@ -1,8 +1,7 @@
 from django.conf.urls import url
 from .views import MaterialCreateView, DesignlListView, MaterialUpdateView, MaterialDetailView, \
     PurchaseListView, PurchaseUpdateView, AdminListView, DesignUpdateView, StoreListView, StoreUpdateView,\
-    FabListView, FabUpdateView, FabHomeView, AdminHomeView, JointReportView, FabReportView, \
-    PerformReportView
+    FabListView, FabUpdateView, JointReportView, FabReportView, PerformReportView
 
 
 urlpatterns = [
@@ -21,6 +20,5 @@ urlpatterns = [
     url(r'^store/(?P<pk>[\w-]+)/$', StoreUpdateView.as_view(), name='store_update'),
     url(r'^fabrication/$', FabListView.as_view(), name='fab_list'),
     url(r'^fabrication/(?P<pk>[\w-]+)/$', FabUpdateView.as_view(), name='fab_update'),
-    url(r'^admin_dept/$', AdminHomeView.as_view(), name='admin_home'),
-    url(r'^fab_dept/$', FabHomeView.as_view(), name='fab_home'),
+
 ]

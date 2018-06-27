@@ -102,8 +102,8 @@
                                         will help to manage the projects and co-ordinate the work effectively among all the
                                         departments. Please click the link below to know more.
                                     </p>
-                                    <div class="excerpt-btn">
-                                        <a href="#">Read More</a>
+                                    <div class="btn btn-info">
+                                        <a href="{% url 'read_more' %}">Read More</a>
                                     </div>
                                 </div>
                             </article>
@@ -192,19 +192,19 @@
                                         <li class="active">
                                             <a href="#indus1" data-toggle="tab">
                                                 <i class="fa fa-briefcase "></i>
-                                                Company Profile
+                                                Instructions
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#indus2" data-toggle="tab">
                                                 <i class="fa fa-folder"></i>
-                                                Company Magazine
+                                                Assistance
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#indus3" data-toggle="tab">
                                                 <i class="fa fa-heart"></i>
-                                                Corporate values
+                                                Faq
                                             </a>
                                         </li>
                                     </ul>
@@ -212,10 +212,16 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="indus1">
                                             <img src="{% static 'img/industry/tab1.jpg' %}" alt="Human">
-                                            <h4>Lorem ipsum dolor sit amet.</h4>
-                                            <p><strong>Consec tetuer adipicing it. Praesebul.</strong></p>
-                                            <p>Integer vel nulla ut erat faucibus auctor in in felis. Proin a justo arcu. Sed commodo dolor vel velit elementum eget volutpat nisi placerat. In tellus nulla, lacinia a vestibulum at, dapibus sed lorem. Nunc porta pharetra sollicitudin.</p>
-                                            <p>Nunc varius mauris leo, ut facilisis orci. Praesent vehicula, lectus id condimentum suscipit, ipsum mauris vulputate elit, quis auctor turpis magna fringilla justo.</p>
+                                            <p>
+                                                <strong>Important Instructions</strong>
+                                            </p>
+
+                                            <p>After Sign up/ Login to the site please read the following instructions.</p>
+                                            <p>Intian configuration is a one time activity and cannot be edited or deleted.
+                                            Pleas click below to continue</p>
+                                            <div class="btn btn-info">
+                                                <a href="{% url 'instruction' %}">Read More</a>
+                                            </div>
                                         </div>
                                         <div class="tab-pane" id="indus2">
                                             <img src="{% static 'img/industry/tab2.jpg' %}" alt="Human">
@@ -243,13 +249,13 @@
                                                 <div class="panel-heading active" role="tab" id="headingOne">
                                                     <h4 class="panel-title">
                                                         <a data-toggle="collapse" data-parent="#sc_accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                            Collapsible Group Item #1
+                                                             How to register?
                                                         </a>
                                                     </h4>
                                                 </div>
                                                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                                     <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At voluptatibus rerum quas debitis aspernatur libero illum, hic. Dignissimos deserunt cum, distinctio eveniet!</p>
+                                                        <p>Click on login/register link and create an account with email, username and password</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -257,13 +263,14 @@
                                                 <div class="panel-heading" role="tab" id="headingTwo">
                                                     <h4 class="panel-title">
                                                         <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                            Collapsible Group Item #2
+                                                            How to take a trial?
                                                         </a>
                                                     </h4>
                                                 </div>
                                                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                                     <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquam, amet magni molestias, quae excepturi, magnam iusto autem maiores quam nesciunt? Quasi.</p>
+                                                        <p>Use the trial link to experience the site for three days.Make sure to read all the
+                                                        instructions properly to c</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -271,107 +278,13 @@
                                                 <div class="panel-heading" role="tab" id="headingThree">
                                                     <h4 class="panel-title">
                                                         <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                            Collapsible Group Item #3
+                                                            How to subscribe the service?
                                                         </a>
                                                     </h4>
                                                 </div>
                                                 <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                                     <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate doloribus adipisci, delectus asperiores minus natus exercitationem earum accusamus ipsam non id ad?</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <div class="eydia-ac panel-group sc_accordion" id="sc_accordion2" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading active" role="tab" id="hd1">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#sc_accordion2" href="#a1" aria-expanded="true" aria-controls="a1">
-                                                            Collapsible Group Item #1
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="a1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="hd1">
-                                                    <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At voluptatibus rerum quas debitis aspernatur libero illum, hic. Dignissimos deserunt cum, distinctio eveniet!</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="hd2">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion2" href="#a2" aria-expanded="false" aria-controls="a2">
-                                                            Collapsible Group Item #2
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="a2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="hd2">
-                                                    <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquam, amet magni molestias, quae excepturi, magnam iusto autem maiores quam nesciunt? Quasi.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="hd3">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion2" href="#a3" aria-expanded="false" aria-controls="a3">
-                                                            Collapsible Group Item #3
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="a3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="hd3">
-                                                    <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate doloribus adipisci, delectus asperiores minus natus exercitationem earum accusamus ipsam non id ad?</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <div class="eydia-ac panel-group sc_accordion" id="sc_accordion3" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading active" role="tab" id="hd4">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#sc_accordion3" href="#b1" aria-expanded="true" aria-controls="b1">
-                                                            Collapsible Group Item #1
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="b1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="hd4">
-                                                    <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At voluptatibus rerum quas debitis aspernatur libero illum, hic. Dignissimos deserunt cum, distinctio eveniet!</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="hd5">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion3" href="#b2" aria-expanded="false" aria-controls="b2">
-                                                            Collapsible Group Item #2
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="b2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="hd5">
-                                                    <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquam, amet magni molestias, quae excepturi, magnam iusto autem maiores quam nesciunt? Quasi.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="hd6">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" data-toggle="collapse" data-parent="#sc_accordion3" href="#b3" aria-expanded="false" aria-controls="b3">
-                                                            Collapsible Group Item #3
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="b3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="hd6">
-                                                    <div class="panel-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate doloribus adipisci, delectus asperiores minus natus exercitationem earum accusamus ipsam non id ad?</p>
+                                                          <p>Make necessary subscription charges and use the site as per the configuration details.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -391,54 +304,56 @@
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <h3 class="subtitle2">Latest News and Events</h3>
                             <div class="service-carousel">
+                                {% for post in post %}
                                 <div class="item">
                                     <div class="nws-item">
                                         <img src="{% static 'img/industry/news1.jpg' %}" alt="" class="{% static 'img-responsive">
                                         <div class="news-head">
-                                            <h4><a href="#">Post Title</a></h4>
+                                            <h4><a href="#">{{ post.title }}</a></h4>
                                             <div class="post-meta">
-                                                <span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>
+                                                <span>{{ post.published }}</span>
                                             </div>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>
+                                        <p>{{ post.content }}</p>
                                     </div>
                                 </div>
-                                <div class="item">
-                                    <div class="nws-item">
-                                        <img src="{% static 'img/industry/news2.jpg' %}" alt="" class="{% static 'img-responsive">
-                                        <div class="news-head">
-                                            <h4><a href="#">Post Title</a></h4>
-                                            <div class="post-meta">
-                                                <span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="nws-item">
-                                        <img src="{% static 'img/industry/news1.jpg' %}" alt="" class="{% static 'img-responsive">
-                                        <div class="news-head">
-                                            <h4><a href="#">Post Title</a></h4>
-                                            <div class="post-meta">
-                                                <span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="nws-item">
-                                        <img src="{% static 'img/industry/news3.jpg' %}" alt="" class="{% static 'img-responsive">
-                                        <div class="news-head">
-                                            <h4><a href="#">Post Title</a></h4>
-                                            <div class="post-meta">
-                                                <span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>
-                                    </div>
-                                </div>
+                                {% endfor %}
+                                <!--<div class="item">-->
+                                    <!--<div class="nws-item">-->
+                                        <!--<img src="{% static 'img/industry/news2.jpg' %}" alt="" class="{% static 'img-responsive">-->
+                                        <!--<div class="news-head">-->
+                                            <!--<h4><a href="#">Post Title</a></h4>-->
+                                            <!--<div class="post-meta">-->
+                                                <!--<span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="item">-->
+                                    <!--<div class="nws-item">-->
+                                        <!--<img src="{% static 'img/industry/news1.jpg' %}" alt="" class="{% static 'img-responsive">-->
+                                        <!--<div class="news-head">-->
+                                            <!--<h4><a href="#">Post Title</a></h4>-->
+                                            <!--<div class="post-meta">-->
+                                                <!--<span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="item">-->
+                                    <!--<div class="nws-item">-->
+                                        <!--<img src="{% static 'img/industry/news3.jpg' %}" alt="" class="{% static 'img-responsive">-->
+                                        <!--<div class="news-head">-->
+                                            <!--<h4><a href="#">Post Title</a></h4>-->
+                                            <!--<div class="post-meta">-->
+                                                <!--<span>January 19, 2015</span> at <span>1.:01 pm</span> by <span><a href="#">admin</a></span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus eos architecto assumenda inventore quidem.</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -446,7 +361,8 @@
                             <div class="one-slide-control">
                                 <div class="testimonial-block">
                                     <div class="testimonial-block-content">
-                                        <p>Aliquam a ipsum nulla. Fusce eu congue tellus, vitae ullamcorper dolor. Donec ut dapibus eros, id mattis enim. Donec eu auctor ipsum. Morbi ac aliquet neque. Praesent placerat aliquam elit. Etiam vitae tempus sem. Vivamus sit amet tellus sed sem lobortis vulputate. Nunc accumsan, velit pretium.</p>
+                                        <p>Very effective application and easy to use. We will continue to use this application
+                                        in all our coming projects.</p>
                                         <span class="testimonial-caret"></span>
                                     </div>
                                     <div class="testimonial-author-content">
@@ -461,7 +377,8 @@
                                 </div>
                                 <div class="testimonial-block">
                                     <div class="testimonial-block-content">
-                                        <p>Aliquam a ipsum nulla. Fusce eu congue tellus, vitae ullamcorper dolor. Donec ut dapibus eros, id mattis enim. Donec eu auctor ipsum. Morbi ac aliquet neque. Praesent placerat aliquam elit. Etiam vitae tempus sem. Vivamus sit amet tellus sed sem lobortis vulputate. Nunc accumsan, velit pretium.</p>
+                                        <p>Very effective application and easy to use. We will continue to use this application
+                                        in all our coming projects.</p>
                                         <span class="testimonial-caret"></span>
                                     </div>
                                     <div class="testimonial-author-content">
@@ -476,7 +393,8 @@
                                 </div>
                                 <div class="testimonial-block">
                                     <div class="testimonial-block-content">
-                                        <p>Aliquam a ipsum nulla. Fusce eu congue tellus, vitae ullamcorper dolor. Donec ut dapibus eros, id mattis enim. Donec eu auctor ipsum. Morbi ac aliquet neque. Praesent placerat aliquam elit. Etiam vitae tempus sem. Vivamus sit amet tellus sed sem lobortis vulputate. Nunc accumsan, velit pretium.</p>
+                                        <p>Very effective application and easy to use. We will continue to use this application
+                                        in all our coming projects.</p>
                                         <span class="testimonial-caret"></span>
                                     </div>
                                     <div class="testimonial-author-content">
@@ -498,20 +416,20 @@
             <!--
             Our Client
             ==================================== -->
-            <section id="client" class="client">
-                <div class="container">
-                    <ul class="client-list text-center item_bottom">
-                        <li><a href="#"><img src="{% static 'img/client/codecanyon.png' %}" alt="graphicriver"></a></li>
-                        <li><a href="#"><img src="{% static 'img/client/audiojungle.png' %}" alt="graphicriver"></a></li>
-                        <li><a href="#"><img src="{% static 'img/client/themeforest.png' %}" alt="graphicriver"></a></li>
-                        <li><a href="#"><img src="{% static 'img/client/graphicriver.png' %}" alt="graphicriver"></a></li>
-                        <li><a href="#"><img src="{% static 'img/client/codecanyon.png' %}" alt="graphicriver"></a></li>
-                        <li><a href="#"><img src="{% static 'img/client/audiojungle.png' %}" alt="graphicriver"></a></li>
-                        <li><a href="#"><img src="{% static 'img/client/themeforest.png' %}" alt="graphicriver"></a></li>
-                        <li><a href="#"><img src="{% static 'img/client/graphicriver.png' %}" alt="graphicriver"></a></li>
-                    </ul>
-                </div>
-            </section>
+            <!--<section id="client" class="client">-->
+                <!--<div class="container">-->
+                    <!--<ul class="client-list text-center item_bottom">-->
+                        <!--<li><a href="#"><img src="{% static 'img/client/codecanyon.png' %}" alt="graphicriver"></a></li>-->
+                        <!--<li><a href="#"><img src="{% static 'img/client/audiojungle.png' %}" alt="graphicriver"></a></li>-->
+                        <!--<li><a href="#"><img src="{% static 'img/client/themeforest.png' %}" alt="graphicriver"></a></li>-->
+                        <!--<li><a href="#"><img src="{% static 'img/client/graphicriver.png' %}" alt="graphicriver"></a></li>-->
+                        <!--<li><a href="#"><img src="{% static 'img/client/codecanyon.png' %}" alt="graphicriver"></a></li>-->
+                        <!--<li><a href="#"><img src="{% static 'img/client/audiojungle.png' %}" alt="graphicriver"></a></li>-->
+                        <!--<li><a href="#"><img src="{% static 'img/client/themeforest.png' %}" alt="graphicriver"></a></li>-->
+                        <!--<li><a href="#"><img src="{% static 'img/client/graphicriver.png' %}" alt="graphicriver"></a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</section>-->
             <!--
             End Our Client
             ==================================== -->

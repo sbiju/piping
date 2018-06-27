@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 
 from django.conf.urls.static import static
-from materials.views import HomeView
-from control_centre.views import contact_us, Terms, Faq, AboutUs, Privacy
+from control_centre.views import contact_us, Terms, Faq, AboutUs, Privacy, ReadMore, Instruction, HomeView
 
 
 urlpatterns = [
@@ -20,6 +19,8 @@ urlpatterns = [
     url(r'^about/$', AboutUs.as_view(), name='about'),
     url(r'^privacy/$', Privacy.as_view(), name='privacy'),
     url(r'^contact/$', contact_us, name='contact'),
+    url(r'^read_more/$', ReadMore.as_view(), name='read_more'),
+    url(r'^instruction/$', Instruction.as_view(), name='instruction'),
 ]
 
 if settings.DEBUG:

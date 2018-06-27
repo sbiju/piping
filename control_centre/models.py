@@ -38,6 +38,10 @@ class Iso(models.Model):
         return self.iso_no
 
 
+class Post(models.Model):
+    title = models.CharField(max_length=200, blank=True, null=True, unique=True)
+    content = models.TextField()
+    published = models.DateTimeField(default=timezone.now)
 
-
-
+    def __str__(self):
+        return self.title
