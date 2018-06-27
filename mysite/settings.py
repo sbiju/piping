@@ -25,7 +25,7 @@ SECRET_KEY = 'f==g$@0ak+kq_f*l)xb=y_b)*rbwye$j)=7dxt8=rwu4wv%5i^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pmapp.pythonanywhere.com', '127.0.0.1:8000']
 
 
 # Application definition
