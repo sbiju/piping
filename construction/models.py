@@ -71,7 +71,7 @@ class Joint(models.Model):
                              default='Not Started')
     status = models.CharField(verbose_name='Joint Status', max_length=40, choices=STATUS_CHOICES,
                              default='Pending')
-    qc_checked = models.DateField()
+    qc_checked = models.DateField(blank=True, null=True)
 
     objects = JointManager()
 

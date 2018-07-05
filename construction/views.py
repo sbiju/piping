@@ -10,7 +10,7 @@ from django.utils import timezone
 
 from .models import Joint
 from .forms import JointForm, QcJointForm
-from .resources import IsoResource, QcResource
+from .resources import IsoResource, QcResource, JointResource
 from control_centre.models import Owner
 
 
@@ -27,7 +27,7 @@ class JointListView(LoginRequiredMixin, ListView):
     model = Joint
     days_ago = timezone.now() - datetime.timedelta(days=5)
     queryset = Joint.objects.all()
-    template_name = 'joint_list.html'
+    template_name = 'construction/joint_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(JointListView, self).get_context_data(**kwargs)
@@ -36,6 +36,27 @@ class JointListView(LoginRequiredMixin, ListView):
         context['mat_list'] = Joint.objects.filter(iso__project__owner__user=user)\
             .by_range(start_date=days_ago, end_date=timezone.now())
         return context
+
+
+class JointPrintView(WeasyTemplateResponseMixin, ListView):
+    model = Joint
+    queryset = Joint.objects.all()
+    template_name = 'construction/fab_pdf_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(JointPrintView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['mat_list'] = Joint.objects.filter(iso__project__owner__user=user)
+        return context
+
+
+def joint_export(request):
+    user = request.user
+    queryset = Joint.objects.filter(iso__project__owner__user=user)
+    joint_resource = JointResource().export(queryset)
+    response = HttpResponse(joint_resource.xls, content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="reports.xls"'
+    return response
 
 
 class JointyReportAjaxView(View):

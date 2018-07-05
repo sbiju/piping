@@ -15,6 +15,9 @@ class Designation(models.Model):
 
 
 class EmployeeManager(models.Manager):
+    def recent(self):
+        return self.order_by('designation', '-joined_date')
+
     def welders(self):
         return self.filter(designation__title='welder')
 

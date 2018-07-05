@@ -1,11 +1,20 @@
-{% extends 'base.html' %}
+{% load static %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<style>
+{% block style %}
+ @page { size: A3;
+         margin: 1cm;
+        }
+{% endblock %}
+</style>
+
 
 {% block content %}
 
 <div class="container fab-report">
     <div class="row">
          <div class="table-responsive">
-             <h3>Joint Status</h3>
+             <h3>Joint Status: Total completed: {{ mat_list.total_inch_dia.inch_dia__sum }} Inch Dia</h3>
                   <table class="table table-bordered">
                       <tr>
                           <th>Sl.No</th>
@@ -15,10 +24,9 @@
                           <th>Schedule</th>
                           <th>Welder</th>
                           <th>Fabricator</th>
+                          <th>Supervisor</th>
+                          <th>Time taken</th>
                           <th>Completed At</th>
-                          <th>Jont Status</th>
-                          <th>Inspection Date</th>
-                          <th>Edit</th>
                       </tr>
                       {% for item in mat_list %}
                       <tr>
@@ -29,19 +37,14 @@
                           <td>{{ item.sch }}</td>
                           <td>{{ item.welder|title }}</td>
                           <td>{{ item.fabricator|title }}</td>
+                          <td>{{ item.supervisor|title }}</td>
+                          <td>{{ item.hours_worked }} hrs</td>
                           <td>{{ item.date_completed }}</td>
-                          <td>{{ item.status }}</td>
-                          <td>{{ item.qc_checked }}</td>
-
-                          <td><a href="{% url 'qc_joint_update' pk=item.pk %}">Edit</a></td>
                       </tr>
                       {% endfor %}
                   </table>
         </div>
 
     </div>
-    <a href="{% url 'qc_pdf' %}" class="btn btn-info">Print to PDF</a>
-    <a href="{% url 'qc_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
-
 </div>
 {% endblock %}

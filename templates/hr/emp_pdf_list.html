@@ -1,8 +1,12 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% load crispy_forms_tags %}
-
+<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<style>
+{% block style %}
+ @page { size: A3;
+         margin: 1cm;
+        }
+{% endblock %}
+</style>
 {% block content %}
 <div class="container employees">
     <div class="row">
@@ -32,8 +36,6 @@
 
         </div>
     </div>
-    <a href="{% url 'emp_pdf' %}" class="btn btn-info">Print to PDF</a>
-    <a href="{% url 'emp_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
 </div>
 
 

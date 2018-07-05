@@ -4,10 +4,12 @@ from django.db.models import Sum, Count
 from django.views.generic import CreateView, UpdateView, ListView
 from django.urls import reverse_lazy
 from dal import autocomplete
+from django_weasyprint import WeasyTemplateResponseMixin
 
 from .models import Employee, Designation
 from .forms import EmployeeCreateForm
 from control_centre.models import Owner, Project
+from construction.resources import HrResource
 
 
 class EmpAutocomplete(autocomplete.Select2QuerySetView):
@@ -57,73 +59,12 @@ class EmployeeListView(ListView):
     model = Employee
 
     def get_queryset(self):
-        return Employee.objects.filter(project__owner__user=self.request.user)
+        return Employee.objects.recent().filter(project__owner__user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super(EmployeeListView, self).get_context_data(**kwargs)
-        user = self.request.user
-        context['headline'] = 'Employees'
-        context['obj_list'] = Employee.objects.filter(project__owner__user=user)
+        context['headline'] = 'Employees List'
         return context
-
-#
-# class EngineerListView(ListView):
-#     model = Engineer
-#
-#     def get_queryset(self):
-#         return Engineer.objects.filter(employee__project__owner__user=self.request.user)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(EngineerListView, self).get_context_data(**kwargs)
-#         user = self.request.user
-#         context['obj_list'] = Engineer.objects.filter(employee__project__owner__user=user)
-#         context['headline'] = 'Engineers'
-#         return context
-#
-#
-# class SupervisorListView(ListView):
-#     model = Supervisor
-#     template_name = 'hr/engineer_list.html'
-#
-#     def get_queryset(self):
-#         return Supervisor.objects.filter(employee__project__owner__user=self.request.user)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(SupervisorListView, self).get_context_data(**kwargs)
-#         user = self.request.user
-#         context['obj_list'] = Supervisor.objects.filter(employee__project__owner__user=user)
-#         context['headline'] = 'Supervisors'
-#         return context
-#
-#
-# class WelderListView(ListView):
-#     model = Welder
-#     template_name = 'hr/engineer_list.html'
-#
-#     def get_queryset(self):
-#         return Welder.objects.filter(employee__project__owner__user=self.request.user)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(WelderListView, self).get_context_data(**kwargs)
-#         user = self.request.user
-#         context['obj_list'] = Welder.objects.filter(employee__project__owner__user=user)
-#         context['headline'] = 'Welders'
-#         return context
-#
-#
-# class FabricatorListView(ListView):
-#     model = Fabricator
-#     template_name = 'hr/engineer_list.html'
-#
-#     def get_queryset(self):
-#         return Fabricator.objects.filter(employee__project__owner__user=self.request.user)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(FabricatorListView, self).get_context_data(**kwargs)
-#         user = self.request.user
-#         context['obj_list'] = Fabricator.objects.filter(employee__project__owner__user=user)
-#         context['headline'] = 'Fabricators'
-#         return context
 
 
 class EmployeeCreateView(CreateView):
@@ -141,45 +82,32 @@ class EmployeeCreateView(CreateView):
         return valid_data
 
 
-# class EngineerCreateView(CreateView):
-#     model = Engineer
-#     form_class = EngineerCreateForm
-#     template_name = 'form.html'
-#     success_url = reverse_lazy('add_engineer')
-#
-#     def form_valid(self, form):
-#         owner = Owner.objects.get(user=self.request.user)
-#         form.instance.employee.project.owner = owner
-#         valid_data = super(EngineerCreateView, self).form_valid(form)
-#         return valid_data
-#
-#
-# class SupervisorCreateView(CreateView):
-#     model = Supervisor
-#     form_class = SupervisorCreateForm
-#     template_name = 'form.html'
-#     success_url = reverse_lazy('add_supervisor')
-#
-#     def form_valid(self, form):
-#         owner = Owner.objects.get(user=self.request.user)
-#         form.instance.employee.project.owner = owner
-#         valid_data = super(SupervisorCreateView, self).form_valid(form)
-#         return valid_data
-#
-#
-# class FabricatorCreateView(CreateView):
-#     model = Fabricator
-#     form_class = FabricatorCreateForm
-#     template_name = 'form.html'
-#     success_url = reverse_lazy('add_fabricator')
-#
-#     def form_valid(self, form):
-#         owner = Owner.objects.get(user=self.request.user)
-#         form.instance.employee.project.owner = owner
-#         valid_data = super(FabricatorCreateView, self).form_valid(form)
-#         return valid_data
-#
-#
+class EmpPrintView(WeasyTemplateResponseMixin, ListView):
+    model = Employee
+    template_name = 'hr/emp_pdf_list.html'
+
+    def get_queryset(self):
+        return Employee.objects.recent().filter(project__owner__user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(EmpPrintView, self).get_context_data(**kwargs)
+        context['headline'] = 'Employees List'
+        return context
+
+
+def qc_export(request):
+    user = request.user
+    queryset = Employee.objects.filter(project__owner__user=user)
+    qc_resource = HrResource().export(queryset)
+    response = HttpResponse(qc_resource.xls, content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="reports.xls"'
+    return response
+
+
+
+
+
+
 # class WelderCreateView(CreateView):
 #     model = Welder
 #     form_class = WelderCreateForm
