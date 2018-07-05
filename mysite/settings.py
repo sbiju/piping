@@ -25,7 +25,7 @@ SECRET_KEY = 'f==g$@0ak+kq_f*l)xb=y_b)*rbwye$j)=7dxt8=rwu4wv%5i^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pmapp.pythonanywhere.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['pmapp.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'import_export',
+    'rest_framework',
     'construction',
     'control_centre',
     'materials',
@@ -118,6 +120,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # Internationalization

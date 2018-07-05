@@ -1,0 +1,64 @@
+
+{% load static %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+     <head>
+         <title>Title</title>
+         <style type="text/css">
+             body {
+                 font-weight: 200;
+                 font-size: 14px;
+             }
+             .header {
+                 font-size: 20px;
+                 font-weight: 100;
+                 text-align: center;
+                 color: #007cae;
+             }
+             .title {
+                 font-size: 22px;
+                 font-weight: 100;
+                /* text-align: right;*/
+                padding: 10px 20px 0px 20px;
+             }
+             .title span {
+                 color: #007cae;
+             }
+             .details {
+                 padding: 10px 20px 0px 20px;
+                 text-align: left !important;
+                 /*margin-left: 40%;*/
+             }
+             .hrItem {
+                 border: none;
+                 height: 1px;
+                 /* Set the hr color */
+                 color: #333; /* old IE */
+                 background-color: #fff; /* Modern Browsers */
+             }
+
+         </style>
+     </head>
+     <body>
+
+         <table>
+              <tr>
+                  <th>Sl.No</th>
+                  <th>ISO NO./ LINE NO.</th>
+                  <th>Total Inch Dia</th>
+                  <th>Completed Inch Dia</th>
+              </tr>
+              {% for item in report %}
+
+              <tr>
+
+                  <td>{{ forloop.counter }}</td>
+                  <td><h5>{{ item.iso_no }}</h5></td>
+                  <td>{{ item.inch_dia }}</td>
+                  <td>{{ item.completed_inch_dia }}</td>
+              </tr>
+              {% endfor %}
+          </table>
+     </body>
+ </html>

@@ -1,10 +1,16 @@
+ @page { size: A3;
+         margin: 1cm;
+        }
 
 .form-class{
     margin-top:30px;
     margin-bottom:30px;
 }
 .wrap{
-    padding: 50px;
+    padding: 0px;
+}
+.fab-report{
+    padding:30px;
 }
 .employees{
     margin-top:25px;
@@ -24,7 +30,7 @@
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
     padding:10px;
-    padding-left:50px;
+    padding-left:10px;
     text-transform: uppercase;
 
 }

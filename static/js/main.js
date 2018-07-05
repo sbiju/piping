@@ -1988,9 +1988,6 @@ $(document).ready(function() {
         Travel 2
     -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 
-    $(".reload-map").on("shown.bs.tab", function() {
-        googleMap();
-    });
 
 
 

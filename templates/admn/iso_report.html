@@ -4,23 +4,24 @@
 
 
 {% block content %}
-
+{{ total }}
 <div class="container fab-report">
     <div class="row">
         <div class="table-responsive">
-             <h3>Fabrication Report based on Date</h3>
+             <h3>Fabrication Report based on Iso</h3>
               <table class="table table-bordered">
                   <tr>
                       <th>Sl.No</th>
-                      <th>DATE</th>
+                      <th>ISO No</th>
+                      <th>Total Inch Dia</th>
                       <th>Completed Inch Dia</th>
                   </tr>
 
-                  {% for item in date_report %}
+                  {% for item in report %}
                   <tr>
-
                       <td>{{ forloop.counter }}</td>
-                      <td><h5>{{ item.joint__date_completed }}</h5></td>
+                      <td><h5>{{ item.iso_no }}</h5></td>
+                      <td>{{ item.inch_dia }}</td>
                       <td>{{ item.completed_inch_dia }}</td>
                   </tr>
                   {% endfor %}

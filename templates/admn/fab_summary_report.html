@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% endblock %}
+
+
+{% block content %}
+
+<div class="container fab-report">
+    <div class="row">
+        <div class="table-responsive">
+             <h3>Summary</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                          <!--<th>Sl.No</th>-->
+                          <th>Project Name</th>
+                          <th>Total</th>
+                          <th>Total Inch Dia Completed</th>
+
+                      </tr>
+                      {% for item in sum_list %}
+
+                      <tr>
+                          <td><h5>{{ item.project__name|title }}</h5></td>
+                          <td>{{ item.total_inch_dia }}</td>
+                          <td>{{ item.completed_inch_dia }}</td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

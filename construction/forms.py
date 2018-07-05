@@ -1,10 +1,34 @@
 from django import forms
 from .models import Joint
+from hr.models import Employee
+from dal import autocomplete
+
+
+class QcJointForm(forms.ModelForm):
+    class Meta:
+        model = Joint
+        fields = ['status', 'qc_checked']
 
 
 class JointForm(forms.ModelForm):
-
+    welder = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='weld_auto')
+    )
+    fabricator = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='fab_auto')
+    )
+    supervisor = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='sup_auto')
+    )
+    engineer = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='eng_auto')
+    )
     class Meta:
         model = Joint
         fields = ['iso', 'joint_no', 'size', 'sch', 'welder', 'fabricator',
-                  'hours_worked',]
+                  'supervisor','engineer','hours_worked',]
+

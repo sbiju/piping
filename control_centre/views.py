@@ -71,24 +71,24 @@ class OwnerCreateView(CreateView):
             return HttpResponse('Error! You are not authorized to perform this!!')
 
 
-class OwnerEditView(UpdateView):
-    model = Owner
-    form_class = OwnerCreateForm
-    template_name = 'form.html'
-    success_url = reverse_lazy('home')
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        valid_data = super(OwnerEditView, self).form_valid(form)
-        return valid_data
-
-    def get_object(self, *args, **kwargs):
-        user = self.request.user
-        obj = super(OwnerEditView, self).get_object(*args, **kwargs)
-        if obj.user == user:
-            return obj
-        else:
-            raise Http404
+# class OwnerEditView(UpdateView):
+#     model = Owner
+#     form_class = OwnerCreateForm
+#     template_name = 'form.html'
+#     success_url = reverse_lazy('home')
+#
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         valid_data = super(OwnerEditView, self).form_valid(form)
+#         return valid_data
+#
+#     def get_object(self, *args, **kwargs):
+#         user = self.request.user
+#         obj = super(OwnerEditView, self).get_object(*args, **kwargs)
+#         if obj.user == user:
+#             return obj
+#         else:
+#             raise Http404
 
 
 def add_user(request):
