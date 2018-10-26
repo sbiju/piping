@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from .views import JointListView, JointUpdateView, export, QcJointListView, QcJointUpdateView, \
-    QcPrintView, qc_export, JointCreateView, JointPrintView, joint_export
+    QcPrintView, qc_export, JointCreateView, JointPrintView, joint_export, IsoAutocomplete
 
 
 urlpatterns = [
@@ -14,5 +14,5 @@ urlpatterns = [
     url(r'^qc/pdf/$', QcPrintView.as_view(), name='qc_pdf'),
     url(r'^qc/csv/$', qc_export, name='qc_csv'),
     url(r'^csv/$', export, name='csv'),
-
+    url(r'^iso_auto/$', IsoAutocomplete.as_view(), name='iso_auto'),
 ]

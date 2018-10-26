@@ -1,6 +1,7 @@
 from django import forms
 from .models import Joint
 from hr.models import Employee
+from control_centre.models import Iso
 from dal import autocomplete
 
 
@@ -11,6 +12,10 @@ class QcJointForm(forms.ModelForm):
 
 
 class JointForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto')
+    )
     welder = forms.ModelChoiceField(
         queryset=Employee.objects.all(),
         widget=autocomplete.ModelSelect2(url='weld_auto')
@@ -30,5 +35,5 @@ class JointForm(forms.ModelForm):
     class Meta:
         model = Joint
         fields = ['iso', 'joint_no', 'size', 'sch', 'welder', 'fabricator',
-                  'supervisor','engineer','hours_worked',]
+                  'supervisor','engineer','hours_worked', 'crew_members']
 

@@ -1,3 +1,20 @@
+.fab-report{
+    height: 600px;
+}
+.badge {
+    display: inline-block;
+    min-width: 160px;
+    padding: 15px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 0px;
+}
  @page { size: A3;
          margin: 1cm;
         }
@@ -6,8 +23,11 @@
     margin-top:30px;
     margin-bottom:30px;
 }
-.wrap{
-    padding: 0px;
+.contact-wrap{
+    padding: 20px;
+}
+.read-wrap{
+    padding: 40px;
 }
 .fab-report{
     padding:30px;

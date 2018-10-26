@@ -7,11 +7,12 @@ from django_weasyprint import WeasyTemplateResponseMixin
 from django.db.models import Sum
 import datetime
 from django.utils import timezone
+from dal import autocomplete
 
 from .models import Joint
 from .forms import JointForm, QcJointForm
 from .resources import IsoResource, QcResource, JointResource
-from control_centre.models import Owner
+from control_centre.models import Owner, Iso
 
 
 def export(request):
@@ -59,7 +60,7 @@ def joint_export(request):
     return response
 
 
-class JointyReportAjaxView(View):
+class JointReportAjaxView(View):
 
     def get(self, request, *args, **kwargs):
         data = {}
@@ -87,6 +88,15 @@ class JointUpdateView(UpdateView):
     success_url = reverse_lazy('joint_list')
 
 
+class IsoAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Iso.objects.filter(project__owner__user=self.request.user)
+        print(qs)
+        if self.q:
+            qs = qs.filter(username__istartswith=self.q)
+        return qs
+
+
 class JointCreateView(CreateView):
     model = Joint
     form_class = JointForm
@@ -94,8 +104,6 @@ class JointCreateView(CreateView):
     success_url = reverse_lazy('joint_list')
 
     def form_valid(self, form):
-        # iso = Joint.objects.filter(iso__project__owner__user=self.request.user)
-        # Joint.objects.filter(iso__project__owner__user=self.request.user)
         owner = Owner.objects.get(user=self.request.user)
         form.instance.iso.project.owner = owner
         valid_data = super(JointCreateView, self).form_valid(form)

@@ -106,8 +106,6 @@ def qc_export(request):
 
 
 
-
-
 # class WelderCreateView(CreateView):
 #     model = Welder
 #     form_class = WelderCreateForm

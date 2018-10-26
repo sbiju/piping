@@ -13,6 +13,9 @@ class Owner(models.Model):
     purchase = models.ForeignKey(User, related_name='purchaser',blank=True, null=True, on_delete=models.CASCADE)
     store = models.ForeignKey(User, related_name='store_keeper',blank=True, null=True, on_delete=models.CASCADE)
     fabrication = models.ForeignKey(User, related_name='fabricator',blank=True, null=True, on_delete=models.CASCADE)
+    const_head = models.ForeignKey(User, related_name='construction_head',blank=True, null=True, on_delete=models.CASCADE)
+    qc = models.ForeignKey(User, related_name='qc',blank=True, null=True, on_delete=models.CASCADE)
+    hr = models.ForeignKey(User, related_name='hr',blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
@@ -27,6 +30,7 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class IsoManagerQueryset(models.query.QuerySet):
     def total_inch_dia(self):
@@ -43,6 +47,7 @@ class Iso(models.Model):
     iso_no = models.CharField(verbose_name='iso no/line no', max_length=200, blank=True, null=True, unique=True)
     no_of_joints = models.IntegerField(blank=True, null=True)
     inch_dia = models.IntegerField(verbose_name='Total Inch Dia', blank=True, null=True)
+    is_approved = models.BooleanField(default=True)
 
     objects = IsoManager()
 

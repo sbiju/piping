@@ -7,6 +7,9 @@ from django.db import IntegrityError
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.contrib import messages
+from dal import autocomplete
+
 from .forms import UserForm, OwnerCreateForm, LoginForm, ProjectCreateForm, IsoCreateForm, ContactusForm
 from .models import Owner, Iso, Project, Post
 
@@ -57,6 +60,20 @@ def logout_view(request):
     return redirect('home')
 
 
+class OwnerListView(ListView):
+    model = Owner
+
+    def get_queryset(self):
+        return Owner.objects.filter(user=self.request.user)
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(IsoListView, self).get_context_data(**kwargs)
+    #     user = self.request.user
+    #     # context['headline'] = 'Employees'
+    #     context['obj_list'] = Iso.objects.filter(project__owner__user=user)
+    #     return context
+
+
 class OwnerCreateView(CreateView):
     model = Owner
     form_class = OwnerCreateForm
@@ -71,40 +88,47 @@ class OwnerCreateView(CreateView):
             return HttpResponse('Error! You are not authorized to perform this!!')
 
 
-# class OwnerEditView(UpdateView):
-#     model = Owner
-#     form_class = OwnerCreateForm
-#     template_name = 'form.html'
-#     success_url = reverse_lazy('home')
-#
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         valid_data = super(OwnerEditView, self).form_valid(form)
-#         return valid_data
-#
-#     def get_object(self, *args, **kwargs):
-#         user = self.request.user
-#         obj = super(OwnerEditView, self).get_object(*args, **kwargs)
-#         if obj.user == user:
-#             return obj
-#         else:
-#             raise Http404
+class OwnerEditView(UpdateView):
+    model = Owner
+    form_class = OwnerCreateForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('owner_list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        try:
+            return super(OwnerEditView, self).form_valid(form)
+        except IntegrityError:
+            return HttpResponse('Error! You are not authorized to perform this!!')
+
+
+class UserAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = User.objects.filter(email=self.request.user.email)
+        if self.q:
+            qs = qs.filter(username__istartswith=self.q)
+        return qs
 
 
 def add_user(request):
     form = UserForm(request.POST or None)
     context = {'form': form}
+    user_count = User.objects.filter(email=request.user.email).count()
+    print(user_count)
     if form.is_valid():
         username = form.cleaned_data.get('username')
-        email = form.cleaned_data.get('email')
+        email = request.user.email
         password = form.cleaned_data.get('password')
-        new_user = User.objects.create_user(username, email, password)
-        return redirect('home')
+        if not user_count > 7:
+            new_user = User.objects.create_user(username, email, password)
+        # else: raise messages.error(request, 'You have exceeded user limit')
+        return redirect('add_user')
     return render(request, 'form.html', context)
 
 
 # Design
 class IsoCreateView(CreateView):
+    # form_class = modelformset_factory(fields=['iso_no', 'no_of_joints', 'inch_dia'], model = Iso)
     model = Iso
     form_class = IsoCreateForm
     template_name = 'form.html'

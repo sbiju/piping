@@ -2,12 +2,13 @@ from django.conf.urls import url
 from .views import MaterialCreateView, DesignlListView, MaterialUpdateView, MaterialDetailView, \
     PurchaseListView, PurchaseUpdateView, AdminListView, DesignUpdateView, StoreListView, StoreUpdateView,\
     FabListView, FabUpdateView, JointReportView, FabIsoReportView, PerformReportView, FabDailyReportView,\
-    FabSumReportView, MyModelViewPrintView, FabDailyReportApiView, ProductionChartView, FabDailyReportAjaxView
+    FabSumReportView, MyModelViewPrintView, FabDailyReportApiView, ProductionChartView, FabDailyReportAjaxView, \
+    material_create
 
 
 urlpatterns = [
-    url(r'^add/$', MaterialCreateView.as_view(), name='add'),
-    url(r'^add/(?P<pk>[\w-]+)/$', MaterialUpdateView.as_view(), name='update'),
+    url(r'^material/add/$', MaterialCreateView.as_view(), name='add'),
+    url(r'^material/(?P<pk>[\w-]+)/$', MaterialUpdateView.as_view(), name='update'),
     url(r'^design/$', DesignlListView.as_view(), name='design_list'),
     url(r'^design/(?P<pk>[\w-]+)/$', DesignUpdateView.as_view(), name='design_update'),
     url(r'^main_list/$', AdminListView.as_view(), name='main_list'),
@@ -31,5 +32,5 @@ urlpatterns = [
 
     url(r'^fabrication/$', FabListView.as_view(), name='fab_list'),
     url(r'^fabrication/(?P<pk>[\w-]+)/$', FabUpdateView.as_view(), name='fab_update'),
-
+    url(r'^mat_add/$', material_create, name='material_add'),
 ]

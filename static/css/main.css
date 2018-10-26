@@ -82,7 +82,7 @@ body {
     line-height: 26px;
     font-weight: 400;
     font-size: 14px;
-    color: #777;
+    color: #000000;
 }
 
 html, body {
@@ -100,7 +100,7 @@ p {
 }
 
 a {
-    color: #777;
+    color: #000000;
 	
     -webkit-transition: all .3s ease-in 0s;
        -moz-transition: all .3s ease-in 0s;
@@ -373,7 +373,7 @@ input::-moz-placeholder {
 }
 
 .btn-bottom-bdr {
-    border-bottom: 1px solid #777;
+    border-bottom: 1px solid #000000;
     letter-spacing: 2px;
     padding: 12px 0;
 }
@@ -769,7 +769,7 @@ input::-moz-placeholder {
 }
 
 .section-head.style_3 p {
-    color: #777;
+    color: #000000;
     font-size: 18px;
     margin: 0;
 }
@@ -1332,7 +1332,7 @@ body.mfp-white-bg .mfp-bg.mfp-zoom-in {
     height: 1.3em;
     border-width: .1em;
     border-top-color: #ddd;
-    border-left-color: #777;
+    border-left-color: #000000;
     top: -.45em;
     left: -.45em;
     -webkit-animation: spin .7s linear infinite;
@@ -1894,7 +1894,7 @@ body.boxed-mode > section > .overlay {
 
 .quick-contact {
 	font-family: 'Lato', sans-serif;
-	color:#777;
+	color:#000000;
 }
 
 .quick-contact > i {
@@ -1969,7 +1969,7 @@ body.boxed-mode > section > .overlay {
     border: 1px solid #e5e5e5;
     border-radius: 50%;
     display: block;
-    color: #777;
+    color: #000000;
     font-size: 16px;
     height: 38px;
     line-height: 37px;
@@ -2335,7 +2335,7 @@ body.boxed-mode > section > .overlay {
 
 .transparent-head.animated .toggle-search .search-form > i,
 .transparent-head.animated .navbar-nav > li > a {
-    color: #777;
+    color: #000000;
 }
 
 .transparent-head .navbar-nav > li > a,
@@ -2651,7 +2651,7 @@ body.boxed-mode > section > .overlay {
 .header19.animated .search-form > i,
 .header19.animated .cart-and-search a > i,
 .header19.animated .side-nav {
-    color: #777;
+    color: #000000;
 }
 
 .header19.animated .navbar-nav > li.current > a,
@@ -2760,7 +2760,7 @@ body.boxed-mode > section > .overlay {
     border: 0;
     height: 42px;
     font-size: 14px;
-    color: #777;
+    color: #000000;
     padding: 0;
     text-indent: 15px;
     width: 100%;
@@ -3137,7 +3137,7 @@ body.boxed-mode > section > .overlay {
 
 .nav22 .navbar-nav > li > a {
     padding: 25.5px 25px;
-    color: #777;
+    color: #000000;
 }
 
 
@@ -3257,7 +3257,7 @@ body.boxed-mode > section > .overlay {
 }
 
 .header-top.dark .htRight li a span {
-    color: #777;
+    color: #000000;
 }
 
 .header-top.dark .htRight li:first-child a {
@@ -3391,7 +3391,7 @@ body.boxed-mode > section > .overlay {
 }
 
 .header28.animated .navbar-nav > li > a {
-    color: #777;
+    color: #000000;
     padding: 20px 15px;
 }
 
@@ -4483,7 +4483,7 @@ body.boxed-mode > section > .overlay {
     height: 50px;
     margin-right: 20px;
     background-color: #fff;
-    color: #777;
+    color: #000000;
     border: 0;
     padding: 0;
     text-indent: 25px;
@@ -4614,7 +4614,7 @@ body.boxed-mode > section > .overlay {
 }
 
 .quote-form p {
-    color: #777;
+    color: #000000;
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 22px;
@@ -5822,7 +5822,7 @@ html.custom-scrollbar body {
 }
 
 .app-feature .feature-item {
-    color: #777;
+    color: #000000;
     display: table;
     text-align: left;
 }
@@ -6647,7 +6647,7 @@ html.custom-scrollbar body {
 }
 
 .boxed-hover .portfolio-desc span a {
-    border-color: #777;
+    border-color: #000000;
     margin-bottom: 20px;
     background-image: url("../img/icons/zoom-hr.png");
 }
@@ -6948,7 +6948,7 @@ html.custom-scrollbar body {
 }
 
 .portfolio-item .entry-meta a:hover {
-    color: #777;
+    color: #000000;
 }
 
 .portfolio-head .caption-top {
@@ -7255,7 +7255,7 @@ html.custom-scrollbar body {
     text-transform: uppercase;
     font-size: 30px;
     margin: 0;
-    color: #777;
+    color: #000000;
 }
 
 .price-table .value span {
@@ -7391,7 +7391,7 @@ html.custom-scrollbar body {
 
 
 #filter a{
-    color: #777;
+    color: #000000;
     display: inline-block;
     height: 39px;
     line-height: 37px;
@@ -8245,7 +8245,7 @@ h4.subtitle {
     background-color: #fff;
     border: 1px solid #cccccc;
     position: relative;
-    color: #777;
+    color: #000000;
     padding: 15px;
     margin-bottom: 30px;
 }
@@ -9554,7 +9554,7 @@ h4.subtitle {
 
 .post-entry .post-excerpt {
     padding: 30px;
-    color: #999;
+    color: #000000;
 }
 
 .posts-section .post-entry h2 {
@@ -9727,7 +9727,7 @@ blockquote {
 .post-entry .post-share li a {
     border: 1px solid #e5e5e5;
     border-radius: 50%;
-    color: #777;
+    color: #000000;
     display: block;
     font-size: 18px;
     height: 42px;
@@ -10027,7 +10027,7 @@ blockquote {
 
 .next-prev-post.pagi2 a {
     background-color: transparent;
-    color: #777;
+    color: #000000;
 }
 
 .next-prev-post.pagi2 .pull-left {
@@ -10098,7 +10098,7 @@ blockquote {
 .search-form .input-field {
     background-color: #e0e0e0;
     border: 0 none;
-    color: #777;
+    color: #000000;
     padding: 4px 35px 4px 20px;
 }
 
@@ -10726,7 +10726,7 @@ ul.post-tab-nav li a {
 .sidebar .social-links li a {
     border: 1px solid #e5e5e5;
     border-radius: 50%;
-    color: #777;
+    color: #000000;
     display: block;
     font-size: 18px;
     height: 42px;
@@ -11082,7 +11082,7 @@ ul.post-tab-nav li a {
 }
 
 .portfolio-item-single .project-details h2 {
-    color: #777;
+    color: #000000;
     font-weight: 300;
     text-transform: uppercase;
 }
@@ -11334,7 +11334,7 @@ ul.post-tab-nav li a {
 .page-sec-head p {
     margin-top: 35px;
     font-size: 16px;
-    color: #777;
+    color: #000000;
 }
 
 .boxed-slide2 .item h1 {
@@ -11446,7 +11446,7 @@ ul.post-tab-nav li a {
 }
 
 .dark .feature-item {
-    color: #777;
+    color: #000000;
 }
 
 .dark .feature-item .fi-icon {
@@ -15094,7 +15094,7 @@ ul.page-numbers li .current:hover {
 }
 
 .team .bx-controls-direction a.bx-prev:after {
-    background-color: #777;
+    background-color: #000000;
     content: "";
     height: 21px;
     margin-top: -9px;
@@ -15212,7 +15212,7 @@ ul.page-numbers li .current:hover {
 body.boxed-mode {
     background-color: #efefef;
     margin: 80px 0 60px;
-    color: #777;
+    color: #000000;
 }
 
 .boxed-mode > .container {
@@ -15288,7 +15288,7 @@ body.boxed-mode {
 
 .boxed-mode .contact .address p,
 .boxed-mode .contact .address a {
-    color: #777;
+    color: #000000;
 }
 
 .header-full .slide-wrapper {
@@ -15297,7 +15297,7 @@ body.boxed-mode {
 
 .boxed-mode .footer-top:not(.boxed-reverse) {
     background-color: #fff;
-    color: #777;
+    color: #000000;
     border: 0;
 }
 
@@ -15728,12 +15728,12 @@ body.bordered .sticky-header.on {
 }
 
 .bordered .navbar-default:not(.primary).animated .navbar-nav > li > a {
-    color: #777;
+    color: #000000;
 }
 
 .bordered .animated .navbar-form-menu .search-form > i,
 .bordered .animated .navbar-form-menu .side-nav {
-    color: #777;
+    color: #000000;
     padding-top: 28px;
     padding-bottom: 28px;
 }
@@ -16110,7 +16110,7 @@ body.bordered .sticky-header.on {
 }
 
 .color2 .slide-item h2 {
-    color: #777;
+    color: #000000;
 }
 
 .eydia .slide-item p {
@@ -17172,7 +17172,7 @@ body.bordered .sticky-header.on {
 .eydia-input .form-control {
     border-radius: 0;
     box-shadow: none;
-    color: #777;
+    color: #000000;
     height: 45px;
 }
 
@@ -17516,7 +17516,7 @@ body.bordered .sticky-header.on {
 }
 
 .shopCatList li a:before {
-    background-color: #777;
+    background-color: #000000;
     content: "";
     height: 1px;
     left: 0;
@@ -17613,7 +17613,7 @@ body.bordered .sticky-header.on {
 }
 
 .shop-search form input[type="text"]:focus {
-    color: #777;
+    color: #000000;
 }
 
 .shop-search.active form input[type="text"] {
@@ -18078,7 +18078,7 @@ body.bordered .sticky-header.on {
 
 .shopSingleDesc .subtitle {
     border-bottom: 0 none;
-    color: #777;
+    color: #000000;
     font-size: 20px;
     letter-spacing: 1px;
     margin: 40px 0 13px;
@@ -18631,7 +18631,7 @@ body.bordered .sticky-header.on {
 
 .productBlock h3 {
     border-bottom: 0 none;
-    color: #777;
+    color: #000000;
     font-size: 20px;
     margin-bottom: 30px;
 }
@@ -19257,7 +19257,7 @@ figure.lookbook-image.fixed {
 }
 
 .productItem.type1 .product-colors li:hover {
-    border-color: #777;
+    border-color: #000000;
 }
 
 .productItem.type1 .product-colors li span {
@@ -19286,7 +19286,7 @@ figure.lookbook-image.fixed {
 }
 
 .productItem.type1 .product-sizes li.active {
-    border-color: #777;
+    border-color: #000000;
 }
 
 .productItem.type1 .btn-ash-border {
@@ -19303,7 +19303,7 @@ figure.lookbook-image.fixed {
 
 .productItem.type1 .product-meta a {
     border: 1px solid #ccc;
-    color: #777;
+    color: #000000;
     display: inline-block;
     height: 40px;
     line-height: 38px;
@@ -20600,7 +20600,7 @@ form.appointment {
 }
 
 .service4 .service-icon {
-    color: #777;
+    color: #000000;
     font-size: 80px;
     margin-bottom: 30px;
 }
@@ -20902,7 +20902,7 @@ form.appointment {
 }
 
 .slide-search.animated .search-sub {
-    color: #777;
+    color: #000000;
 }
 
 .header3 .callus {
@@ -21037,7 +21037,7 @@ form.appointment {
 }
 
 .top-nav.dropdown ul.submenu li a {
-    color: #777;
+    color: #000000;
     display: block;
     font-weight: 300;
     line-height: 26px;
@@ -21053,7 +21053,7 @@ form.appointment {
 }
 
 .top-nav.dropdown .cart .product_list_widget {
-    color: #777;
+    color: #000000;
     left: auto;
     line-height: 26px;
     min-width: 330px;
@@ -22015,7 +22015,7 @@ form.appointment {
 .corporate .service-item:hover {
     background-color: #fff;
     margin-top: -60px;
-    color: #777;
+    color: #000000;
 }
 
 .corporate .service-item:hover .service-icon {
@@ -23053,7 +23053,7 @@ form.appointment {
 .promotion-item .btn-set a {
     border: 1px solid #e5e5e5;
     margin: 0 5px 0 0;
-    color: #777;
+    color: #000000;
     padding: 8px 20px;
 }
 
@@ -23678,7 +23678,7 @@ form.appointment {
 
 .service6 .service-icon {
     background-color: transparent;
-    border: 1px solid #777;
+    border: 1px solid #000000;
     color: #00aeef;
     font-size: 65px;
     height: 170px;
@@ -24035,7 +24035,7 @@ form.appointment {
 
 .form2 .form-control {
     border-color: #aaa;
-    color: #777;
+    color: #000000;
 }
 
 .form2 textarea.form-control {

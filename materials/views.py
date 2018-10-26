@@ -2,15 +2,16 @@ from django.shortcuts import render, Http404
 from django.db.models import Count, Sum, Avg
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, TemplateView, View
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django_weasyprint import WeasyTemplateResponseMixin
 import datetime
 from django.utils import timezone
+from django.forms import modelformset_factory
 
 from .mixins import LoginRequiredMixin
-from .models import MaterialData
+from .models import MaterialData, Material
 from .forms import MaterialForm, PurchaseForm, DesignForm, StoreForm, FabForm
 from control_centre.models import Owner, Iso
 from construction.models import Joint
@@ -202,17 +203,17 @@ class PerformReportView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(PerformReportView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['welder'] = Iso.objects.filter(project__owner__user=user).values('joint__welder') \
+        context['welder'] = Iso.objects.filter(project__owner__user=user).values('joint__welder__first_name') \
             .order_by('joint__welder').annotate(total_inch=Sum('joint__inch_dia')) \
             .annotate(actual_inch=Sum('joint__actual_inch_dia'))
-        context['fabricator'] = Iso.objects.filter(project__owner__user=user).values('joint__fabricator') \
+        context['fabricator'] = Iso.objects.filter(project__owner__user=user).values('joint__fabricator__first_name') \
             .order_by('joint__fabricator').annotate(total_inch=Sum('joint__inch_dia')) \
             .annotate(actual_inch=Sum('joint__actual_inch_dia'))
-        context['supervisor'] = Iso.objects.filter(project__owner__user=user).values('joint__supervisor') \
+        context['supervisor'] = Iso.objects.filter(project__owner__user=user).values('joint__supervisor__first_name') \
             .order_by('joint__supervisor').annotate(total_inch=Sum('joint__inch_dia')) \
             .annotate(actual_inch=Sum('joint__actual_inch_dia')) \
             .annotate(avg_man_hours=Avg('joint__man_hours'))
-        context['engineer'] = Iso.objects.filter(project__owner__user=user).values('joint__engineer') \
+        context['engineer'] = Iso.objects.filter(project__owner__user=user).values('joint__engineer__first_name') \
             .order_by('joint__engineer').annotate(total_inch=Sum('joint__inch_dia')) \
             .annotate(actual_inch=Sum('joint__actual_inch_dia')) \
             .annotate(avg_man_hours=Avg('joint__man_hours'))
@@ -296,6 +297,23 @@ class MaterialCreateView(CreateView):
         form.instance.iso.project.owner = owner
         valid_data = super(MaterialCreateView, self).form_valid(form)
         return valid_data
+
+
+def material_create(request):
+    materialFormset = modelformset_factory(Material, form=MaterialForm)
+    formset = materialFormset(request.POST or None, queryset=Material.objects.filter
+    (iso__project__owner__user=request.user))
+
+    if formset.is_valid():
+        for form in formset:
+            obj = form.save(commit=False)
+            if form.cleaned_data:
+                owner = Owner.objects.get(user=request.user)
+                form.instance.iso.project.owner = owner
+                obj.save()
+    context = {'formset': formset}
+    return render(request, 'formset.html', context)
+    # return HttpResponse('')
 
 
 class PurchaseListView(ListView):

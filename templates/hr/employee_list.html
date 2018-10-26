@@ -11,18 +11,17 @@
              <h3 style="margin-left: 50px; margin-bottom:15px;">{{ headline }}</h3>
                   <table class="table table-striped emp-list">
                       <tr>
-
                           <th>Sl No.</th>
-                          <th>Full Name</th>
                           <th>Employee No.</th>
+                          <th>Full Name</th>
                           <th>Designation</th>
                           <th>Date of Joining</th>
                       </tr>
                       {% for emp in object_list %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ emp.first_name }} {{ emp.last_name }} </td>
                           <td>{{ emp.emplyee_no }}</td>
+                          <td>{{ emp.first_name }} {{ emp.last_name }} </td>
                           <td>{{ emp.designation }}</td>
                           <td>{{ emp.joined_date }}</td>
 

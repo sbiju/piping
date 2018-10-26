@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container employees">
+<div class="row">
+
+     <div class="table-responsive">
+         <h3 style="margin-bottom:15px;">Department Heads</h3>
+              <table class="table table-bordered emp-list">
+                  <tr>
+                      <th>Construction Head</th>
+                      <th>HR</th>
+                      <th>Design</th>
+                      <th>Purchase</th>
+                      <th>Stores</th>
+                      <th>Fabrication</th>
+                      <th>Quality Control</th>
+                      <th>Edit</th>
+                  </tr>
+                  {% for item in object_list %}
+                  <tr>
+                      <td>{{ item.const_head }}</td>
+                      <td>{{ item.hr }}</td>
+                      <td>{{ item.design }}</td>
+                      <td>{{ item.purchase }}</td>
+                      <td>{{ item.store }}</td>
+                      <td>{{ item.fabrication }}</td>
+                      <td>{{ item.qc }}</td>
+                      <td><a href="{{ item.get_edit_url }}">Edit</a></td>
+                  </tr>
+                  {% endfor %}
+              </table>
+
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

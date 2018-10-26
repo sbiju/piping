@@ -51,7 +51,7 @@ class JointManager(models.Manager):
 class Joint(models.Model):
     iso = models.ForeignKey(Iso, on_delete=models.CASCADE)
     joint_no = models.CharField(max_length=50, blank=True, null=True)
-    size = models.IntegerField(blank=True, null=True)
+    size = models.IntegerField(verbose_name='Size',blank=True, null=True)
     sch = models.CharField(verbose_name='Schedule', max_length=50, blank=True, null=True)
     welder = models.ForeignKey(Employee, related_name='welder', on_delete=models.CASCADE)
     fabricator = models.ForeignKey(Employee, related_name='fabricator',  on_delete=models.CASCADE )

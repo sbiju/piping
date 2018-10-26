@@ -1,6 +1,7 @@
 from django import forms
 from .models import Owner, Project, Iso
 from django.contrib.auth import get_user_model
+from dal import autocomplete
 
 User = get_user_model()
 
@@ -22,11 +23,39 @@ class ProjectCreateForm(forms.ModelForm):
 
 
 class OwnerCreateForm(forms.ModelForm):
+    hr = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        widget=autocomplete.ModelSelect2(url='user_auto')
+    )
+    const_head = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        widget=autocomplete.ModelSelect2(url='user_auto')
+    )
+    design = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        widget=autocomplete.ModelSelect2(url='user_auto')
+    )
+    purchase = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        widget=autocomplete.ModelSelect2(url='user_auto')
+    )
+    store = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        widget=autocomplete.ModelSelect2(url='user_auto')
+    )
+    fabrication = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        widget=autocomplete.ModelSelect2(url='user_auto')
+    )
+    qc = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        widget=autocomplete.ModelSelect2(url='user_auto')
+    )
 
     class Meta:
         model = Owner
-        fields = ['user', 'design', 'purchase', 'store', 'fabrication']
-        labels = {'user': 'Admin'}
+        fields = ['const_head', 'hr', 'design', 'purchase', 'store', 'fabrication','qc']
+        # labels = {'user': 'Admin'}
 
 
 class LoginForm(forms.Form):
@@ -36,7 +65,7 @@ class LoginForm(forms.Form):
 
 class UserForm(forms.Form):
     username = forms.CharField()
-    email = forms.EmailField()
+    # email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
     password_2 = forms.CharField(widget=forms.PasswordInput, label='Confirm Password')
 

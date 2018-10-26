@@ -4,7 +4,12 @@ from django.conf import settings
 from django.urls import reverse
 from django.db.models.signals import post_save
 from control_centre.models import Project
-User = settings.AUTH_USER_MODEL
+
+DAY_CHOICES = (
+                ('Present', 'Present'),
+                ('Absent', 'Absent'),
+                ('Vacation', 'On Vacation'),
+                  )
 
 
 class Designation(models.Model):
@@ -40,6 +45,9 @@ class Employee(models.Model):
     joined_date = models.DateField(default=timezone.now)
 
     objects = EmployeeManager()
+
+    class Meta:
+        unique_together = ('first_name', 'last_name')
 
     def __str__(self):
         return str(self.first_name)

@@ -23,7 +23,7 @@
                   {% for item in supervisor %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.joint__supervisor }}</td>
+                      <td>{{ item.joint__supervisor__first_name }}</td>
                       <td>{{ item.total_inch }}</td>
                       <td>{{ item.actual_inch }}</td>
                       <td>{{ item.avg_man_hours|floatformat:2 }}</td>
@@ -47,7 +47,7 @@
                   {% for item in engineer %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.joint__engineer }}</td>
+                      <td>{{ item.joint__engineer__first_name }}</td>
                       <td>{{ item.total_inch }}</td>
                       <td>{{ item.actual_inch }}</td>
                       <td>{{ item.avg_man_hours|floatformat:2 }}</td>
@@ -74,7 +74,7 @@
                   {% for item in welder %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.joint__welder }}</td>
+                      <td>{{ item.joint__welder__first_name }}</td>
                       <td>{{ item.total_inch }}</td>
                       <td>{{ item.actual_inch }}</td>
 
@@ -97,7 +97,7 @@
                   {% for item in fabricator %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.joint__fabricator }}</td>
+                      <td>{{ item.joint__fabricator__first_name }}</td>
                       <td>{{ item.total_inch }}</td>
                       <td>{{ item.actual_inch }}</td>
                   </tr>
