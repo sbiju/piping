@@ -56,8 +56,8 @@ class MaterialData(models.Model):
     def get_absolute_url(self):
         return reverse("detail", kwargs={"pk": self.pk})
 
-    class Meta:
-        unique_together = ('iso', 'name', 'size',)
+    # class Meta:
+    #     unique_together = ('iso', 'name', 'size',)
 
 
 def total_receiver(sender, instance, *args, **kwargs):

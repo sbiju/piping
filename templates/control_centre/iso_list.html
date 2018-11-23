@@ -23,5 +23,24 @@
               </table>
         </div>
     </div>
+    <div class="row">
+         <div class="table-responsive">
+             <h3 style="margin-bottom:15px;">Pipe List</h3>
+              <table class="table table-bordered emp-list">
+                  <tr>
+                      <th>Service</th>
+                      <th>Length</th>
+
+                  </tr>
+                  {% for pipe in pipe_report %}
+                  <tr>
+                      <td>{{ pipe.service }}</td>
+                      <td>{{ pipe.pipe_length }}</td>
+
+                  </tr>
+                  {% endfor %}
+              </table>
+        </div>
+    </div>
 </div>
 {% endblock %}

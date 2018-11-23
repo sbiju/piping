@@ -1,5 +1,5 @@
 from django import forms
-from .models import Owner, Project, Iso
+from .models import Owner, Project, Iso, Pipe
 from django.contrib.auth import get_user_model
 from dal import autocomplete
 
@@ -10,8 +10,20 @@ class IsoCreateForm(forms.ModelForm):
 
     class Meta:
         model = Iso
-        fields = ['iso_no', 'no_of_joints', 'inch_dia', ]
-        # labels = {'name': 'Project Name'}
+        fields = ['iso_no',
+                  'service',
+                  ]
+
+
+class PipeCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Pipe
+        fields = [ 'iso',
+                   'material',
+                   'size',
+                   'length'
+                  ]
 
 
 class ProjectCreateForm(forms.ModelForm):

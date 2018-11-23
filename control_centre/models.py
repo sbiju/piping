@@ -42,11 +42,42 @@ class IsoManager(models.Manager):
         return IsoManagerQueryset(self.model, using=self._db)
 
 
+class Size(models.Model):
+    name = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return str(self.name)
+
+
+class Fitting(models.Model):
+    name = models.CharField(max_length=10, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Qty(models.Model):
+    name = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return str(self.name)
+
+
+class Service(models.Model):
+    name = models.CharField(max_length=120, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Iso(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    iso_no = models.CharField(verbose_name='iso no/line no', max_length=200, blank=True, null=True, unique=True)
-    no_of_joints = models.IntegerField(blank=True, null=True)
-    inch_dia = models.IntegerField(verbose_name='Total Inch Dia', blank=True, null=True)
+    iso_no = models.CharField(verbose_name='iso no/line no', max_length=200, blank=True, null=True)
+    service = models.CharField(max_length=100, blank=True, null=True)
+    # pipe1 = models.IntegerField(blank=True, null=True)
+    # pipe2 = models.IntegerField(blank=True, null=True)
+    # pipe_1l = models.IntegerField(blank=True, null=True)
+    # pipe_2l = models.IntegerField(blank=True, null=True)
     is_approved = models.BooleanField(default=True)
 
     objects = IsoManager()
@@ -55,11 +86,11 @@ class Iso(models.Model):
         return self.iso_no
 
 
-class Post(models.Model):
-    title = models.CharField(max_length=200, blank=True, null=True, unique=True)
-    content = models.TextField()
-    image = models.FileField(null=True, blank=True)
-    published = models.DateTimeField(default=timezone.now)
+class Pipe(models.Model):
+    iso = models.ForeignKey(Iso, on_delete=models.CASCADE, blank=True, null=True)
+    material = models.CharField(max_length=80, blank=True, null=True)
+    size = models.IntegerField(blank=True, null=True)
+    length = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return str(self.size)
