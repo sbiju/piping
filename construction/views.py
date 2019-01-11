@@ -9,7 +9,7 @@ import datetime
 from django.utils import timezone
 from dal import autocomplete
 
-from .models import Joint
+from .models import Joint, Qc
 from .forms import JointForm, QcJointForm
 from .resources import IsoResource, QcResource, JointResource
 from control_centre.models import Owner, Iso
@@ -88,15 +88,6 @@ class JointUpdateView(UpdateView):
     success_url = reverse_lazy('joint_list')
 
 
-class IsoAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = Iso.objects.filter(project__owner__user=self.request.user)
-        print(qs)
-        if self.q:
-            qs = qs.filter(username__istartswith=self.q)
-        return qs
-
-
 class JointCreateView(CreateView):
     model = Joint
     form_class = JointForm
@@ -104,9 +95,34 @@ class JointCreateView(CreateView):
     success_url = reverse_lazy('joint_list')
 
     def form_valid(self, form):
+        # owner = Owner.objects.get(fabrication=self.request.user)
         owner = Owner.objects.get(user=self.request.user)
         form.instance.iso.project.owner = owner
         valid_data = super(JointCreateView, self).form_valid(form)
+        return valid_data
+
+
+class QcAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Qc.objects.filter(joint__iso__project__owner__user=self.request.user)
+        iso = self.forwarded.get('iso', None)
+        if iso:
+            qs = qs.filter(iso=iso)
+        if self.q:
+            qs = qs.filter(joint__joint_no__istartswith=self.q)
+        return qs
+
+
+class QcCreateView(CreateView):
+    model = Qc
+    form_class = QcJointForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('joint_list')
+
+    def form_valid(self, form):
+        owner = Owner.objects.get(user=self.request.user)
+        form.instance.iso.project.owner = owner
+        valid_data = super(QcCreateView, self).form_valid(form)
         return valid_data
 
 
@@ -144,7 +160,7 @@ def qc_export(request):
 
 
 class QcJointUpdateView(UpdateView):
-    model = Joint
+    model = Qc
     form_class = QcJointForm
     template_name = 'form.html'
     success_url = reverse_lazy('qc_joint_list')

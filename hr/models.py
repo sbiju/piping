@@ -15,6 +15,9 @@ DAY_CHOICES = (
 class Designation(models.Model):
     title = models.CharField(max_length=120, blank=True, null=True)
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return self.title
 
@@ -48,6 +51,7 @@ class Employee(models.Model):
 
     class Meta:
         unique_together = ('first_name', 'last_name')
+        ordering = ['first_name']
 
     def __str__(self):
         return str(self.first_name)

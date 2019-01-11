@@ -35,11 +35,11 @@ class JointResource(resources.ModelResource):
         import_id_fields = ('iso__iso_no',)
         fields = ('iso__iso_no', 'joint_no', 'size', 'sch', 'welder__first_name',
                   'fabricator__first_name', 'supervisor__first_name', 'engineer__first_name',
-                  'hours_worked', 'crew_members', 'date_completed','ndt', 'hydro','radio' )
+                  'hours_worked', 'crew_members', 'date_completed' )
 
         export_order = ('iso__iso_no', 'joint_no', 'size', 'sch', 'welder__first_name',
                       'fabricator__first_name', 'supervisor__first_name', 'engineer__first_name',
-                      'hours_worked', 'crew_members', 'date_completed','ndt', 'hydro','radio' )
+                      'hours_worked', 'crew_members', 'date_completed')
 
 
 class QcResource(resources.ModelResource):
@@ -51,6 +51,6 @@ class QcResource(resources.ModelResource):
         model = Joint
         import_id_fields = ('iso__iso_no',)
         fields = ('iso__iso_no', 'joint_no', 'size','sch', 'welder__first_name',
-                  'fabricator__first_name', 'status', 'qc_checked')
+                  'fabricator__first_name', 'status')
         export_order = ('iso__iso_no', 'joint_no', 'size','sch', 'welder__first_name',
-                        'fabricator__first_name', 'status', 'qc_checked')
+                        'fabricator__first_name', 'status')

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from materials.models import Iso
+from control_centre.models import Iso
 from django.db.models.signals import pre_save
 from django.db.models import Sum
 from hr.models import Employee
@@ -42,7 +42,6 @@ class JointManagerQueryset(models.query.QuerySet):
         return self.recent().status('Failed')
 
 
-
 class JointManager(models.Manager):
     def get_queryset(self):
         return JointManagerQueryset(self.model, using=self._db)
@@ -63,6 +62,18 @@ class Joint(models.Model):
     inch_dia = models.IntegerField(blank=True, null=True)
     actual_inch_dia = models.IntegerField(blank=True, null=True)
     man_hours = models.FloatField(verbose_name='Total Man Hours Taken', blank=True, null=True)
+    status = models.CharField(verbose_name='Joint Status', max_length=40, choices=STATUS_CHOICES,
+                             default='Pending')
+
+    objects = JointManager()
+
+    def __str__(self):
+        return self.iso.iso_no
+
+
+class Qc(models.Model):
+    iso = models.ForeignKey(Iso, on_delete=models.CASCADE)
+    joint = models.ForeignKey(Joint, on_delete=models.CASCADE)
     ndt = models.CharField(verbose_name='NDT Status', max_length=40, choices=NDT_CHOICES,
                            default='Not Started')
     hydro = models.CharField(verbose_name='Hydrotest Status', max_length=40, choices=NDT_CHOICES,
@@ -71,12 +82,13 @@ class Joint(models.Model):
                              default='Not Started')
     status = models.CharField(verbose_name='Joint Status', max_length=40, choices=STATUS_CHOICES,
                              default='Pending')
-    qc_checked = models.DateField(blank=True, null=True)
-
-    objects = JointManager()
+    timestamp = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return self.joint_no
+        return self.joint.joint_no
+
+    class Meta:
+        ordering = ['-id']
 
 
 def total_inch_receiver(sender, instance, *args, **kwargs):

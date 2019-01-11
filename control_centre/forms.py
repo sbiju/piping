@@ -1,5 +1,8 @@
 from django import forms
-from .models import Owner, Project, Iso, Pipe
+from .models import Owner, Project, Iso, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
+    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, Fabrication, FabStatus, WeldStatus, \
+    FitUpStatus
+
 from django.contrib.auth import get_user_model
 from dal import autocomplete
 
@@ -7,22 +10,207 @@ User = get_user_model()
 
 
 class IsoCreateForm(forms.ModelForm):
+    service = forms.ModelChoiceField(
+        queryset=Service.objects.all(),
+        widget=autocomplete.ModelSelect2(url='service_auto'),
+    )
+    line_class = forms.ModelChoiceField(
+        queryset=LineClass.objects.all(),
+        widget=autocomplete.ModelSelect2(url='line_auto'),
+    )
 
     class Meta:
         model = Iso
         fields = ['iso_no',
                   'service',
+                  'line_class',
+                  'is_approved',
                   ]
 
 
 class PipeCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    material = forms.ModelChoiceField(
+        queryset=Material.objects.all(),
+        widget=autocomplete.ModelSelect2(url='mat_auto'),
+    )
 
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    schedule = forms.ModelChoiceField(
+        queryset=Schedule.objects.all(),
+        widget=autocomplete.ModelSelect2(url='sch_auto'),
+    )
     class Meta:
         model = Pipe
         fields = [ 'iso',
-                   'material',
                    'size',
+                   'material',
+                   'schedule',
                    'length'
+                  ]
+
+
+class FittingCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    material = forms.ModelChoiceField(
+        queryset=Material.objects.all(),
+        widget=autocomplete.ModelSelect2(url='mat_auto'),
+    )
+
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+
+    class Meta:
+        model = Fitting
+        fields = [ 'iso',
+                   'name',
+                   'size',
+                   'material',
+                   'quantity'
+                  ]
+
+
+class FlangeCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    material = forms.ModelChoiceField(
+        queryset=Material.objects.all(),
+        widget=autocomplete.ModelSelect2(url='mat_auto'),
+    )
+
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    flange_class = forms.ModelChoiceField(
+        queryset=FlangeClass.objects.all(),
+        widget=autocomplete.ModelSelect2(url='flange_auto'),
+    )
+    schedule = forms.ModelChoiceField(
+        queryset=Schedule.objects.all(),
+        widget=autocomplete.ModelSelect2(url='sch_auto'),
+    )
+    class Meta:
+        model = Flange
+        fields = [ 'iso',
+                   'size',
+                   'flange_class',
+                   'material',
+                   'schedule',
+                   'quantity'
+                  ]
+
+
+class BoltCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    grade = forms.ModelChoiceField(
+        queryset=BoltGrade.objects.all(),
+        widget=autocomplete.ModelSelect2(url='grade_auto'),
+    )
+
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    length = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    class Meta:
+        model = Bolt
+        fields = [ 'iso',
+                   'size',
+                   'length',
+                   'grade',
+                   'quantity'
+                  ]
+
+
+class GasketCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    gasket_class = forms.ModelChoiceField(
+        queryset=FlangeClass.objects.all(),
+        widget=autocomplete.ModelSelect2(url='flange_auto'),
+    )
+    gasket_material = forms.ModelChoiceField(
+        queryset=GasketMaterial.objects.all(),
+        widget=autocomplete.ModelSelect2(url='gasket_auto'),
+    )
+    class Meta:
+        model = Gasket
+        fields = [ 'iso',
+                   'size',
+                   'gasket_class',
+                   'gasket_material',
+                   'quantity'
+                  ]
+
+
+class SpoolAddForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    spool_status = forms.ModelChoiceField(
+        queryset=SpoolStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='spool_auto'),
+    )
+    class Meta:
+        model = Spool
+        fields = [ 'iso',
+                   'spool_tag',
+                   'spool_status',
+                   'timestamp',
+                  ]
+
+
+class FabAddForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    fitup_status = forms.ModelChoiceField(
+        queryset=FitUpStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='fitup_auto'),
+    )
+    weld_status = forms.ModelChoiceField(
+        queryset=WeldStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='weld_auto'),
+    )
+    fab_status = forms.ModelChoiceField(
+        queryset=FabStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='fab_auto'),
+    )
+    class Meta:
+        model = Fabrication
+        fields = [ 'iso',
+                   'joint_no',
+                   'fitup_status',
+                   'weld_status',
+                   'fab_status',
                   ]
 
 
@@ -75,9 +263,14 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
+class UserEditForm(forms.ModelForm):
+   class Meta:
+       model = User
+       fields = ['username', 'password',]
+
+
 class UserForm(forms.Form):
     username = forms.CharField()
-    # email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
     password_2 = forms.CharField(widget=forms.PasswordInput, label='Confirm Password')
 

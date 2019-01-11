@@ -1,3 +1,7 @@
+.dataContainer{
+min-height:400px;
+padding-top:15px;
+}
 .fab-report{
     height: 600px;
 }

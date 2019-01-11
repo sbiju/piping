@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container employees">
+    <div class="row">
+         <div class="table-responsive">
+             <div class="table-responsive">
+                <h2>Material List</h2>
+              <table class="table table-bordered">
+
+                {% for iso in object_list %}
+                  <tr>
+                  <td><h3>ISO NO: {{ iso.iso_no }}</h3></td>
+                  </tr>
+                  <tr>
+                      <th>PIPE</th>
+                      <th>SIZE</th>
+                      <th>MATERIAL</th>
+                      <th>SCHEDULE</th>
+                      <th>LENGTH</th>
+                  </tr>
+                  {% for pipe in iso.pipe_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ pipe.size }}</td>
+                          <td>{{ pipe.material }}"</td>
+                          <td>{{ pipe.schedule }}</td>
+                          <td>{{ pipe.length }} MTR</td>
+                      </tr>
+                  {% endfor %}
+                  <tr>
+                      <th>FLANGE</th>
+                      <th>SIZE</th>
+                      <th>MATERIAL</th>
+                      <th>SCHEDULE</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for flange in iso.flange_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ flange.size }}</td>
+                          <td>{{ flange.material }}"</td>
+                          <td>{{ flange.schedule }}</td>
+                          <td>{{ flange.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                  <tr>
+                      <th>FITTINGS</th>
+                      <th>NAME</th>
+                      <th>MATERIAL</th>
+                      <th>SIZE</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for fit in iso.fitting_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ fit.name }}</td>
+                          <td>{{ fit.material }}"</td>
+                          <td>{{ fit.size }}</td>
+                          <td>{{ fit.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                  <tr>
+                      <th>GASKET</th>
+                      <th>SIZE</th>
+                      <th>CLASS</th>
+                      <th>MATERIAL</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for gasket in iso.gasket_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ gasket.size }}</td>
+                          <td>{{ gasket.gasket_class.name }}"</td>
+                          <td>{{ gasket.gasket_material }}</td>
+                          <td>{{ gasket.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                  <tr>
+                      <th>BOLT</th>
+                      <th>SIZE</th>
+                      <th>LENGTH</th>
+                      <th>GRADE</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for bolt in iso.bolt_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ bolt.size }}</td>
+                          <td>{{ bolt.length }}"</td>
+                          <td>{{ bolt.grade }}</td>
+                          <td>{{ bolt.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                  {% endfor %}
+              </table>
+
+    </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

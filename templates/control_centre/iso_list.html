@@ -5,42 +5,33 @@
 {% block content %}
 <div class="container employees">
     <div class="row">
+		<form class="search-form">
+			<input type="text" class="form-control" id="search-iso" placeholder="Search Iso" name="q" value="{{ request.GET.q }}">
+		</form>
+
+	</div>
+    <div class="row">
          <div class="table-responsive">
              <h3 style="margin-bottom:15px;">Iso List</h3>
               <table class="table table-bordered emp-list">
                   <tr>
+                      <th>Sl.No</th>
                       <th>Iso No</th>
-                      <th>No. of Joints</th>
-                      <th>Inch Dia</th>
+                      <th>Service</th>
+                      <th>Line Class</th>
                   </tr>
                   {% for iso in object_list %}
                   <tr>
-                      <td>{{ iso.iso_no }}</td>
-                      <td>{{ iso.no_of_joints }}</td>
-                      <td>{{ iso.inch_dia }}</td>
+                      <td>{{ forloop.counter }}</td>
+                      <td><a href="{{ iso.get_absolute_url }}">{{ iso.iso_no }}</a></td>
+                      <td>{{ iso.service.name }}</td>
+                      <td>{{ iso.line_class.name }}</td>
                   </tr>
+
                   {% endfor %}
               </table>
         </div>
     </div>
-    <div class="row">
-         <div class="table-responsive">
-             <h3 style="margin-bottom:15px;">Pipe List</h3>
-              <table class="table table-bordered emp-list">
-                  <tr>
-                      <th>Service</th>
-                      <th>Length</th>
 
-                  </tr>
-                  {% for pipe in pipe_report %}
-                  <tr>
-                      <td>{{ pipe.service }}</td>
-                      <td>{{ pipe.pipe_length }}</td>
-
-                  </tr>
-                  {% endfor %}
-              </table>
-        </div>
-    </div>
 </div>
 {% endblock %}

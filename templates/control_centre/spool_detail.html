@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container employees">
+    <div class="row">
+         <div class="table-responsive">
+             <h3 style="margin-bottom:15px;">Spool List</h3>
+              <table class="table table-bordered emp-list">
+                  <tr>
+                      <th>Iso No</th>
+                      <th>Spool No</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>Update</th>
+                  </tr>
+                  <tr>
+                      <td><a href="{{ object.iso.get_absolute_url }}">{{ object.iso.iso_no }}</a></td>
+                      <td><a href="{{ object.get_edit_url }}">{{ object.spool_tag }}</a></td>
+                      <td>{{ object.spool_status }}</td>
+                      <td>{{ object.timestamp }}</td>
+                      <td><a href="{{ object.get_edit_url }}">Update</a></td>
+                  </tr>
+              </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

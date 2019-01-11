@@ -2,7 +2,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from control_centre.views import contact_us, Terms, Faq, AboutUs, Privacy, ReadMore, Instruction, HomeView
+from control_centre.views import contact_us, Terms, Faq, AboutUs, Privacy, ReadMore, Instruction, HomeView, \
+    Data_Entry
 
 
 urlpatterns = [
@@ -14,6 +15,7 @@ urlpatterns = [
     url(r'^', include('materials.urls')),
     url(r'^', include('hr.urls')),
     url(r'^terms/$', Terms.as_view(), name='terms'),
+    url(r'^data/$', Data_Entry.as_view(), name='data'),
     url(r'^faq/$', Faq.as_view(), name='faq'),
     url(r'^about/$', AboutUs.as_view(), name='about'),
     url(r'^privacy/$', Privacy.as_view(), name='privacy'),

@@ -1,6 +1,155 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% if request.user.is_authenticated %}
+<div class="container">
+    <div class="mega-menu-wrapper no-beaf nav22 clear">
+        <div class="navbar-header">
+            <!-- responsive nav button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- /responsive nav button -->
+        </div>
+        <!-- main nav -->
+        <nav class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="current mega-menu">
+                    <a href="/">Home</a>
+
+                </li>
+                <li>
+                    <a href="#">Admin</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'owner_list' %}">Department Heads</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add_user' %}">Add Users</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add_owner' %}">Assign Department Heads</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add_project' %}">Add Project</a>
+                        </li>
+                        <li>
+                            <a href="#">Reports</a>
+                            <ul>
+                                <li><a href="{% url 'daily_fab_report' %}">Daily Fab Report</a></li>
+                                <li><a href="{% url 'iso_fab_report' %}">Daily Iso based Report</a></li>
+                                <li><a href="{% url 'daily_sum_report' %}">Daily Summary Report</a></li>
+                                <li><a href="{% url 'daily_joint_report' %}">Joint History</a></li>
+                                <li><a href="{% url 'perform_report' %}">Performance Report</a></li>
+                                <li><a href="{% url 'main_list' %}">Material Data</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Const-Head</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'main_list' %}">Material Status</a></li>
+                        <li><a href="{% url 'daily_fab_report' %}">Daily Fab Report</a></li>
+                        <li><a href="{% url 'daily_joint_report' %}">Joint History</a></li>
+                        <li><a href="{% url 'perform_report' %}">Performance Report</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">HR</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'employee_list' %}">Employees List</a></li>
+                        <li><a href="{% url 'add_employee' %}">Add Employee</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Data Entry</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'add_iso' %}">Add Iso</a></li>
+                        <li><a href="{% url 'add_pipe' %}">Add Pipe</a></li>
+                        <li><a href="{% url 'add_flange' %}">Add Flange</a></li>
+                        <li><a href="{% url 'add_fitting' %}">Add Fittings</a></li>
+                        <li><a href="{% url 'add_bolt' %}">Add Bolts/Nuts</a></li>
+                        <li><a href="{% url 'add_gasket' %}">Add Gasket</a></li>
+                        <li><a href="{% url 'add_spool' %}">Add Spool</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'data' %}">Data Center</a>
+                    <!--<ul class="sub-menu">-->
+                        <!--<li><a href="{% url 'add_iso' %}">Add List</a></li>-->
+                        <!--<li><a href="{% url 'iso_list' %}">Iso List</a></li>-->
+                        <!--<li><a href="{% url 'design_list' %}">Material List</a></li>-->
+                    <!--</ul>-->
+                </li>
+                <li>
+                    <a href="#">Purchase</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="#">Iso</a>
+                            <ul>
+                                <li><a href="{% url 'add_iso' %}">Add List</a></li>
+                                <li><a href="{% url 'iso_list' %}">Iso List</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Material List</a>
+                            <ul>
+                                <li><a href="{% url 'purchase_list' %}">Material List</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#">Stores</a>
+                     <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'store_list' %}">Material List</a>
+                        </li>
+
+                    </ul>
+                </li>
+              <li>
+                    <a href="#">Fabrication</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'joint_add' %}">Add Joint</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'joint_list' %}">Joint List</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'fab_list' %}">Material List</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">QC</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'qc_joint_list' %}">Joint List</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--<li>-->
+                    <!--<a href="#" id="cont">Contact</a>-->
+                    <!--<ul class="sub-menu">-->
+                        <!--<li>-->
+                            <!--<a href="{% url 'contact' %}">Contact</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+            </ul>
+        </nav>
+        <!-- /main nav -->
+    </div>
+</div>
+{% endif %}
         <!--
             Home Banner
             ==================================== -->
@@ -116,69 +265,11 @@
                                     construction activities and get the reports with minimum user input.
                                 </p>
                             </div>
-                            <div class="product-carousel3">
-                                <div class="service-carousel">
-                                    <div class="item">
-                                        <div class="product-single">
-                                            <div class="product-image">
-                                                <img class="img-responsive" alt="" src="{% static 'img/industry/product1.jpg' %}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="product-single">
-                                            <div class="product-image">
-                                                <img class="img-responsive" alt="" src="{% static 'img/industry/product2.jpg' %}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="product-single">
-                                            <div class="product-image">
-                                                <img class="img-responsive" alt="" src="{% static 'img/industry/product3.jpg' %}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="product-single">
-                                            <div class="product-image">
-                                                <img class="img-responsive" alt="" src="{% static 'img/industry/product2.jpg' %}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="pt0">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h3 class="subtitle2">Latest News and Events</h3>
-                            <div class="service-carousel">
-                                {% for post in post %}
-                                <div class="item">
-                                    <div class="nws-item">
-                                        <img src="{{ post.image.url }}" alt="" class="img-responsive">
-                                        <div class="news-head">
-                                            <h4><a href="#">{{ post.title }}</a></h4>
-                                            <div class="post-meta">
-                                                <span>{{ post.published }}</span>
-                                            </div>
-                                        </div>
-                                        <p>{{ post.content }}</p>
-                                    </div>
-                                </div>
-                                {% endfor %}
 
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
 
 {% endblock %}
