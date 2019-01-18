@@ -160,20 +160,22 @@ class FabStatus(models.Model):
 
 
 class FitUpStatus(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['name']
 
     def __str__(self):
         return self.name
 
 
 class WeldStatus(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -305,14 +307,5 @@ class Spool(models.Model):
         return reverse("spool_detail", kwargs={"pk": self.pk})
 
 
-# class Fabrication(models.Model):
-#     iso = models.ForeignKey(Iso, on_delete=models.CASCADE, blank=True, null=True)
-#     joint_no = models.CharField(verbose_name='Joint Nos', max_length=120, blank=True, null=True)
-#     fitup_status = models.ForeignKey(FitUpStatus, on_delete=models.CASCADE, blank=True, null=True)
-#     weld_status = models.ForeignKey(WeldStatus, on_delete=models.CASCADE, blank=True, null=True)
-#     fab_status = models.ForeignKey(FabStatus, on_delete=models.CASCADE, blank=True, null=True)
-#
-#     def __str__(self):
-#         return self.iso.iso_no
 
 

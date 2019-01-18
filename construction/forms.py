@@ -3,7 +3,7 @@ from .models import Joint, Qc
 from hr.models import Employee
 from control_centre.models import Iso
 from dal import autocomplete
-from control_centre.models import Schedule, Size, FabStatus
+from control_centre.models import Schedule, Size, FabStatus, FitUpStatus, WeldStatus
 
 
 class QcJointForm(forms.ModelForm):
@@ -55,12 +55,12 @@ class JointForm(forms.ModelForm):
         widget=autocomplete.ModelSelect2(url='fab_auto'),
     )
     fitup_status = forms.ModelChoiceField(
-        queryset=FabStatus.objects.all(),
-        widget=autocomplete.ModelSelect2(url='fab_auto'),
+        queryset=FitUpStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='fitup_auto'),
     )
     weld_status = forms.ModelChoiceField(
-        queryset=FabStatus.objects.all(),
-        widget=autocomplete.ModelSelect2(url='fab_auto'),
+        queryset=WeldStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='weld_auto'),
     )
     class Meta:
 

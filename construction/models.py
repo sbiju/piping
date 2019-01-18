@@ -72,10 +72,18 @@ class Joint(models.Model):
     objects = JointManager()
 
     def __str__(self):
-        return self.iso.iso_no
+        return str(self.iso.iso_no)
 
     class Meta:
         ordering = ['-date_completed']
+
+    @property
+    def pipe_size(self):
+        return int(self.size.name)
+
+    @property
+    def pipe_sch(self):
+        return int(self.sch.name)
 
 
 class Qc(models.Model):
@@ -99,24 +107,27 @@ class Qc(models.Model):
 
 
 def total_inch_receiver(sender, instance, *args, **kwargs):
-    size = instance.size
-    inch_dia = size
-    instance.inch_dia = inch_dia
+    pipe_size = instance.pipe_size
+    pipe_sch = instance.pipe_sch
     crew_members = instance.crew_members
     hours_worked = instance.hours_worked
-
-    sch = instance.sch
-    if sch == '60':
-        actual_inch_dia = size * 1.5
-    elif sch == '80':
-        actual_inch_dia = size * 2
-    elif sch == '120':
-        actual_inch_dia = size * 3
-    elif sch == '160':
-        actual_inch_dia = size * 4
+    if pipe_sch == 60:
+        actual_inch_dia = pipe_size * 1.5
+    elif pipe_sch == 80:
+        actual_inch_dia = pipe_size * 2
+    elif pipe_sch == 120:
+        actual_inch_dia = pipe_size * 3
+    elif pipe_sch == 160:
+        actual_inch_dia = pipe_size * 4
     else:
-        actual_inch_dia = size
+        actual_inch_dia = pipe_size
     instance.actual_inch_dia = actual_inch_dia
+
+    try:
+        inch_dia = pipe_size
+    except:
+        inch_dia = 0
+    instance.inch_dia = inch_dia
 
     try:
         man_hours =  (crew_members * hours_worked) / actual_inch_dia

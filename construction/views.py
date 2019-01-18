@@ -27,7 +27,6 @@ def export(request):
 class JointListView(LoginRequiredMixin, ListView):
     model = Joint
     days_ago = timezone.now() - datetime.timedelta(days=5)
-    queryset = Joint.objects.all()
     template_name = 'construction/joint_list.html'
 
     def get_context_data(self, **kwargs):
