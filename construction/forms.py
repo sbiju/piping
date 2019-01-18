@@ -63,10 +63,11 @@ class JointForm(forms.ModelForm):
         widget=autocomplete.ModelSelect2(url='fab_auto'),
     )
     class Meta:
+
         model = Joint
         fields = ['iso', 'joint_no', 'size', 'sch', 'welder', 'fabricator',
                   'supervisor','engineer','hours_worked', 'crew_members', 'erection_status',
-                  'fitup_status', 'weld_status']
+                  'fitup_status', 'weld_status', 'iso_comleted']
 
 
 # class JointForm(forms.ModelForm):

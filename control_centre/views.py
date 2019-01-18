@@ -14,10 +14,10 @@ from django.forms.models import modelformset_factory
 from queryset_sequence import QuerySetSequence
 from .forms import UserForm, OwnerCreateForm, LoginForm, ProjectCreateForm, IsoCreateForm, ContactusForm,\
     PipeCreateForm, UserEditForm, FittingCreateForm, FlangeCreateForm, BoltCreateForm, GasketCreateForm, \
-    SpoolAddForm, FabAddForm
+    SpoolAddForm
 
 from .models import Owner, Iso, Project, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
-    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FabStatus, Fabrication, FitUpStatus, \
+    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FabStatus, FitUpStatus, \
     WeldStatus
 import json
 
@@ -308,24 +308,6 @@ class SpoolAddView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(SpoolAddView, self).get_context_data(**kwargs)
         context['heading'] = 'Add Spool Name/ Number'
-        return context
-
-
-class FabAddView(CreateView):
-    model = Fabrication
-    form_class = FabAddForm
-    template_name = 'form.html'
-    success_url = reverse_lazy('data')
-
-    def form_valid(self, form):
-        owner = Owner.objects.get(user=self.request.user)
-        form.instance.owner = owner
-        valid_data = super(FabAddView, self).form_valid(form)
-        return valid_data
-
-    def get_context_data(self, **kwargs):
-        context = super(FabAddView, self).get_context_data(**kwargs)
-        context['heading'] = 'Add Fabrication Status'
         return context
 
 

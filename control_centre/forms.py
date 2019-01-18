@@ -1,11 +1,10 @@
 from django import forms
 from .models import Owner, Project, Iso, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
-    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, Fabrication, FabStatus, WeldStatus, \
+    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, FabStatus, WeldStatus, \
     FitUpStatus
 
 from django.contrib.auth import get_user_model
 from dal import autocomplete
-from tempus_dominus.widgets import DatePicker
 
 
 User = get_user_model()
@@ -191,33 +190,6 @@ class SpoolAddForm(forms.ModelForm):
         widgets = {
             'timestamp': forms.DateInput(attrs={'class': 'datepicker'}),
         }
-
-
-class FabAddForm(forms.ModelForm):
-    iso = forms.ModelChoiceField(
-        queryset=Iso.objects.all(),
-        widget=autocomplete.ModelSelect2(url='iso_auto'),
-    )
-    fitup_status = forms.ModelChoiceField(
-        queryset=FitUpStatus.objects.all(),
-        widget=autocomplete.ModelSelect2(url='fitup_auto'),
-    )
-    weld_status = forms.ModelChoiceField(
-        queryset=WeldStatus.objects.all(),
-        widget=autocomplete.ModelSelect2(url='weld_auto'),
-    )
-    fab_status = forms.ModelChoiceField(
-        queryset=FabStatus.objects.all(),
-        widget=autocomplete.ModelSelect2(url='fab_auto'),
-    )
-    class Meta:
-        model = Fabrication
-        fields = [ 'iso',
-                   'joint_no',
-                   'fitup_status',
-                   'weld_status',
-                   'fab_status',
-                  ]
 
 
 class ServiceCreateForm(forms.ModelForm):

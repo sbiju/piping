@@ -67,6 +67,7 @@ class Joint(models.Model):
     erection_status = models.ForeignKey(FabStatus, on_delete=models.CASCADE, blank=True, null=True)
     fitup_status = models.ForeignKey(FitUpStatus, on_delete=models.CASCADE, blank=True, null=True)
     weld_status = models.ForeignKey(WeldStatus, on_delete=models.CASCADE, blank=True, null=True)
+    iso_comleted = models.BooleanField(verbose_name='Is Mechanical Job Completed for this ISO', default=False)
 
     objects = JointManager()
 

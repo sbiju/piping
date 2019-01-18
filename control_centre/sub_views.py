@@ -8,7 +8,7 @@ from .forms import ServiceCreateForm, SizeCreateForm, MaterialCreateForm, Flange
     ScheduleCreateForm, LineClassCreateForm, GradeCreateForm, GasketMaterialCreateForm, SpoolStatusCreateForm
 
 from .models import Owner, Iso, Project, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
-    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FabStatus, Fabrication, FitUpStatus, \
+    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FabStatus, FitUpStatus, \
     WeldStatus
 import json
 

@@ -4,7 +4,7 @@ from .views import add_user, OwnerCreateView, login_view, logout_view, ProjectCr
     MatListView, PipeEditView, IsoAutocomplete, UserListView, MatAutocomplete, ScheduleAutocomplete, \
     SizeAutocomplete, ServiceAutocomplete, LineClassAutocomplete, FittingCreateView, FlangeCreateView, \
     GradeAutocomplete, BoltCreateView, GasketMatAutocomplete, FlangeClassAutocomplete,GasketCreateView, \
-    SpoolStatusAutocomplete, SpoolAddView, FabAutocomplete, FabAddView, FitupAutocomplete, WeldAutocomplete, \
+    SpoolStatusAutocomplete, SpoolAddView, FabAutocomplete, FitupAutocomplete, WeldAutocomplete, \
     search_iso, IsoDetailView, SpoolListView, SpoolUpdateView, search_spool, SpoolDetailView
 
 from .sub_views import ServiceCreateView, SizeCreateView, MaterialCreateView, FlangeClassCreateView, \
@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^add_bolt/$', BoltCreateView.as_view(), name='add_bolt'),
     url(r'^add_gasket/$', GasketCreateView.as_view(), name='add_gasket'),
     url(r'^add_spool/$', SpoolAddView.as_view(), name='add_spool'),
-    url(r'^add_fab/$', FabAddView.as_view(), name='add_fab'),
     url(r'^add_service/$', ServiceCreateView.as_view(), name='add_service'),
     url(r'^add_size/$', SizeCreateView.as_view(), name='add_size'),
     url(r'^add_material/$', MaterialCreateView.as_view(), name='add_material'),

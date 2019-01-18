@@ -94,6 +94,11 @@ class JointCreateView(CreateView):
         valid_data = super(JointCreateView, self).form_valid(form)
         return valid_data
 
+    def get_context_data(self, **kwargs):
+        context = super(JointCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Update Joints'
+        return context
+
 
 class JointUpdateView(UpdateView):
     model = Joint
