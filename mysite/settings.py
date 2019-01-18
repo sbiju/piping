@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'import_export',
     'rest_framework',
+    'tempus_dominus',
     'construction',
     'control_centre',
     'materials',
@@ -121,9 +122,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 

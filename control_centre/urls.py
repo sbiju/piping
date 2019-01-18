@@ -7,6 +7,8 @@ from .views import add_user, OwnerCreateView, login_view, logout_view, ProjectCr
     SpoolStatusAutocomplete, SpoolAddView, FabAutocomplete, FabAddView, FitupAutocomplete, WeldAutocomplete, \
     search_iso, IsoDetailView, SpoolListView, SpoolUpdateView, search_spool, SpoolDetailView
 
+from .sub_views import ServiceCreateView, SizeCreateView, MaterialCreateView, FlangeClassCreateView, \
+    ScheduleCreateView, LineClassCreateView, GradeCreateView, GasketMaterialCreateView, SpoolStatusCreateView
 
 urlpatterns = [
     url(r'^search/$', search_iso, name='search_iso'),
@@ -16,6 +18,7 @@ urlpatterns = [
     url(r'^add/user/$', UserAutocomplete.as_view(), name='user_auto'),
     url(r'^user/list/$', UserListView.as_view(), name='user_list'),
     url(r'^owner/list/$', OwnerListView.as_view(), name='owner_list'),
+
     url(r'^add_owner/$', OwnerCreateView.as_view(), name='add_owner'),
     url(r'^add_pipe/$', PipeCreateView.as_view(), name='add_pipe'),
     url(r'^add_fitting/$', FittingCreateView.as_view(), name='add_fitting'),
@@ -24,6 +27,16 @@ urlpatterns = [
     url(r'^add_gasket/$', GasketCreateView.as_view(), name='add_gasket'),
     url(r'^add_spool/$', SpoolAddView.as_view(), name='add_spool'),
     url(r'^add_fab/$', FabAddView.as_view(), name='add_fab'),
+    url(r'^add_service/$', ServiceCreateView.as_view(), name='add_service'),
+    url(r'^add_size/$', SizeCreateView.as_view(), name='add_size'),
+    url(r'^add_material/$', MaterialCreateView.as_view(), name='add_material'),
+    url(r'^add_flange_class/$', FlangeClassCreateView.as_view(), name='add_flange_class'),
+    url(r'^add_schedule/$', ScheduleCreateView.as_view(), name='add_schedule'),
+    url(r'^add_line_class/$', LineClassCreateView.as_view(), name='add_line_class'),
+    url(r'^add_grade/$', GradeCreateView.as_view(), name='add_grade'),
+    url(r'^add_gasket_material/$', GasketMaterialCreateView.as_view(), name='add_gasket_material'),
+    url(r'^add_spool_status/$', SpoolStatusCreateView.as_view(), name='add_spool_status'),
+
     url(r'^edit_spool/(?P<pk>[\w-]+)/$', SpoolUpdateView.as_view(), name='edit_spool'),
     url(r'^edit_owner/(?P<pk>[\w-]+)/$', OwnerEditView.as_view(), name='edit_owner'),
     url(r'^iso_list/$', IsoListView.as_view(), name='iso_list'),

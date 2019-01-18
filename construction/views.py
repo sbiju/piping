@@ -81,17 +81,10 @@ class JointReportAjaxView(View):
         return JsonResponse(data)
 
 
-class JointUpdateView(UpdateView):
-    model = Joint
-    form_class = JointForm
-    template_name = 'form.html'
-    success_url = reverse_lazy('joint_list')
-
-
 class JointCreateView(CreateView):
     model = Joint
     form_class = JointForm
-    template_name = 'form.html'
+    template_name = 'forms/joint_form.html'
     success_url = reverse_lazy('joint_list')
 
     def form_valid(self, form):
@@ -100,6 +93,13 @@ class JointCreateView(CreateView):
         form.instance.iso.project.owner = owner
         valid_data = super(JointCreateView, self).form_valid(form)
         return valid_data
+
+
+class JointUpdateView(UpdateView):
+    model = Joint
+    form_class = JointForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('joint_list')
 
 
 class QcAutocomplete(autocomplete.Select2QuerySetView):
@@ -111,19 +111,6 @@ class QcAutocomplete(autocomplete.Select2QuerySetView):
         if self.q:
             qs = qs.filter(joint__joint_no__istartswith=self.q)
         return qs
-
-
-class QcCreateView(CreateView):
-    model = Qc
-    form_class = QcJointForm
-    template_name = 'form.html'
-    success_url = reverse_lazy('joint_list')
-
-    def form_valid(self, form):
-        owner = Owner.objects.get(user=self.request.user)
-        form.instance.iso.project.owner = owner
-        valid_data = super(QcCreateView, self).form_valid(form)
-        return valid_data
 
 
 class QcJointListView(LoginRequiredMixin, ListView):
@@ -157,6 +144,19 @@ def qc_export(request):
     response = HttpResponse(qc_resource.xls, content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename="reports.xls"'
     return response
+
+
+class QcCreateView(CreateView):
+    model = Qc
+    form_class = QcJointForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('joint_list')
+
+    def form_valid(self, form):
+        owner = Owner.objects.get(user=self.request.user)
+        form.instance.iso.project.owner = owner
+        valid_data = super(QcCreateView, self).form_valid(form)
+        return valid_data
 
 
 class QcJointUpdateView(UpdateView):

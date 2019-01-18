@@ -185,7 +185,7 @@ def add_user(request):
 class IsoCreateView(CreateView):
     model = Iso
     form_class = IsoCreateForm
-    template_name = 'form.html'
+    template_name = 'forms/iso_form.html'
     success_url = reverse_lazy('data')
 
     def form_valid(self, form):
@@ -206,7 +206,7 @@ class IsoCreateView(CreateView):
 class PipeCreateView(CreateView):
     model = Pipe
     form_class = PipeCreateForm
-    template_name = 'form.html'
+    template_name = 'forms/pipe_form.html'
     success_url = reverse_lazy('data')
 
     def form_valid(self, form):
@@ -224,7 +224,7 @@ class PipeCreateView(CreateView):
 class FlangeCreateView(CreateView):
     model = Flange
     form_class = FlangeCreateForm
-    template_name = 'form.html'
+    template_name = 'forms/flange_form.html'
     success_url = reverse_lazy('data')
 
     def form_valid(self, form):
@@ -242,7 +242,7 @@ class FlangeCreateView(CreateView):
 class FittingCreateView(CreateView):
     model = Fitting
     form_class = FittingCreateForm
-    template_name = 'form.html'
+    template_name = 'forms/fitting_form.html'
     success_url = reverse_lazy('data')
 
     def form_valid(self, form):
@@ -260,7 +260,7 @@ class FittingCreateView(CreateView):
 class BoltCreateView(CreateView):
     model = Bolt
     form_class = BoltCreateForm
-    template_name = 'form.html'
+    template_name = 'forms/bolt_form.html'
     success_url = reverse_lazy('data')
 
     def form_valid(self, form):
@@ -278,7 +278,7 @@ class BoltCreateView(CreateView):
 class GasketCreateView(CreateView):
     model = Gasket
     form_class = GasketCreateForm
-    template_name = 'form.html'
+    template_name = 'forms/gasket_form.html'
     success_url = reverse_lazy('data')
 
     def form_valid(self, form):
@@ -296,7 +296,7 @@ class GasketCreateView(CreateView):
 class SpoolAddView(CreateView):
     model = Spool
     form_class = SpoolAddForm
-    template_name = 'form.html'
+    template_name = 'forms/spool_form.html'
     success_url = reverse_lazy('data')
 
     def form_valid(self, form):

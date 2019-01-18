@@ -5,6 +5,8 @@ from .models import Owner, Project, Iso, Pipe, Material, Size, Service, Schedule
 
 from django.contrib.auth import get_user_model
 from dal import autocomplete
+from tempus_dominus.widgets import DatePicker
+
 
 User = get_user_model()
 
@@ -178,6 +180,7 @@ class SpoolAddForm(forms.ModelForm):
         queryset=SpoolStatus.objects.all(),
         widget=autocomplete.ModelSelect2(url='spool_auto'),
     )
+    # timestamp = forms.DateField(widget=DatePicker())
     class Meta:
         model = Spool
         fields = [ 'iso',
@@ -185,6 +188,9 @@ class SpoolAddForm(forms.ModelForm):
                    'spool_status',
                    'timestamp',
                   ]
+        widgets = {
+            'timestamp': forms.DateInput(attrs={'class': 'datepicker'}),
+        }
 
 
 class FabAddForm(forms.ModelForm):
@@ -212,6 +218,69 @@ class FabAddForm(forms.ModelForm):
                    'weld_status',
                    'fab_status',
                   ]
+
+
+class ServiceCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Service
+        fields = ['name']
+
+
+class SizeCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Size
+        fields = ['name']
+
+
+class MaterialCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Material
+        fields = ['name']
+
+
+class FlangeClassCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = FlangeClass
+        fields = ['name']
+
+
+class ScheduleCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Schedule
+        fields = ['name']
+
+
+class LineClassCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = LineClass
+        fields = ['name']
+
+
+class GradeCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = BoltGrade
+        fields = ['name']
+
+
+class GasketMaterialCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = GasketMaterial
+        fields = ['name']
+
+
+class SpoolStatusCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = SpoolStatus
+        fields = ['name']
 
 
 class ProjectCreateForm(forms.ModelForm):

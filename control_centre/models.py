@@ -40,73 +40,120 @@ class Project(models.Model):
 
 
 class Size(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=80, blank=True, null=True)
+
 
     def __str__(self):
         return str(self.name)
 
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
+
 
 class Service(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
 
 
 class Material(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
 
 
 class Schedule(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
 
 
 class LineClass(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
 
 
 class FlangeClass(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
 
 
 class GasketMaterial(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
 
 
 class BoltGrade(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
 
 
 class SpoolStatus(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
+    class Meta:
+        unique_together = ('project', 'name')
+        ordering = ['name']
+
 
 class FabStatus(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -165,6 +212,9 @@ class Iso(models.Model):
     def get_absolute_url(self):
         return reverse("iso_detail", kwargs={"pk": self.pk})
 
+    class Meta:
+        ordering = ['service__name']
+
 
 class Pipe(models.Model):
     iso = models.ForeignKey(Iso, on_delete=models.CASCADE, blank=True, null=True)
@@ -207,7 +257,7 @@ class Bolt(models.Model):
     iso = models.ForeignKey(Iso, on_delete=models.CASCADE, blank=True, null=True)
     grade = models.ForeignKey(BoltGrade, on_delete=models.CASCADE, blank=True, null=True)
     size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True)
-    length = models.ForeignKey(Size, related_name='bolt_length', on_delete=models.CASCADE, blank=True, null=True)
+    length = models.CharField(max_length=50, blank=True, null=True)
     quantity = models.IntegerField(verbose_name='Quantity in Nos', blank=True, null=True)
 
     def __str__(self):

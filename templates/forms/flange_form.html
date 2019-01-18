@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container form-class">
+    <h3 class="text-center">{{ heading }}</h3>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <form method="POST">{% csrf_token %}
+                {{ form.iso| as_crispy_field }}
+                <p><a href="{% url 'add_iso' %}">Couldn't find Iso? Add new</a></p>
+                {{ form.size| as_crispy_field }}
+                <p><a href="{% url 'add_size' %}">Couldn't find right Size? Add new</a></p>
+                {{ form.material| as_crispy_field }}
+                <p><a href="{% url 'add_material' %}">Couldn't find Material? Add new</a></p>
+                {{ form.flange_class| as_crispy_field }}
+                <p><a href="{% url 'add_flange_class' %}">Couldn't find Flange Class? Add new</a></p>
+                {{ form.schedule| as_crispy_field }}
+                <p><a href="{% url 'add_schedule' %}">Couldn't find Schedule? Add new</a></p>
+                {{ form.quantity| as_crispy_field }}
+                <input type="submit" class="btn btn-success" value="Save">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block custom_js %}
+{{ form.media }}
+{% endblock %}

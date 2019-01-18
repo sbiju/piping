@@ -4,6 +4,8 @@ from control_centre.models import Iso
 from django.db.models.signals import pre_save
 from django.db.models import Sum
 from hr.models import Employee
+from control_centre.models import Size, Schedule, FabStatus, FitUpStatus, WeldStatus
+
 
 NDT_CHOICES = (
                 ('Not Started', 'Not Started'),
@@ -50,8 +52,8 @@ class JointManager(models.Manager):
 class Joint(models.Model):
     iso = models.ForeignKey(Iso, on_delete=models.CASCADE)
     joint_no = models.CharField(max_length=50, blank=True, null=True)
-    size = models.IntegerField(verbose_name='Size',blank=True, null=True)
-    sch = models.CharField(verbose_name='Schedule', max_length=50, blank=True, null=True)
+    size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True)
+    sch = models.ForeignKey(Schedule, on_delete=models.CASCADE, blank=True, null=True)
     welder = models.ForeignKey(Employee, related_name='welder', on_delete=models.CASCADE)
     fabricator = models.ForeignKey(Employee, related_name='fabricator',  on_delete=models.CASCADE )
     supervisor = models.ForeignKey(Employee, related_name='supervisor', on_delete=models.CASCADE)
@@ -62,13 +64,17 @@ class Joint(models.Model):
     inch_dia = models.IntegerField(blank=True, null=True)
     actual_inch_dia = models.IntegerField(blank=True, null=True)
     man_hours = models.FloatField(verbose_name='Total Man Hours Taken', blank=True, null=True)
-    status = models.CharField(verbose_name='Joint Status', max_length=40, choices=STATUS_CHOICES,
-                             default='Pending')
+    erection_status = models.ForeignKey(FabStatus, on_delete=models.CASCADE, blank=True, null=True)
+    fitup_status = models.ForeignKey(FitUpStatus, on_delete=models.CASCADE, blank=True, null=True)
+    weld_status = models.ForeignKey(WeldStatus, on_delete=models.CASCADE, blank=True, null=True)
 
     objects = JointManager()
 
     def __str__(self):
         return self.iso.iso_no
+
+    class Meta:
+        ordering = ['-date_completed']
 
 
 class Qc(models.Model):
@@ -88,7 +94,7 @@ class Qc(models.Model):
         return self.joint.joint_no
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['-timestamp']
 
 
 def total_inch_receiver(sender, instance, *args, **kwargs):

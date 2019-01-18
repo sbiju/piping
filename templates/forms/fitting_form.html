@@ -10,16 +10,18 @@
             <form method="POST">{% csrf_token %}
                 {{ form.iso| as_crispy_field }}
                 <p><a href="{% url 'add_iso' %}">Couldn't find Iso? Add new</a></p>
-                {{ form.spool_tag| as_crispy_field }}
-                {{ form.spool_status| as_crispy_field }}
-                <p><a href="{% url 'add_spool_status' %}">Couldn't find Status? Add new</a></p>
-                {{ form.timestamp| as_crispy_field }}
+                {{ form.name| as_crispy_field }}
+                {{ form.size| as_crispy_field }}
+                <p><a href="{% url 'add_size' %}">Couldn't find right Size? Add new</a></p>
+                {{ form.material| as_crispy_field }}
+                <p><a href="{% url 'add_material' %}">Couldn't find Material? Add new</a></p>
+                {{ form.quantity| as_crispy_field }}
                 <input type="submit" class="btn btn-success" value="Save">
             </form>
         </div>
     </div>
 </div>
-{{ form.media }}
+
 {% endblock %}
 {% block custom_js %}
 {{ form.media }}

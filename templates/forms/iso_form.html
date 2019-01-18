@@ -8,18 +8,18 @@
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <form method="POST">{% csrf_token %}
-                {{ form.iso| as_crispy_field }}
-                <p><a href="{% url 'add_iso' %}">Couldn't find Iso? Add new</a></p>
-                {{ form.spool_tag| as_crispy_field }}
-                {{ form.spool_status| as_crispy_field }}
-                <p><a href="{% url 'add_spool_status' %}">Couldn't find Status? Add new</a></p>
-                {{ form.timestamp| as_crispy_field }}
+                {{ form.iso_no| as_crispy_field }}
+                {{ form.service| as_crispy_field }}
+                <p><a href="{% url 'add_service' %}">Couldn't find a Service? Add new</a></p>
+                {{ form.line_class| as_crispy_field }}
+                <p><a href="{% url 'add_line_class' %}">Couldn't find a Line Class? Add new</a></p>
+                {{ form.is_approved| as_crispy_field }}
                 <input type="submit" class="btn btn-success" value="Save">
             </form>
         </div>
     </div>
 </div>
-{{ form.media }}
+
 {% endblock %}
 {% block custom_js %}
 {{ form.media }}
