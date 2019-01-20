@@ -329,7 +329,7 @@ class IsoAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Iso.objects.filter(project__owner__user=self.request.user)
         if self.q:
-            qs = qs.filter(iso_no__istartswith=self.q)
+            qs = qs.filter(iso_no__icontains=self.q)
         return qs
 
 
