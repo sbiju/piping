@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container dataContainer">
+    <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_user' %}">Add Users</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_owner' %}">Assign Department Heads</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'owner_list' %}">Department Head List</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_project' %}">Add Project</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+<!--{% ifequal orderitem.value.id orderitem.order.id %}-->
+    <!--<p>are equals!<p/>-->
+<!--{% endifequal %}-->

@@ -5,20 +5,19 @@ from django.views.generic import CreateView, UpdateView, ListView, TemplateView,
 from django.urls import reverse_lazy
 from django.db import IntegrityError
 from django.conf import settings
-from django.contrib import messages
 from django.core.mail import send_mail
 from django.contrib import messages
 from dal import autocomplete
-from django.db.models import Count, Sum, Avg, F, Case, When, IntegerField, Q
-from django.forms.models import modelformset_factory
-from queryset_sequence import QuerySetSequence
+from django_weasyprint import WeasyTemplateResponseMixin
+
+from construction.resources import IsoResource
 from .forms import UserForm, OwnerCreateForm, LoginForm, ProjectCreateForm, IsoCreateForm, ContactusForm,\
-    PipeCreateForm, UserEditForm, FittingCreateForm, FlangeCreateForm, BoltCreateForm, GasketCreateForm, \
+    PipeCreateForm, FittingCreateForm, FlangeCreateForm, BoltCreateForm, GasketCreateForm, \
     SpoolAddForm
 
 from .models import Owner, Iso, Project, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
-    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FabStatus, FitUpStatus, \
-    WeldStatus
+    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FitUpStatus, \
+    WeldStatus, Pefs
 import json
 
 User = get_user_model()
@@ -405,9 +404,9 @@ class SpoolStatusAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-class FabAutocomplete(autocomplete.Select2QuerySetView):
+class PefsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = FabStatus.objects.all()
+        qs = Pefs.objects.all()
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -439,6 +438,22 @@ class IsoListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(IsoListView, self).get_context_data(**kwargs)
         return context
+
+
+class IsoPrintView(WeasyTemplateResponseMixin, ListView):
+    model = Iso
+
+    def get_queryset(self):
+        return Iso.objects.filter(project__owner__user=self.request.user).order_by('service')
+
+
+def iso_export(request):
+    user = request.user
+    queryset = Iso.objects.filter(project__owner__user=user)
+    iso_resource = IsoResource().export(queryset)
+    response = HttpResponse(iso_resource.xls, content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="reports.xls"'
+    return response
 
 
 class IsoDetailView(DetailView):
@@ -479,6 +494,14 @@ class MatListView(ListView):
 
 class Data_Entry(TemplateView):
     template_name = 'stat/data_entry.html'
+
+
+class AdminPage(TemplateView):
+    template_name = 'stat/admin.html'
+
+
+class Client(TemplateView):
+    template_name = 'stat/client.html'
 
 
 class AboutUs(TemplateView):

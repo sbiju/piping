@@ -1,6 +1,7 @@
 from import_export import resources
 from import_export.fields import Field
 from .models import Joint
+from control_centre.models import Iso
 from hr.models import Employee
 
 
@@ -18,9 +19,14 @@ class HrResource(resources.ModelResource):
 
 
 class IsoResource(resources.ModelResource):
+    iso_no = Field(attribute='iso_no', column_name='Iso No.')
+    service = Field(attribute='service', column_name='Service')
+    line_class = Field(attribute='line_class', column_name='Line Class')
 
     class Meta:
-        model = Joint
+        model = Iso
+        fields = ('iso_no', 'service', 'line_class')
+        export_order = ('iso_no', 'service', 'line_class')
 
 
 class JointResource(resources.ModelResource):

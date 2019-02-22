@@ -7,11 +7,16 @@
 
 <div class="container fab-report">
     <div class="row">
-         <div class="table-responsive">
-             <h3>Joint Status: Total completed: {{ mat_list.total_inch_dia.inch_dia__sum }} Inch Dia</h3>
+         <div class="table-responsive">i
+             <h3>Total Joint List</h3>(<a href="{% url 'fitup_list' %}"> Fitup Comleted</a>
+             ,<a href="{% url 'welded_list' %}"> Welding Comleted </a>)
+                 <a href="{% url 'joint_add' %}" class="btn btn-info" style="float: right;">Add new</a>
+
+             <!--<h3>Joint Status: Total completed: {{ mat_list.total_inch_dia.inch_dia__sum }} Inch Dia</h3>-->
                   <table class="table table-bordered">
                       <tr>
                           <th>Sl.No</th>
+                          <th>Date</th>
                           <th>ISO NO./ LINE NO.</th>
                           <th>Joint No.</th>
                           <th>Size</th>
@@ -20,12 +25,12 @@
                           <th>Fabricator</th>
                           <th>Supervisor</th>
                           <th>Time taken</th>
-                          <th>Completed At</th>
                           <th>Edit</th>
                       </tr>
-                      {% for item in mat_list %}
+                      {% for item in total_list %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
+                          <td>{{ item.date_completed }}</td>
                           <td>{{ item.iso.iso_no }}</td>
                           <td>{{ item.joint_no }}</td>
                           <td>{{ item.size }}</td>
@@ -34,7 +39,6 @@
                           <td>{{ item.fabricator|title }}</td>
                           <td>{{ item.supervisor|title }}</td>
                           <td>{{ item.hours_worked }} hrs</td>
-                          <td>{{ item.date_completed }}</td>
 
                           <td><a href="{% url 'joint_update' pk=item.pk %}">Edit</a></td>
                       </tr>

@@ -3,7 +3,7 @@ from .views import MaterialCreateView, DesignlListView, MaterialUpdateView, Mate
     PurchaseListView, PurchaseUpdateView, AdminListView, DesignUpdateView, StoreListView, StoreUpdateView,\
     FabListView, FabUpdateView, JointReportView, FabIsoReportView, PerformReportView, FabDailyReportView,\
     FabSumReportView, MyModelViewPrintView, FabDailyReportApiView, ProductionChartView, FabDailyReportAjaxView, \
-    material_create
+    material_create, FabPrintView
 
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^design/(?P<pk>[\w-]+)/$', DesignUpdateView.as_view(), name='design_update'),
     url(r'^main_list/$', AdminListView.as_view(), name='main_list'),
     url(r'^report_joint/$', JointReportView.as_view(), name='daily_joint_report'),
+    url(r'^report_joint_pdf/$', FabPrintView.as_view(), name='report_joint_pdf'),
     url(r'^performance/$', PerformReportView.as_view(), name='perform_report'),
 
     url(r'^report_iso/$', FabIsoReportView.as_view(), name='iso_fab_report'),

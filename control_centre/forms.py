@@ -1,7 +1,7 @@
 from django import forms
 from .models import Owner, Project, Iso, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
-    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, FabStatus, WeldStatus, \
-    FitUpStatus
+    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, WeldStatus, \
+    FitUpStatus, Pefs
 
 from django.contrib.auth import get_user_model
 from dal import autocomplete
@@ -19,10 +19,15 @@ class IsoCreateForm(forms.ModelForm):
         queryset=LineClass.objects.all(),
         widget=autocomplete.ModelSelect2(url='line_auto'),
     )
+    pefs = forms.ModelChoiceField(
+        queryset=Pefs.objects.all(),
+        widget=autocomplete.ModelSelect2(url='pefs_auto'),
+    )
 
     class Meta:
         model = Iso
         fields = ['iso_no',
+                  'pefs',
                   'service',
                   'line_class',
                   'is_approved',
@@ -190,6 +195,13 @@ class SpoolAddForm(forms.ModelForm):
         widgets = {
             'timestamp': forms.DateInput(attrs={'class': 'datepicker'}),
         }
+
+
+class PefsCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Pefs
+        fields = ['name']
 
 
 class ServiceCreateForm(forms.ModelForm):

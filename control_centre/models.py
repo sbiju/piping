@@ -148,7 +148,7 @@ class SpoolStatus(models.Model):
         ordering = ['name']
 
 
-class FabStatus(models.Model):
+class Pefs(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
@@ -160,7 +160,7 @@ class FabStatus(models.Model):
 
 
 class FitUpStatus(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
+    # project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
@@ -171,7 +171,7 @@ class FitUpStatus(models.Model):
 
 
 class WeldStatus(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
+    # project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
@@ -202,6 +202,7 @@ class IsoManager(models.Manager):
 class Iso(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     iso_no = models.CharField(verbose_name='iso no/line no', max_length=200, blank=True, null=True)
+    pefs = models.ForeignKey(Pefs, on_delete=models.CASCADE, blank=True, null=True)
     service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True)
     line_class = models.ForeignKey(LineClass, on_delete=models.CASCADE, blank=True, null=True)
     is_approved = models.BooleanField(default=True)
@@ -287,6 +288,9 @@ class SpoolManager(models.Manager):
                          )
             qs = qs.filter(or_lookup).distinct()
         return qs
+
+    def erected(self):
+        return self.filter(spool_status__name='erected')
 
 
 class Spool(models.Model):

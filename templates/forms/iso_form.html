@@ -6,9 +6,11 @@
 <div class="container form-class">
     <h3 class="text-center">{{ heading }}</h3>
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-6 offset-3">
             <form method="POST">{% csrf_token %}
                 {{ form.iso_no| as_crispy_field }}
+                {{ form.pefs| as_crispy_field }}
+                <p><a href="{% url 'add_pefs' %}">Couldn't find PEFS/ P&ID? Add new</a></p>
                 {{ form.service| as_crispy_field }}
                 <p><a href="{% url 'add_service' %}">Couldn't find a Service? Add new</a></p>
                 {{ form.line_class| as_crispy_field }}

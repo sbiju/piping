@@ -105,7 +105,6 @@ class MyModelViewPrintView(WeasyTemplateResponseMixin, ListView):
 # administration
 class FabDailyReportView(LoginRequiredMixin, ListView):
     model = Iso
-    queryset = Iso.objects.all()
     template_name = 'admn/daily_fab_report.html'
 
     def get_context_data(self, **kwargs):
@@ -179,11 +178,27 @@ class FabSumReportView(LoginRequiredMixin, ListView):
 # administration
 class JointReportView(LoginRequiredMixin, ListView):
     model = Iso
-    queryset = Iso.objects.all()
+    # queryset = Iso.objects.all()
     template_name = 'admn/daily_joint_report.html'
 
     def get_context_data(self, **kwargs):
         context = super(JointReportView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['report'] = Iso.objects.filter(project__owner__user=user)
+        context['sum_list'] = Iso.objects.filter(project__owner__user=user) \
+            .values('project', 'project__name') \
+            .annotate(total_joint=Count('joint__joint_no')) \
+            .annotate(avg_man_hours=Avg('joint__man_hours')) \
+            .annotate(total_inch_dia=Sum('joint__inch_dia'))
+        return context
+
+
+class FabPrintView(WeasyTemplateResponseMixin, ListView):
+    model = Iso
+    template_name = 'admn/daily_fab_report.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FabPrintView, self).get_context_data(**kwargs)
         user = self.request.user
         context['report'] = Iso.objects.filter(project__owner__user=user)
         context['sum_list'] = Iso.objects.filter(project__owner__user=user) \

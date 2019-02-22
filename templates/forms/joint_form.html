@@ -6,8 +6,10 @@
 <div class="container form-class">
     <h3 class="text-center">{{ heading }}</h3>
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-6 offset-3">
             <form method="POST">{% csrf_token %}
+                {{ form.errors }}
+                {{ form.date_completed| as_crispy_field }}
                 {{ form.iso| as_crispy_field }}
                 <p><a href="{% url 'add_iso' %}">Couldn't find Iso? Add new</a></p>
                 {{ form.joint_no| as_crispy_field }}
@@ -21,7 +23,6 @@
                 {{ form.engineer| as_crispy_field }}
                 {{ form.hours_worked| as_crispy_field }}
                 {{ form.crew_members| as_crispy_field }}
-                {{ form.erection_status| as_crispy_field }}
                 {{ form.fitup_status| as_crispy_field }}
                 {{ form.weld_status| as_crispy_field }}
                 {{ form.iso_comleted| as_crispy_field }}

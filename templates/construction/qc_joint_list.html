@@ -5,35 +5,35 @@
 <div class="container fab-report">
     <div class="row">
          <div class="table-responsive">
-             <h3>Joint Status</h3>
+             <h3>{{ heading }} </h3>
+             (<a href="{% url 'fitup_passed' %}"> Fitup Passed List</a>,
+             <a href="{% url 'fitup_failed' %}"> Fitup Failed List</a>,
                   <table class="table table-bordered">
                       <tr>
                           <th>Sl.No</th>
                           <th>ISO NO./ LINE NO.</th>
                           <th>Joint No.</th>
-                          <th>Size</th>
-                          <th>Schedule</th>
-                          <th>Welder</th>
-                          <th>Fabricator</th>
-                          <th>Completed At</th>
-                          <th>Jont Status</th>
-                          <th>Inspection Date</th>
+                          <th>Fitup Status</th>
+                          <th>Fitup Insp. Date</th>
+                          <th>Welding Status</th>
+                          <th>Welding Insp. Date</th>
+                          <th>Radiography Status</th>
+                          <th>Radiography Insp. Date</th>
                           <th>Edit</th>
                       </tr>
-                      {% for item in mat_list %}
+                      {% for item in joint_list %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ item.iso.iso_no }}</td>
-                          <td>{{ item.joint_no }}</td>
-                          <td>{{ item.size }}</td>
-                          <td>{{ item.sch }}</td>
-                          <td>{{ item.welder|title }}</td>
-                          <td>{{ item.fabricator|title }}</td>
-                          <td>{{ item.date_completed }}</td>
-                          <td>{{ item.status }}</td>
-                          <td>{{ item.qc_checked }}</td>
-
-                          <td><a href="{% url 'qc_joint_update' pk=item.pk %}">Edit</a></td>
+                          <td>{{ item.joint.joint_no }}</td>
+                          <td>{{ item.fitup_status.name }}</td>
+                          <td>{{ item.fitup_inspection_date }}</td>
+                          <td>{{ item.welding_status.name }}</td>
+                          <td>{{ item.welding_inspection_date }}</td>
+                          <td>{{ item.radiography_status }}</td>
+                          <td>{{ item.radiography_inspection_date }}</td>
+                          <!--<td><a href="{% url 'qc_joint_update' pk=item.pk %}">Edit</a></td>-->
+                          <td><a href="{{ item.get_edit_url }}">Edit</a></td>
                       </tr>
                       {% endfor %}
                   </table>

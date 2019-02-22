@@ -5,11 +5,12 @@ from django.views.generic import CreateView, UpdateView, ListView, TemplateView,
 from django.urls import reverse_lazy
 from dal import autocomplete
 from .forms import ServiceCreateForm, SizeCreateForm, MaterialCreateForm, FlangeClassCreateForm, \
-    ScheduleCreateForm, LineClassCreateForm, GradeCreateForm, GasketMaterialCreateForm, SpoolStatusCreateForm
+    ScheduleCreateForm, LineClassCreateForm, GradeCreateForm, GasketMaterialCreateForm, SpoolStatusCreateForm, \
+    PefsCreateForm
 
 from .models import Owner, Iso, Project, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
-    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FabStatus, FitUpStatus, \
-    WeldStatus
+    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FitUpStatus, \
+    WeldStatus, Pefs
 import json
 
 User = get_user_model()
@@ -172,6 +173,24 @@ class GasketMaterialCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(GasketMaterialCreateView, self).get_context_data(**kwargs)
         context['heading'] = 'Add Gasket Material'
+        return context
+
+
+class PefsAddView(CreateView):
+    model = Pefs
+    form_class = PefsCreateForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('data')
+
+    def form_valid(self, form):
+        owner = Owner.objects.get(user=self.request.user)
+        form.instance.owner = owner
+        valid_data = super(PefsAddView, self).form_valid(form)
+        return valid_data
+
+    def get_context_data(self, **kwargs):
+        context = super(PefsAddView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add PEFS/ P&ID'
         return context
 
 

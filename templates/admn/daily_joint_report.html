@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
+
 
 {% load crispy_forms_tags %}
-
-{% block head_title %}{% endblock %}
 
 
 {% block content %}
@@ -84,6 +82,8 @@
         </div>
         </div>
     </div>
+    <a href="{% url 'report_joint_pdf' %}" class="btn btn-info">Print to PDF</a>
+    <a href="{% url 'iso_csv' %}" class="btn btn-info ml-auto">Save to EXEL</a>
 
 </div>
 {% endblock %}

@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 from .models import Iso, Owner, Size, Fitting, Flange, Service, Pipe, Material, Schedule, LineClass, BoltGrade, \
-    Bolt, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, FabStatus, FitUpStatus, WeldStatus
+    Bolt, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, FitUpStatus, WeldStatus, Pefs
 
+admin.site.register(Pefs)
 admin.site.register(FitUpStatus)
 admin.site.register(WeldStatus)
-admin.site.register(FabStatus)
 admin.site.register(SpoolStatus)
 admin.site.register(Spool)
 admin.site.register(Gasket)

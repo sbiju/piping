@@ -3,7 +3,12 @@ from .models import Joint, Qc
 from hr.models import Employee
 from control_centre.models import Iso
 from dal import autocomplete
-from control_centre.models import Schedule, Size, FabStatus, FitUpStatus, WeldStatus
+from control_centre.models import Schedule, Size, FitUpStatus, WeldStatus
+from .models import NdtStatus
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 
 class QcJointForm(forms.ModelForm):
@@ -11,14 +16,36 @@ class QcJointForm(forms.ModelForm):
         queryset=Iso.objects.all(),
         widget=autocomplete.ModelSelect2(url='iso_auto')
     )
-    joint = forms.ModelChoiceField(
-        queryset=Qc.objects.all(),
-        widget=autocomplete.ModelSelect2(url='qc_auto', forward=('iso',))
-
+    fitup_status = forms.ModelChoiceField(
+        queryset=NdtStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='ndt_auto')
+    )
+    welding_status = forms.ModelChoiceField(
+        queryset=NdtStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='ndt_auto')
+    )
+    hydro_test_status = forms.ModelChoiceField(
+        queryset=NdtStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='ndt_auto')
+    )
+    radiography_status = forms.ModelChoiceField(
+        queryset=NdtStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='ndt_auto')
     )
     class Meta:
         model = Qc
-        fields = ['iso', 'joint', 'hydro', 'radio', 'status', 'timestamp']
+        fields = ['iso', 'joint', 'fitup_status', 'fitup_inspection_date', 'welding_status',
+                  'welding_inspection_date', 'hydro_test_status', 'hydro_test_inspection_date',
+                  'radiography_status', 'radiography_inspection_date',]
+
+        widgets = {
+            'joint': autocomplete.ModelSelect2(url='joint_auto',
+                                              forward=['iso']),
+            'fitup_inspection_date': DateInput(),
+            'welding_inspection_date': DateInput(),
+            'hydro_test_inspection_date': DateInput(),
+            'radiography_inspection_date': DateInput(),
+        }
 
 
 class JointForm(forms.ModelForm):
@@ -50,10 +77,6 @@ class JointForm(forms.ModelForm):
         queryset=Employee.objects.all(),
         widget=autocomplete.ModelSelect2(url='eng_auto')
     )
-    erection_status = forms.ModelChoiceField(
-        queryset=FabStatus.objects.all(),
-        widget=autocomplete.ModelSelect2(url='fab_auto'),
-    )
     fitup_status = forms.ModelChoiceField(
         queryset=FitUpStatus.objects.all(),
         widget=autocomplete.ModelSelect2(url='fitup_auto'),
@@ -65,9 +88,13 @@ class JointForm(forms.ModelForm):
     class Meta:
 
         model = Joint
-        fields = ['iso', 'joint_no', 'size', 'sch', 'welder', 'fabricator',
-                  'supervisor','engineer','hours_worked', 'crew_members', 'erection_status',
+        fields = ['date_completed', 'iso', 'joint_no', 'size', 'sch', 'welder', 'fabricator',
+                  'supervisor','engineer','hours_worked', 'crew_members',
                   'fitup_status', 'weld_status', 'iso_comleted']
+
+        widgets = {
+            'date_completed': DateInput(),
+        }
 
 
 # class JointForm(forms.ModelForm):

@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="container">
+    <div class="mega-menu-wrapper no-beaf nav22 clear">
+        <div class="navbar-header">
+            <!-- responsive nav button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- /responsive nav button -->
+        </div>
+        <!-- main nav -->
+        <nav class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="current mega-menu">
+                    <a href="/">Home</a>
+
+                </li>
+                <li>
+                    <a href="#">Admin</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'owner_list' %}">Department Heads</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add_user' %}">Add Users</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add_owner' %}">Assign Department Heads</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add_project' %}">Add Project</a>
+                        </li>
+                        <li>
+                            <a href="#">Reports</a>
+                            <ul>
+                                <li><a href="{% url 'daily_fab_report' %}">Daily Fab Report</a></li>
+                                <li><a href="{% url 'iso_fab_report' %}">Daily Iso based Report</a></li>
+                                <li><a href="{% url 'daily_sum_report' %}">Daily Summary Report</a></li>
+                                <li><a href="{% url 'daily_joint_report' %}">Joint History</a></li>
+                                <li><a href="{% url 'perform_report' %}">Performance Report</a></li>
+                                <li><a href="{% url 'main_list' %}">Material Data</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Const-Head</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'iso_list' %}">ISO List</a></li>
+                        <li><a href="{% url 'spool_list' %}">SPOOL List</a></li>
+                        <li><a href="{% url 'mat_list' %}">Material List</a></li>
+                        <li><a href="{% url 'daily_fab_report' %}">Daily Fab Report</a></li>
+                        <li><a href="{% url 'daily_joint_report' %}">Joint History</a></li>
+                        <li><a href="{% url 'perform_report' %}">Performance Report</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">HR</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'employee_list' %}">Employees List</a></li>
+                        <li><a href="{% url 'add_employee' %}">Add Employee</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Data Entry</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'add_iso' %}">Add Iso</a></li>
+                        <li><a href="{% url 'add_pipe' %}">Add Pipe</a></li>
+                        <li><a href="{% url 'add_flange' %}">Add Flange</a></li>
+                        <li><a href="{% url 'add_fitting' %}">Add Fittings</a></li>
+                        <li><a href="{% url 'add_bolt' %}">Add Bolts/Nuts</a></li>
+                        <li><a href="{% url 'add_gasket' %}">Add Gasket</a></li>
+                        <li><a href="{% url 'add_spool' %}">Add Spool</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'data' %}">Data Center</a>
+                    <!--<ul class="sub-menu">-->
+                        <!--<li><a href="{% url 'add_iso' %}">Add List</a></li>-->
+                        <!--<li><a href="{% url 'iso_list' %}">Iso List</a></li>-->
+                        <!--<li><a href="{% url 'design_list' %}">Material List</a></li>-->
+                    <!--</ul>-->
+                </li>
+                <li>
+                    <a href="#">Purchase</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="#">Iso</a>
+                            <ul>
+                                <li><a href="{% url 'add_iso' %}">Add List</a></li>
+                                <li><a href="{% url 'iso_list' %}">Iso List</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Material List</a>
+                            <ul>
+                                <li><a href="{% url 'purchase_list' %}">Material List</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#">Stores</a>
+                     <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'store_list' %}">Material List</a>
+                        </li>
+
+                    </ul>
+                </li>
+              <li>
+                    <a href="#">Fabrication</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'joint_add' %}">Add Joint</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'joint_list' %}">Joint List</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'fab_list' %}">Material List</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">QC</a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'qc_joint_list' %}">Joint List</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--<li>-->
+                    <!--<a href="#" id="cont">Contact</a>-->
+                    <!--<ul class="sub-menu">-->
+                        <!--<li>-->
+                            <!--<a href="{% url 'contact' %}">Contact</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+            </ul>
+        </nav>
+        <!-- /main nav -->
+    </div>
+</div>
+{% endif %}
+        <!--
+            Home Banner
+            ==================================== -->
+            <div id="start" class="home26">
+                <div class="slide26 wedding">
+                    <div class="item" style="background-image: url(static/img/industry/piping1.jpg);">
+                        <div class="overlay"></div>
+                        <div class="container">
+                            <div class="item-inner">
+                                <h1>We Are Professional, Competitive And</h1>
+                                <h2>Competent In Our Service</h2>
+                                <div class="slide-button">
+                                    <a href="{% url 'account_signup' %}">Make a Trial</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(static/img/industry/slider-head1.jpg);">
+                        <div class="overlay"></div>
+                        <div class="container">
+                            <div class="item-inner">
+                                <h1>We Have a Team Of Leaders And Professionals</h1>
+                                <h2>That Know Their Job And Do It Well</h2>
+                                <div class="slide-button">
+                                    <a href="{% url 'account_signup' %}">Make a Trial</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            End Home Banner
+            ==================================== -->
+
+            <!--
+            Services
+            ==================================== -->
+            <section id="service" class="">
+                <div class="container">
+                    <div class="row">
+                        <header class="col-lg-12 section-head text-center item_top">
+                            <h2>what we are doing</h2>
+                            <p>We are always passionate on new idea generation and development</p>
+                        </header>
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4 col-md-4 text-center item_left">
+                                    <div class="service-item">
+                                        <span class="service-icon">
+                                            <i class="icon-pen4"></i>
+                                        </span>
+                                        <h4><a href="service-single.php">Project Management</a></h4>
+                                        <p>Management and control over the project effectively.</p>
+                                    </div>
+                                </div> <!-- end .service-item -->
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 text-center item_bottom">
+                                    <div class="service-item">
+                                        <span class="service-icon">
+                                            <i class="icon-cog5"></i>
+                                        </span>
+                                        <h4><a href="service-single.php">Resource Allocation</a></h4>
+                                        <p>Efficient and effective resource allocation and co-ordination.</p>
+                                    </div>
+                                </div> <!-- end .service-item -->
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 text-center item_right">
+                                    <div class="service-item">
+                                        <span class="service-icon">
+                                             <i class="icon-light"></i>
+                                        </span>
+                                        <h4><a href="service-single.php">Performance Evaluation</a></h4>
+                                        <p>Precise monitoring, evaluation of entire project and graphs.</p>
+                                    </div>
+                                </div> <!-- end .service-item -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--
+            End Services
+            ==================================== -->
+
+            <section class="pt0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                            <article class="post-entry">
+                                <div class="post-media">
+                                    <img class="img-responsive" alt="post thumb" src="{% static 'img/industry/welcome.jpg' %}">
+                                </div>
+                                <div class="post-excerpt">
+                                    <h2>Welcome to PMAPP</h2>
+                                    <p>
+                                        PMAPP is developed to manage prject jobs in oil and gas industry. This application
+                                        will help to manage the projects and co-ordinate the work effectively among all the
+                                        departments. Please click the link below to know more.
+                                    </p>
+                                    <div class="btn btn-info">
+                                        <a href="{% url 'read_more' %}">Read More</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
+                            <div class="section-head text-left item_top">
+                                <h2>Our Idea</h2>
+                                <p>Idea behind this application is mainly to ease the management of
+                                    construction activities and get the reports with minimum user input.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+{% endblock %}
