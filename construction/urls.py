@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from .views import JointListView, JointUpdateView, export, QcJointListView, QcJointUpdateView, \
     QcPrintView, qc_export, JointCreateView, JointPrintView, joint_export, QcCreateView, JointAutocomplete, \
-    FitupListView, WeldedListView, NdtStatusAutocomplete, FitupPassedList, FitupFailList
+    FitupListView, WeldedListView, NdtStatusAutocomplete, FitupPassedList, FitupFailList, WeldFailedList, \
+    WeldPassedList, RadioFailedList, RadioPassedList, QcFitupUpdateView, QcWeldUpdateView
 
 
 urlpatterns = [
@@ -16,7 +17,13 @@ urlpatterns = [
     url(r'^qc/joints/$', QcJointListView.as_view(), name='qc_joint_list'),
     url(r'^qc/fitup_passed/$', FitupPassedList.as_view(), name='fitup_passed'),
     url(r'^qc/fitup_failed/$', FitupFailList.as_view(), name='fitup_failed'),
+    url(r'^qc/weld_passed/$', WeldPassedList.as_view(), name='weld_passed'),
+    url(r'^qc/weld_failed/$', WeldFailedList.as_view(), name='weld_failed'),
+    url(r'^qc/radio_failed/$', RadioFailedList.as_view(), name='radio_failed'),
+    url(r'^qc/radio_passed/$', RadioPassedList.as_view(), name='radio_passed'),
     url(r'^qc/joints/(?P<pk>[\w-]+)/$', QcJointUpdateView.as_view(), name='qc_joint_update'),
+    url(r'^qc/fitup/(?P<pk>[\w-]+)/$', QcFitupUpdateView.as_view(), name='qc_fitup_update'),
+    url(r'^qc/welding/(?P<pk>[\w-]+)/$', QcFitupUpdateView.as_view(), name='qc_weld_update'),
     url(r'^fab/pdf/$', JointPrintView.as_view(), name='fab_pdf'),
     url(r'^fab/csv/$', joint_export, name='fab_csv'),
     url(r'^qc/pdf/$', QcPrintView.as_view(), name='qc_pdf'),

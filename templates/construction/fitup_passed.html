@@ -30,7 +30,6 @@
                           <td>{{ item.welding_inspection_date }}</td>
                           <td>{{ item.radiography_status }}</td>
                           <td>{{ item.radiography_inspection_date }}</td>
-                          <!--<td><a href="{% url 'qc_joint_update' pk=item.pk %}">Edit</a></td>-->
                           <td><a href="{{ item.get_edit_url }}">Edit</a></td>
                       </tr>
                       {% endfor %}

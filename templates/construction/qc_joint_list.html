@@ -8,6 +8,12 @@
              <h3>{{ heading }} </h3>
              (<a href="{% url 'fitup_passed' %}"> Fitup Passed List</a>,
              <a href="{% url 'fitup_failed' %}"> Fitup Failed List</a>,
+             <a href="{% url 'weld_passed' %}"> Welding Passed List</a>,
+             <a href="{% url 'weld_failed' %}"> Welding Failed List</a>,
+             <a href="{% url 'radio_failed' %}"> Radiography Failed List</a>,
+             <a href="{% url 'radio_passed' %}"> Radiography Passed List </a>)
+             <a href="{% url 'qc_add' %}" style="float: right;">Add New</a>
+
                   <table class="table table-bordered">
                       <tr>
                           <th>Sl.No</th>
@@ -15,8 +21,10 @@
                           <th>Joint No.</th>
                           <th>Fitup Status</th>
                           <th>Fitup Insp. Date</th>
+                          <th>Edit Fitup</th>
                           <th>Welding Status</th>
                           <th>Welding Insp. Date</th>
+                          <th>Edit Welding</th>
                           <th>Radiography Status</th>
                           <th>Radiography Insp. Date</th>
                           <th>Edit</th>
@@ -28,8 +36,10 @@
                           <td>{{ item.joint.joint_no }}</td>
                           <td>{{ item.fitup_status.name }}</td>
                           <td>{{ item.fitup_inspection_date }}</td>
+                          <td><a href="{{ item.get_fitup_url }}">Edit Fitup</a></td>
                           <td>{{ item.welding_status.name }}</td>
                           <td>{{ item.welding_inspection_date }}</td>
+                          <td><a href="{{ item.get_weld_url }}">Welding Edit</a></td>
                           <td>{{ item.radiography_status }}</td>
                           <td>{{ item.radiography_inspection_date }}</td>
                           <!--<td><a href="{% url 'qc_joint_update' pk=item.pk %}">Edit</a></td>-->

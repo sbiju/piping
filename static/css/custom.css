@@ -2,6 +2,10 @@
 /**
  * Custom
  */
+
+.bg-dark {
+    background-color: #968a77 !important;
+}
  .footer{
  margin-top:60px;
  }

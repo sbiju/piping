@@ -48,6 +48,51 @@ class QcJointForm(forms.ModelForm):
         }
 
 
+class QcFitupForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto')
+    )
+    welding_status = forms.ModelChoiceField(
+        queryset=NdtStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='ndt_auto')
+    )
+    class Meta:
+        model = Qc
+        fields = ['iso', 'joint', 'welding_status', 'welding_inspection_date']
+
+        widgets = {
+            'joint': autocomplete.ModelSelect2(url='joint_auto',
+                                              forward=['iso']),
+            'welding_inspection_date': DateInput(),
+        }
+
+    def clean_fitup_status(self,*args,**kwargs):
+        fitup_status = self.cleaned_data.get('fitup_status')
+        if not fitup_status == 'passed':
+            raise forms.ValidationError("Fitup is not Passed")
+        return fitup_status
+
+
+class QcWeldForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto')
+    )
+    fitup_status = forms.ModelChoiceField(
+        queryset=NdtStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='ndt_auto')
+    )
+    class Meta:
+        model = Qc
+        fields = ['iso', 'joint', 'fitup_status', 'fitup_inspection_date']
+
+        widgets = {
+            'joint': autocomplete.ModelSelect2(url='joint_auto',
+                                              forward=['iso']),
+            'fitup_inspection_date': DateInput(),
+        }
+
 class JointForm(forms.ModelForm):
     iso = forms.ModelChoiceField(
         queryset=Iso.objects.all(),
@@ -86,7 +131,6 @@ class JointForm(forms.ModelForm):
         widget=autocomplete.ModelSelect2(url='weld_auto'),
     )
     class Meta:
-
         model = Joint
         fields = ['date_completed', 'iso', 'joint_no', 'size', 'sch', 'welder', 'fabricator',
                   'supervisor','engineer','hours_worked', 'crew_members',

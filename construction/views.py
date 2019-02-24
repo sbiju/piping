@@ -10,7 +10,7 @@ from django.utils import timezone
 from dal import autocomplete
 
 from .models import Joint, Qc, NdtStatus
-from .forms import JointForm, QcJointForm
+from .forms import JointForm, QcJointForm, QcFitupForm, QcWeldForm
 from .resources import IsoResource, QcResource, JointResource
 from control_centre.models import Owner, Iso
 
@@ -174,7 +174,7 @@ class FitupPassedList(LoginRequiredMixin, ListView):
 
 class FitupFailList(LoginRequiredMixin, ListView):
     model = Qc
-    template_name = 'construction/fitup_failed.html'
+    template_name = 'construction/fitup_passed.html'
 
     def get_context_data(self, **kwargs):
         context = super(FitupFailList, self).get_context_data(**kwargs)
@@ -186,16 +186,49 @@ class FitupFailList(LoginRequiredMixin, ListView):
 
 class WeldPassedList(LoginRequiredMixin, ListView):
     model = Qc
-    template_name = 'construction/weld_passed.html'
+    template_name = 'construction/fitup_passed.html'
 
     def get_context_data(self, **kwargs):
         context = super(WeldPassedList, self).get_context_data(**kwargs)
         user = self.request.user
-        context['mat_list'] = Qc.objects.welding_passed().filter(iso__project__owner__user=user)
-        context['mat_list'] = Qc.objects.welding_failed.filter(iso__project__owner__user=user)
-        context['mat_list'] = Qc.objects.radiography_passed.filter(iso__project__owner__user=user)
-        context['mat_list'] = Qc.objects.radiography_failed.filter(iso__project__owner__user=user)
+        context['joint_list'] = Qc.objects.welding_passed().filter(iso__project__owner__user=user)
         context['heading'] = 'Fitup Failed Joint List'
+        return context
+
+
+class WeldFailedList(LoginRequiredMixin, ListView):
+    model = Qc
+    template_name = 'construction/fitup_passed.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(WeldFailedList, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['joint_list'] = Qc.objects.welding_failed().filter(iso__project__owner__user=user)
+        context['heading'] = 'Welding Failed Joint List'
+        return context
+
+
+class RadioPassedList(LoginRequiredMixin, ListView):
+    model = Qc
+    template_name = 'construction/fitup_passed.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RadioPassedList, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['joint_list'] = Qc.objects.radiography_passed().filter(iso__project__owner__user=user)
+        context['heading'] = 'Radiography Passed Joint List'
+        return context
+
+
+class RadioFailedList(LoginRequiredMixin, ListView):
+    model = Qc
+    template_name = 'construction/fitup_passed.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RadioFailedList, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['joint_list'] = Qc.objects.radiography_failed().filter(iso__project__owner__user=user)
+        context['heading'] = 'Radiography Failed Joint List'
         return context
 
 
@@ -224,13 +257,27 @@ class QcCreateView(CreateView):
     model = Qc
     form_class = QcJointForm
     template_name = 'form.html'
-    success_url = reverse_lazy('joint_list')
+    success_url = reverse_lazy('qc_joint_list')
 
     def form_valid(self, form):
         owner = Owner.objects.get(user=self.request.user)
         form.instance.iso.project.owner = owner
         valid_data = super(QcCreateView, self).form_valid(form)
         return valid_data
+
+
+class QcFitupUpdateView(UpdateView):
+    model = Qc
+    form_class = QcFitupForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('qc_joint_list')
+
+
+class QcWeldUpdateView(UpdateView):
+    model = Qc
+    form_class = QcWeldForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('qc_joint_list')
 
 
 class QcJointUpdateView(UpdateView):

@@ -125,11 +125,15 @@ class Qc(models.Model):
     def get_edit_url(self):
         return reverse("qc_joint_update", kwargs={"pk": self.pk})
 
+    def get_fitup_url(self):
+        return reverse("qc_fitup_update", kwargs={"pk": self.pk})
+
+    def get_weld_url(self):
+        return reverse("qc_weld_update", kwargs={"pk": self.pk})
+
     class Meta:
         ordering = ['-fitup_inspection_date']
-
-
-
+        unique_together = ['iso', 'joint']
 
 
 def total_inch_receiver(sender, instance, *args, **kwargs):
