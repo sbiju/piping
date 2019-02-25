@@ -10,7 +10,7 @@ from django.utils import timezone
 from dal import autocomplete
 
 from .models import Joint, Qc, NdtStatus
-from .forms import JointForm, QcJointForm, QcFitupForm, QcWeldForm
+from .forms import JointForm, QcJointForm, QcFitupForm, QcWeldForm, QcRadioForm
 from .resources import IsoResource, QcResource, JointResource
 from control_centre.models import Owner, Iso
 
@@ -46,18 +46,20 @@ class FitupListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(FitupListView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['fitup_done_list'] = Joint.objects.fitup_done().filter(iso__project__owner__user=user)
+        context['done_list'] = Joint.objects.fitup_done().filter(iso__project__owner__user=user)
+        context['heading'] = 'Fit-Up Completed List'
         return context
 
 
 class WeldedListView(LoginRequiredMixin, ListView):
     model = Joint
-    template_name = 'construction/welded_list.html'
+    template_name = 'construction/fitup_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(WeldedListView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['welded_list'] = Joint.objects.welded().filter(iso__project__owner__user=user)
+        context['done_list'] = Joint.objects.welded().filter(iso__project__owner__user=user)
+        context['heading'] = 'Fit-Up Completed List'
         return context
 
 
@@ -276,6 +278,13 @@ class QcFitupUpdateView(UpdateView):
 class QcWeldUpdateView(UpdateView):
     model = Qc
     form_class = QcWeldForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('qc_joint_list')
+
+
+class QcRadioUpdateView(UpdateView):
+    model = Qc
+    form_class = QcRadioForm
     template_name = 'form.html'
     success_url = reverse_lazy('qc_joint_list')
 

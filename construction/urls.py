@@ -2,7 +2,7 @@ from django.conf.urls import url
 from .views import JointListView, JointUpdateView, export, QcJointListView, QcJointUpdateView, \
     QcPrintView, qc_export, JointCreateView, JointPrintView, joint_export, QcCreateView, JointAutocomplete, \
     FitupListView, WeldedListView, NdtStatusAutocomplete, FitupPassedList, FitupFailList, WeldFailedList, \
-    WeldPassedList, RadioFailedList, RadioPassedList, QcFitupUpdateView, QcWeldUpdateView
+    WeldPassedList, RadioFailedList, RadioPassedList, QcFitupUpdateView, QcWeldUpdateView, QcRadioUpdateView
 
 
 urlpatterns = [
@@ -23,7 +23,8 @@ urlpatterns = [
     url(r'^qc/radio_passed/$', RadioPassedList.as_view(), name='radio_passed'),
     url(r'^qc/joints/(?P<pk>[\w-]+)/$', QcJointUpdateView.as_view(), name='qc_joint_update'),
     url(r'^qc/fitup/(?P<pk>[\w-]+)/$', QcFitupUpdateView.as_view(), name='qc_fitup_update'),
-    url(r'^qc/welding/(?P<pk>[\w-]+)/$', QcFitupUpdateView.as_view(), name='qc_weld_update'),
+    url(r'^qc/welding/(?P<pk>[\w-]+)/$', QcWeldUpdateView.as_view(), name='qc_weld_update'),
+    url(r'^qc/radiography/(?P<pk>[\w-]+)/$', QcRadioUpdateView.as_view(), name='qc_radio_update'),
     url(r'^fab/pdf/$', JointPrintView.as_view(), name='fab_pdf'),
     url(r'^fab/csv/$', joint_export, name='fab_csv'),
     url(r'^qc/pdf/$', QcPrintView.as_view(), name='qc_pdf'),

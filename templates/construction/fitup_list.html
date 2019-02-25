@@ -8,8 +8,7 @@
 <div class="container fab-report">
     <div class="row">
          <div class="table-responsive">
-             <h3>Total Joint List</h3>(<a href="{% url 'fitup_list' %}"> Fitup Comleted</a>
-             ,<a href="{% url 'welded_list' %}"> Welding Comleted </a>)
+             <h3>{{ heading }}</h3><a href="{% url 'joint_list' %}"> (Total List)</a>
                  <a href="{% url 'joint_add' %}" style="float: right;">Add new</a>
              <!--<h3>Joint Status: Total completed: {{ mat_list.total_inch_dia.inch_dia__sum }} Inch Dia</h3>-->
                   <table class="table table-bordered">
@@ -26,7 +25,7 @@
                           <th>Time taken</th>
                           <th>Edit</th>
                       </tr>
-                      {% for item in total_list %}
+                      {% for item in done_list %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ item.date_completed }}</td>

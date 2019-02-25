@@ -108,22 +108,22 @@ class QcManager(models.Manager):
 class Qc(models.Model):
     iso = models.ForeignKey(Iso, on_delete=models.CASCADE)
     joint = models.ForeignKey(Joint, on_delete=models.CASCADE)
-    fitup_status = models.ForeignKey(NdtStatus, related_name='fitup_status', on_delete=models.CASCADE, blank=True, null=True)
+    fitup_status = models.ForeignKey(NdtStatus, related_name='fitup_status', on_delete=models.CASCADE, default= 1)
     fitup_inspection_date = models.DateField(default=timezone.now, blank=True, null=True)
     welding_status = models.ForeignKey(NdtStatus, related_name='welding_status', on_delete=models.CASCADE, blank=True, null=True)
-    welding_inspection_date = models.DateField(default=timezone.now, blank=True, null=True)
+    welding_inspection_date = models.DateField(blank=True, null=True)
     hydro_test_status = models.ForeignKey(NdtStatus, related_name='hydro_status', on_delete=models.CASCADE, blank=True, null=True)
-    hydro_test_inspection_date = models.DateField(default=timezone.now, blank=True, null=True)
+    hydro_test_inspection_date = models.DateField(blank=True, null=True)
     radiography_status = models.ForeignKey(NdtStatus, related_name='radio_status', on_delete=models.CASCADE, blank=True, null=True)
-    radiography_inspection_date = models.DateField(default=timezone.now, blank=True, null=True)
+    radiography_inspection_date = models.DateField(blank=True, null=True)
 
     objects = QcManager()
 
     def __str__(self):
         return self.joint.joint_no
 
-    def get_edit_url(self):
-        return reverse("qc_joint_update", kwargs={"pk": self.pk})
+    def get_radio_url(self):
+        return reverse("qc_radio_update", kwargs={"pk": self.pk})
 
     def get_fitup_url(self):
         return reverse("qc_fitup_update", kwargs={"pk": self.pk})

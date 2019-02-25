@@ -48,7 +48,27 @@ class QcJointForm(forms.ModelForm):
         }
 
 
-class QcFitupForm(forms.ModelForm):
+class QcRadioForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto')
+    )
+    radiography_status = forms.ModelChoiceField(
+        queryset=NdtStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='ndt_auto')
+    )
+    class Meta:
+        model = Qc
+        fields = ['iso', 'joint', 'radiography_status', 'radiography_inspection_date',]
+
+        widgets = {
+            'joint': autocomplete.ModelSelect2(url='joint_auto',
+                                              forward=['iso']),
+            'radiography_inspection_date': DateInput(),
+        }
+
+
+class QcWeldForm(forms.ModelForm):
     iso = forms.ModelChoiceField(
         queryset=Iso.objects.all(),
         widget=autocomplete.ModelSelect2(url='iso_auto')
@@ -59,7 +79,7 @@ class QcFitupForm(forms.ModelForm):
     )
     class Meta:
         model = Qc
-        fields = ['iso', 'joint', 'welding_status', 'welding_inspection_date']
+        fields = ['iso', 'joint','fitup_status', 'welding_status', 'welding_inspection_date']
 
         widgets = {
             'joint': autocomplete.ModelSelect2(url='joint_auto',
@@ -67,14 +87,25 @@ class QcFitupForm(forms.ModelForm):
             'welding_inspection_date': DateInput(),
         }
 
-    def clean_fitup_status(self,*args,**kwargs):
+    def clean(self,*args,**kwargs):
+        clean_form = super(QcWeldForm, self).clean()
         fitup_status = self.cleaned_data.get('fitup_status')
-        if not fitup_status == 'passed':
+        print(fitup_status)
+        fitup_instance = self.instance.fitup_status
+        print(fitup_instance)
+        if fitup_instance=='failed':
             raise forms.ValidationError("Fitup is not Passed")
-        return fitup_status
+        return clean_form
+
+    # def clean_fitup_status(self,*args,**kwargs):
+    #     fitup_status = self.cleaned_data.get('fitup_status')
+    #     if fitup_status == 'failed':
+    #         raise forms.ValidationError("Fitup is not Passed")
+    #     print(fitup_status)
+    #     return fitup_status
 
 
-class QcWeldForm(forms.ModelForm):
+class QcFitupForm(forms.ModelForm):
     iso = forms.ModelChoiceField(
         queryset=Iso.objects.all(),
         widget=autocomplete.ModelSelect2(url='iso_auto')
