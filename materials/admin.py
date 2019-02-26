@@ -1,9 +1,7 @@
 from django.contrib import admin
 
-from .models import MaterialData, Material
+from .models import MaterialData
 
-
-admin.site.register(Material)
 
 admin.site.register(MaterialData)
 

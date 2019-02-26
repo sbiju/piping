@@ -19,12 +19,11 @@
                       </tr>
                       {% endfor %}
                   </table>
-
-        </div>
-    </div>
-    <a href="{% url 'emp_pdf' %}" class="btn btn-info">Print to PDF</a>
-    <a href="{% url 'emp_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
+         </div>
 </div>
+<a href="{% url 'emp_pdf' %}" class="btn btn-info">Print to PDF</a>
+<a href="{% url 'emp_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
+
 
 
 {% endblock %}

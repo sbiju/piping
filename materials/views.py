@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.forms import modelformset_factory
 
 from .mixins import LoginRequiredMixin
-from .models import MaterialData, Material
+from .models import MaterialData
 from .forms import MaterialForm, PurchaseForm, DesignForm, StoreForm, FabForm
 from control_centre.models import Owner, Iso
 from construction.models import Joint
@@ -307,7 +307,8 @@ class MaterialCreateView(CreateView):
     success_url = reverse_lazy('design_list')
 
     def form_valid(self, form):
-        owner = Owner.objects.get(design=self.request.user)
+        owner = Owner.objects.get(user=self.request.user)
+        # owner = Owner.objects.get(design=self.request.user)
         # owner = MaterialData.objects.get(iso__project__owner__design=self.request.user)
         form.instance.iso.project.owner = owner
         valid_data = super(MaterialCreateView, self).form_valid(form)

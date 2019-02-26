@@ -2,7 +2,6 @@
 {% block content %}
 <div class="container">
     <div class="row">
-
          <div class="table-responsive">
              <h3>{{ headline }}</h3>
                 <a href="{% url 'roster_list' %}">(Abscent List)</a>
@@ -22,16 +21,15 @@
                           <td>{{ emp.first_name }} {{ emp.last_name }} </td>
                           <td>{{ emp.designation }}</td>
                           <td>{{ emp.joined_date }}</td>
-
                       </tr>
                       {% endfor %}
                   </table>
-
-        </div>
+         </div>
     </div>
-    <a href="{% url 'emp_pdf' %}" class="btn btn-info">Print to PDF</a>
-    <a href="{% url 'emp_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
 </div>
+<a href="{% url 'emp_pdf' %}" class="btn btn-info">Print to PDF</a>
+<a href="{% url 'emp_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
+
 
 
 {% endblock %}

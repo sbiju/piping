@@ -11,17 +11,6 @@ UNIT_CHOICES = (
                   )
 
 
-class Material(models.Model):
-    iso = models.ForeignKey(Iso, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, blank=True, null=True)
-    size = models.CharField(max_length=200,blank=True, null=True)
-    quantity = models.IntegerField(blank=True, null=True)
-    unit = models.CharField(max_length=20, choices=UNIT_CHOICES, default="Nos")
-
-    def __str__(self):
-        return self.iso.iso_no
-
-
 class MaterialData(models.Model):
     iso = models.ForeignKey(Iso, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, blank=True, null=True)
