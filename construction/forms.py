@@ -164,7 +164,7 @@ class JointForm(forms.ModelForm):
     class Meta:
         model = Joint
         fields = ['date_completed', 'iso', 'joint_no', 'size', 'sch', 'welder', 'fabricator',
-                  'supervisor','engineer','hours_worked', 'crew_members',
+                  'supervisor','engineer', 'crew_members',
                   'fitup_status', 'weld_status', 'iso_comleted']
 
         widgets = {
@@ -172,29 +172,74 @@ class JointForm(forms.ModelForm):
         }
 
 
-# class JointForm(forms.ModelForm):
-#     iso = forms.ModelChoiceField(
-#         queryset=Iso.objects.all(),
-#         widget=autocomplete.ModelSelect2(url='iso_auto')
-#     )
-#     welder = forms.ModelChoiceField(
-#         queryset=Employee.objects.all(),
-#         widget=autocomplete.ModelSelect2(url='welder_auto')
-#     )
-#     fabricator = forms.ModelChoiceField(
-#         queryset=Employee.objects.all(),
-#         widget=autocomplete.ModelSelect2(url='fabricator_auto')
-#     )
-#     supervisor = forms.ModelChoiceField(
-#         queryset=Employee.objects.all(),
-#         widget=autocomplete.ModelSelect2(url='sup_auto')
-#     )
-#     engineer = forms.ModelChoiceField(
-#         queryset=Employee.objects.all(),
-#         widget=autocomplete.ModelSelect2(url='eng_auto')
-#     )
-#     class Meta:
-#         model = Joint
-#         fields = ['iso', 'joint_no', 'size', 'sch', 'welder', 'fabricator',
-#                   'supervisor','engineer','hours_worked', 'crew_members']
+class FitupForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto')
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    sch = forms.ModelChoiceField(
+        queryset=Schedule.objects.all(),
+        widget=autocomplete.ModelSelect2(url='sch_auto'),
+    )
+    fabricator = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='fabricator_auto')
+    )
+    supervisor = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='sup_auto')
+    )
+    engineer = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='eng_auto')
+    )
+    fitup_status = forms.ModelChoiceField(
+        queryset=FitUpStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='fitup_auto'),
+    )
 
+    class Meta:
+        model = Joint
+        fields = ['date_completed', 'iso', 'joint_no', 'size', 'sch', 'fabricator',
+                  'supervisor','engineer','fitup_time', 'crew_members',
+                  'fitup_status',]
+
+        widgets = {
+            'date_completed': DateInput(),
+        }
+
+
+class WeldForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto')
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    sch = forms.ModelChoiceField(
+        queryset=Schedule.objects.all(),
+        widget=autocomplete.ModelSelect2(url='sch_auto'),
+    )
+    welder = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=autocomplete.ModelSelect2(url='welder_auto')
+    )
+    weld_status = forms.ModelChoiceField(
+        queryset=WeldStatus.objects.all(),
+        widget=autocomplete.ModelSelect2(url='weld_auto'),
+    )
+    class Meta:
+        model = Joint
+        fields = ['date_completed', 'iso', 'joint_no', 'size', 'sch', 'welder',
+                  'welding_time', 'crew_members',
+                  'weld_status', 'iso_comleted']
+
+        widgets = {
+            'date_completed': DateInput(),
+        }

@@ -10,9 +10,10 @@ from django.utils import timezone
 from dal import autocomplete
 
 from .models import Joint, Qc, NdtStatus
-from .forms import JointForm, QcJointForm, QcFitupForm, QcWeldForm, QcRadioForm
+from .forms import JointForm, QcJointForm, QcFitupForm, QcWeldForm, QcRadioForm, FitupForm, WeldForm
 from .resources import IsoResource, QcResource, JointResource
 from control_centre.models import Owner, Iso
+import json
 
 
 def export(request):
@@ -34,6 +35,9 @@ class JointListView(LoginRequiredMixin, ListView):
         user = self.request.user
         days_ago = timezone.now() - datetime.timedelta(days=6)
         context['total_list'] = Joint.objects.filter(iso__project__owner__user=user)
+        # context['total_list'] = Joint.objects.filter(iso__project__owner__user=user) \
+        #     .values('iso', 'iso__iso_no') \
+        #     .annotate(total_inch_dia=Sum('inch_dia'))
         # context['mat_list'] = Joint.objects.filter(iso__project__owner__user=user) \
         #     .by_range(start_date=days_ago, end_date=timezone.now())
         return context
@@ -75,6 +79,10 @@ class JointPrintView(WeasyTemplateResponseMixin, ListView):
         return context
 
 
+class JointDetailView(DetailView):
+    model = Joint
+
+
 def joint_export(request):
     user = request.user
     queryset = Joint.objects.filter(iso__project__owner__user=user)
@@ -107,8 +115,8 @@ class JointReportAjaxView(View):
 
 class JointCreateView(CreateView):
     model = Joint
-    form_class = JointForm
-    template_name = 'forms/joint_form.html'
+    form_class = FitupForm
+    template_name = 'forms/fitup_form.html'
     success_url = reverse_lazy('joint_list')
 
     def form_valid(self, form):
@@ -126,7 +134,14 @@ class JointCreateView(CreateView):
 
 class JointUpdateView(UpdateView):
     model = Joint
-    form_class = JointForm
+    form_class = WeldForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('joint_list')
+
+
+class WeldUpdateView(UpdateView):
+    model = Joint
+    form_class = WeldForm
     template_name = 'form.html'
     success_url = reverse_lazy('joint_list')
 
@@ -294,3 +309,15 @@ class QcJointUpdateView(UpdateView):
     form_class = QcJointForm
     template_name = 'form.html'
     success_url = reverse_lazy('qc_joint_list')
+
+
+def search_joint(request):
+    query = request.GET.get('term', '')
+    if query is not None:
+        queryset = Joint.objects.search(query)
+        res = [dict(id=iso.pk, label=[ iso.joint_no],
+                value=iso.joint_no, url=iso.get_absolute_url())
+                for iso in queryset]
+        return HttpResponse(json.dumps(res))
+    else:
+        Joint.objects.none()

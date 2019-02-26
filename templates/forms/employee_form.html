@@ -3,13 +3,14 @@
 
 {% block content %}
 <div class="container form-class">
-    <h3 class="text-center">{{ heading }}</h3>
+    <h3 class="text-center">{{ heading }}</h3><a href="{% url 'employee_list' %}" class="btn btn-success ml-auto">Employee List</a>
     <div class="row">
         <div class="col-sm-6 offset-3">
             <form method="POST">{% csrf_token %}
                 {{ form|crispy }}
                 <input type="submit" class="btn btn-success" value="Save">
             </form>
+
         </div>
     </div>
 </div>

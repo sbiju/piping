@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+         <div class="table-responsive">
+             <h3 style="margin-bottom:15px;">Joint Detail</h3>
+              <table class="table table-bordered emp-list">
+                  <tr>
+                      <th>ISO NO./ LINE NO.</th>
+                      <th>Joint No.</th>
+                      <th>Size</th>
+                      <th>Schedule</th>
+
+                      <th>Time taken for fit-up</th>
+                      <th>fit up date</th>
+                      <th>fit up status</th>
+
+                      <th>Time taken for welding</th>
+                      <th>welding date</th>
+                      <th>welding status</th>
+
+                      <th>inch dia</th>
+                      <th>Welder</th>
+                      <th>Fabricator</th>
+                      <th>Supervisor</th>
+                      <th>Engineer</th>
+                      <th>Total Crew</th>
+                      <th>Edit</th>
+                  </tr>
+                  <tr>
+                      <td>{{ object.iso.iso_no }}</td>
+                      <td>{{ object.joint_no }}</td>
+                      <td>{{ object.size }}</td>
+                      <td>{{ object.sch }}</td>
+
+                      <td>{{ object.fitup_time }} hrs</td>
+                      <td>{{ object.date_completed }}</td>
+                      <td>{{ object.fitup_status }}</td>
+
+                      <td>{{ object.welding_time }} hrs</td>
+                      <td>{{ object.weld_date }}</td>
+                      <td>{{ object.weld_status }}</td>
+
+                      <td>{{ object.inch_dia }}</td>
+                      <td>{{ object.welder|title }}</td>
+                      <td>{{ object.fabricator|title }}</td>
+                      <td>{{ object.supervisor|title }}</td>
+                      <td>{{ object.engineer|title }}</td>
+                      <td>{{ object.crew_members }}</td>
+
+                      <td><a href="{{ object.get_edit_url }}">Edit</a></td>
+                  </tr>
+              </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+crew_members = models.IntegerField(verbose_name='No.of Crew', blank=True, null=True)
+    date_completed = models.DateField(verbose_name='Fit-Up Date', default=timezone.now)
+    fitup_time = models.IntegerField(verbose_name='Time taken for Fit-Up', blank=True, null=True)
+    welding_time = models.IntegerField(verbose_name='Time taken for Welding', blank=True, null=True)
+    inch_dia = models.IntegerField(blank=True, null=True)
+    actual_inch_dia = models.IntegerField(blank=True, null=True)
+    man_hours = models.FloatField(verbose_name='Total Man Hours Taken', blank=True, null=True)
+    fitup_status = models.ForeignKey(FitUpStatus, on_delete=models.CASCADE, blank=True, null=True)
+    weld_status = models.ForeignKey(WeldStatus, on_delete=models.CASCADE, blank=True, null=True)
+    weld_date = models.DateField(verbose_name='Welding Date', default=timezone.now)

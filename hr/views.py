@@ -6,15 +6,23 @@ from django.urls import reverse_lazy
 from dal import autocomplete
 from django_weasyprint import WeasyTemplateResponseMixin
 
-from .models import Employee, Designation
-from .forms import EmployeeCreateForm
+from .models import Employee, Designation, DailyReport
+from .forms import EmployeeCreateForm, RosterCreateForm
 from control_centre.models import Owner, Project
 from construction.resources import HrResource
 
 
-class EmpAutocomplete(autocomplete.Select2QuerySetView):
+class DesignationAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Designation.objects.all()
+        if self.q:
+            qs = qs.filter(title__istartswith=self.q)
+        return qs
+
+
+class EmpAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Employee.objects.filter(project__owner__user=self.request.user)
         if self.q:
             qs = qs.filter(title__istartswith=self.q)
         return qs
@@ -70,7 +78,7 @@ class EmployeeListView(ListView):
 class EmployeeCreateView(CreateView):
     model = Employee
     form_class = EmployeeCreateForm
-    template_name = 'form.html'
+    template_name = 'forms/employee_form.html'
     success_url = reverse_lazy('add_employee')
 
     def form_valid(self, form):
@@ -104,19 +112,19 @@ def qc_export(request):
     return response
 
 
+class RosterCreateView(CreateView):
+    model = DailyReport
+    form_class = RosterCreateForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('roster_list')
 
-
-# class WelderCreateView(CreateView):
-#     model = Welder
-#     form_class = WelderCreateForm
-#     template_name = 'form.html'
-#     success_url = reverse_lazy('add_welder')
-#
-#     def form_valid(self, form):
-#         owner = Owner.objects.get(user=self.request.user)
-#         form.instance.employee.project.owner = owner
-#         valid_data = super(WelderCreateView, self).form_valid(form)
-#         return valid_data
+    def form_valid(self, form):
+        # owner = Owner.objects.get(user=self.request.user)
+        # form.instance.owner = owner
+        project = Project.objects.get(owner__user=self.request.user)
+        form.instance.project = project
+        valid_data = super(RosterCreateView, self).form_valid(form)
+        return valid_data
 
     # def get_object(self, *args, **kwargs):
     #     owner = Owner.objects.get(user=self.request.user)
@@ -126,3 +134,18 @@ def qc_export(request):
     #     else:
     #         raise Http404
 
+
+class RosterListView(ListView):
+    model = DailyReport
+
+    def get_queryset(self):
+        return DailyReport.objects.filter(project__owner__user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(RosterListView, self).get_context_data(**kwargs)
+        abs_list = DailyReport.objects.absent_emp().filter(project__owner__user=self.request.user)
+        emp_list = Employee.objects.filter(project__owner__user=self.request.user).exclude(pk__in=abs_list)
+        print(emp_list)
+        context['object_list'] = DailyReport.objects.absent_emp().filter(project__owner__user=self.request.user)
+        context['headline'] = 'Abscent List'
+        return context

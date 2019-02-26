@@ -1,28 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-    <div class="row">
-
+<div class="container mt-2 mb-3">
          <div class="table-responsive">
-             <h3>{{ headline }}</h3>
-                <a href="{% url 'roster_list' %}">(Abscent List)</a>
-                <a href="{% url 'add_employee' %}" style="float: right;">Add New</a>
+            <h3>{{ headline }}</h3>
+            <a href="{% url 'employee_list' %}">(Employee List)</a>
+                <a href="{% url 'add_roster' %}" style="float: right;">Add New</a>
                   <table class="table table-striped emp-list">
                       <tr>
                           <th>Sl No.</th>
-                          <th>Employee No.</th>
+                          <th>Date</th>
                           <th>Full Name</th>
-                          <th>Designation</th>
-                          <th>Date of Joining</th>
                       </tr>
                       {% for emp in object_list %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ emp.emplyee_no }}</td>
-                          <td>{{ emp.first_name }} {{ emp.last_name }} </td>
-                          <td>{{ emp.designation }}</td>
-                          <td>{{ emp.joined_date }}</td>
-
+                          <td>{{ emp.timestamp }}</td>
+                          <td>{{ emp.employee.first_name }} {{ emp.employee.last_name }} </td>
                       </tr>
                       {% endfor %}
                   </table>

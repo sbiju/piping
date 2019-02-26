@@ -54,7 +54,7 @@
     </script>
     <!--<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-            <script type="text/javascript">
+       <script type="text/javascript">
         $('#search-iso').autocomplete({
             source: '/search/',
             minLength: 2,
@@ -64,6 +64,13 @@
           });
         $('#search-spool').autocomplete({
             source: '/search_spool/',
+            minLength: 2,
+            select: function(event, ui) {
+              window.location.href = ui.item.url;
+            }
+          });
+        $('#search-joint').autocomplete({
+            source: '/search_joint/',
             minLength: 2,
             select: function(event, ui) {
               window.location.href = ui.item.url;

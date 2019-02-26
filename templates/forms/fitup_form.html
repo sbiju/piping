@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container form-class">
+    <h3 class="text-center">{{ heading }}</h3>
+    <div class="row">
+        <div class="col-sm-6 offset-3">
+            <form method="POST">{% csrf_token %}
+                {{ form.errors }}
+                {{ form.date_completed| as_crispy_field }}
+                {{ form.iso| as_crispy_field }}
+                <p><a href="{% url 'add_iso' %}">Couldn't find Iso? Add new</a></p>
+                {{ form.joint_no| as_crispy_field }}
+                {{ form.size| as_crispy_field }}
+                <p><a href="{% url 'add_size' %}">Couldn't find right Size? Add new</a></p>
+                {{ form.sch| as_crispy_field }}
+                <p><a href="{% url 'add_schedule' %}">Couldn't find Schedule? Add new</a></p>
+                {{ form.fabricator| as_crispy_field }}
+                {{ form.supervisor| as_crispy_field }}
+                {{ form.engineer| as_crispy_field }}
+                {{ form.fitup_time| as_crispy_field }}
+                {{ form.crew_members| as_crispy_field }}
+                {{ form.fitup_status| as_crispy_field }}
+                <input type="submit" class="btn btn-success" value="Save">
+            </form>
+        </div>
+    </div>
+</div>
+{{ form.media }}
+{% endblock %}
+{% block custom_js %}
+{{ form.media }}
+{% endblock %}

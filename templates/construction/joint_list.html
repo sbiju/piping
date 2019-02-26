@@ -1,45 +1,36 @@
 {% extends 'base.html' %}
-{% load static %}
-
-{% load crispy_forms_tags %}
 
 {% block content %}
 
 <div class="container fab-report">
+    <div class="row" style="margin-top:20px; margin-bottom:20px;">
+		<form class="search-form">
+			<input type="text" class="form-control" id="search-joint" placeholder="Search Joint" name="q" value="{{ request.GET.q }}">
+		</form>
+	</div>
     <div class="row">
          <div class="table-responsive">
              <h3>Total Joint List</h3>(<a href="{% url 'fitup_list' %}"> Fitup Comleted</a>
              ,<a href="{% url 'welded_list' %}"> Welding Comleted </a>)
                  <a href="{% url 'joint_add' %}" style="float: right;">Add new</a>
-             <!--<h3>Joint Status: Total completed: {{ mat_list.total_inch_dia.inch_dia__sum }} Inch Dia</h3>-->
+             <!--<h3>Total completed: {{ total_inch }} Inch Dia</h3>-->
                   <table class="table table-bordered">
                       <tr>
-                          <th>Sl.No</th>
-                          <th>Date</th>
+                          <th>Fitup Date</th>
                           <th>ISO NO./ LINE NO.</th>
                           <th>Joint No.</th>
                           <th>Size</th>
                           <th>Schedule</th>
-                          <th>Welder</th>
-                          <th>Fabricator</th>
-                          <th>Supervisor</th>
-                          <th>Time taken</th>
-                          <th>Edit</th>
+                          <th>Update Welding</th>
                       </tr>
                       {% for item in total_list %}
                       <tr>
-                          <td>{{ forloop.counter }}</td>
                           <td>{{ item.date_completed }}</td>
-                          <td>{{ item.iso.iso_no }}</td>
+                          <td><a href="{{ item.get_absolute_url }}">{{ item.iso.iso_no }}</a></td>
                           <td>{{ item.joint_no }}</td>
                           <td>{{ item.size }}</td>
                           <td>{{ item.sch }}</td>
-                          <td>{{ item.welder|title }}</td>
-                          <td>{{ item.fabricator|title }}</td>
-                          <td>{{ item.supervisor|title }}</td>
-                          <td>{{ item.hours_worked }} hrs</td>
-
-                          <td><a href="{% url 'joint_update' pk=item.pk %}">Edit</a></td>
+                          <td><a href="{{ item.get_edit_url }}">Update</a></td>
                       </tr>
                       {% endfor %}
                   </table>

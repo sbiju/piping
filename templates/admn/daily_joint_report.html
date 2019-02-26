@@ -1,48 +1,66 @@
 {% extends 'base.html' %}
 
-
-{% load crispy_forms_tags %}
-
-
 {% block content %}
 
-<div class="container fab-report">
+<div class="container">
+    <div class="row" style="margin-top:20px; margin-bottom:20px;">
+		<form class="search-form">
+			<input type="text" class="form-control" id="search-joint" placeholder="Search ISO/ Joint" name="q" value="{{ request.GET.q }}">
+		</form>
+	</div>
     <div class="row">
         <div class="col-sm-12">
          <div class="table-responsive">
              <h3>Joint Report</h3>
                   <table class="table table-bordered">
                       <tr>
-                      <th>ISO NO./ LINE NO.</th>
-                      <th>Joint No.</th>
-                      <th>Size</th>
-                      <th>Schedule</th>
+                         <th>ISO NO./ LINE NO.</th>
+                          <th>Joint No.</th>
+                          <th>Size</th>
+                          <th>Schedule</th>
 
-                      <th>Welder Name</th>
-                      <th>Fabricator Name</th>
-                      <th>Crew Strength</th>
-                      <th>Time taken</th>
-                      <th>Man Hours Taken</th>
-                      <th>Date</th>
+                          <th>Time taken for fit-up</th>
+                          <th>fit up date</th>
+                          <th>fit up status</th>
 
+                          <th>Time taken for welding</th>
+                          <th>welding date</th>
+                          <th>welding status</th>
+
+                          <th>inch dia</th>
+                          <th>Welder</th>
+                          <th>Fabricator</th>
+                          <th>Supervisor</th>
+                          <th>Engineer</th>
+                          <th>Total Crew</th>
+                          <th>Man Hours Taken</th>
                       </tr>
                       {% for item in report %}
                         <td><h5>{{ item.iso_no }}</h5></td>
                       <tr>
                           {% for joint in item.joint_set.all %}
-                          <td>{{ forloop.counter }}</td>
-                          <td>{{ joint.joint_no }}</td>
-                          <td>{{ joint.size }}</td>
-                          <td>{{ joint.sch }}</td>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ joint.joint_no }}</td>
+                            <td>{{ joint.size }}</td>
+                            <td>{{ joint.sch }}</td>
+                            <td>{{ joint.fitup_time }} hrs</td>
+                            <td>{{ joint.date_completed }}</td>
+                            <td>{{ joint.fitup_status }}</td>
 
-                          <td>{{ joint.welder|title }}</td>
-                          <td>{{ joint.fabricator|title }}</td>
-                          <td>{{ joint.crew_members }}</td>
-                          <td>{{ joint.hours_worked }} hrs</td>
-                          <td>{{ joint.man_hours|floatformat:2 }}</td>
-                          <td>{{ joint.date_completed }}</td>
+                            <td>{{ joint.welding_time }} hrs</td>
+                            <td>{{ joint.weld_date }}</td>
+                            <td>{{ joint.weld_status }}</td>
+
+                            <td>{{ joint.inch_dia }}</td>
+                            <td>{{ joint.welder|title }}</td>
+                            <td>{{ joint.fabricator|title }}</td>
+                            <td>{{ joint.supervisor|title }}</td>
+                            <td>{{ joint.engineer|title }}</td>
+                            <td>{{ joint.crew_members }}</td>
+                            <td>{{ joint.man_hours|floatformat:2 }}</td>
                       </tr>
                       {% endfor %}{% endfor %}
+
                   </table>
         </div>
         </div>
@@ -55,27 +73,15 @@
                       <th>Total Joints</th>
                       <th>Average Manhours Per Inch</th>
                       <th>Total Inch Dia</th>
-
-                      <!--<th>Welder Name</th>-->
-                      <!--<th>Fabricator Name</th>-->
-                      <!--<th>Time taken</th>-->
-                      <!--<th>Date</th>-->
-
                       </tr>
 
 
                       <tr>
                           {% for item in sum_list %}
                           <td><h5>{{ item.project__name|title }}</h5></td>
-
                           <td>{{ item.total_joint }}</td>
                           <td>{{ item.avg_man_hours|floatformat:2 }}</td>
                           <td>{{ item.total_inch_dia }}</td>
-
-                          <!--<td>{{ joint.welder|title }}</td>-->
-                          <!--<td>{{ joint.fabricator|title }}</td>-->
-                          <!--<td>{{ joint.hours_worked }} hrs</td>-->
-                          <!--<td>{{ joint.date_completed }}</td>-->
                       </tr>
                       {% endfor %}
                   </table>

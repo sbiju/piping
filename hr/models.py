@@ -50,11 +50,29 @@ class Employee(models.Model):
     objects = EmployeeManager()
 
     class Meta:
-        unique_together = ('first_name', 'last_name')
         ordering = ['first_name']
 
     def __str__(self):
         return str(self.first_name)
 
 
+class RosterManager(models.Manager):
+    def absent_emp(self):
+        return self.filter(absent=True)
+
+
+class DailyReport(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    absent = models.BooleanField(default=False)
+    timestamp = models.DateField(default=timezone.now)
+
+    objects = RosterManager()
+
+    def __str__(self):
+        return self.employee.first_name
+
+    class Meta:
+        unique_together = ('employee', 'timestamp')
+        ordering = ['-timestamp']
 

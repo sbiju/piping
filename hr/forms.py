@@ -1,20 +1,31 @@
 from django import forms
-from .models import Employee, Designation
+from .models import Employee, Designation, DailyReport
 from dal import autocomplete
+from construction.forms import DateInput
+
+
+class RosterCreateForm(forms.ModelForm):
+    employee = forms.ModelChoiceField(
+            queryset=Employee.objects.all(),
+            widget=autocomplete.ModelSelect2(url='emp_auto')
+        )
+    class Meta:
+        model = DailyReport
+        fields = ['employee', 'absent', 'timestamp', ]
+        widgets = {
+            'timestamp': DateInput(),
+        }
 
 
 class EmployeeCreateForm(forms.ModelForm):
     designation = forms.ModelChoiceField(
         queryset=Designation.objects.all(),
-        widget=autocomplete.ModelSelect2(url='emp_auto')
+        widget=autocomplete.ModelSelect2(url='des_auto')
     )
 
     class Meta:
         model = Employee
         fields = ['emplyee_no', 'first_name', 'last_name', 'designation', 'joined_date', ]
-
-
-
 
 
 
