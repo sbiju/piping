@@ -288,7 +288,7 @@ class OwnerCreateForm(forms.ModelForm):
         queryset=User.objects.all(),
         widget=autocomplete.ModelSelect2(url='user_auto')
     )
-    purchase = forms.ModelChoiceField(
+    client = forms.ModelChoiceField(
         queryset=User.objects.all(),
         widget=autocomplete.ModelSelect2(url='user_auto')
     )
@@ -307,7 +307,7 @@ class OwnerCreateForm(forms.ModelForm):
 
     class Meta:
         model = Owner
-        fields = ['const_head', 'hr', 'design', 'purchase', 'store', 'fabrication','qc']
+        fields = ['const_head', 'hr', 'design', 'store', 'fabrication','qc', 'client']
         # labels = {'user': 'Admin'}
 
 

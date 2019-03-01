@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container dataContainer">
+     <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'employee_list' %}">Employee List</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_employee' %}">Add new Employee</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'roster_list' %}">Roster List</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+     </div>
+     <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_roster' %}">Update Roster</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+            <a data-toggle="modal" data-target="#myModal" style="padding:20px;">
+                    <span data-feather="info"></span> Instructions</a>
+                    <div id="myModal" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Instructions</h4>
+                          </div>
+                          <div class="modal-body">
+                              <ul>
+                                  <li><span data-feather="arrow-down-right"></span> Select required isometric from the dropdown or type the initial letters of the isometric for faster retrieval</li>
+                                  <li><span data-feather="arrow-down-right"></span> Update status of fabrication against each isometric</li>
+                              </ul>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 </div>
+          </div>
+     </div>
+</div>
+
+{% endblock %}

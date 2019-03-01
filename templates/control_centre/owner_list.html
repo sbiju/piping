@@ -12,11 +12,11 @@
                   <tr>
                       <th>Construction Head</th>
                       <th>HR</th>
-                      <th>Design</th>
-                      <th>Purchase</th>
+                      <th>Data Center</th>
                       <th>Stores</th>
                       <th>Fabrication</th>
                       <th>Quality Control</th>
+                      <th>Client</th>
                       <th>Edit</th>
                   </tr>
                   {% for item in object_list %}
@@ -24,10 +24,10 @@
                       <td>{{ item.const_head }}</td>
                       <td>{{ item.hr }}</td>
                       <td>{{ item.design }}</td>
-                      <td>{{ item.purchase }}</td>
                       <td>{{ item.store }}</td>
                       <td>{{ item.fabrication }}</td>
                       <td>{{ item.qc }}</td>
+                      <td>{{ item.client }}</td>
                       <td><a href="{{ item.get_edit_url }}">Edit</a></td>
                   </tr>
                   {% endfor %}

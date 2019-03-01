@@ -44,6 +44,28 @@
         </div>
     </div>
 </div>
+<div class="row mt-3">
+  <div class="container text-justify">
+    <h6>Welcome to the new erp application to ease data entry jobs in plant piping. This cloud erp system is made exclusively to improve data handlling and document processing during
+    construction phase of process plant piping, this enables to connect different departments and summarize the reports in effective way and save time in documentation.
+    Different depattment staff can perform their jobs and view reports and status.</h6>
+    <h5>Main features of the application are:</h5>
+      <ul>
+        <li>Effective and timely co-ordination of different departments</li>
+        <li>Enable to enter and view the various reliorts status easily without delay and errors</li>
+        <li> Data will be saved in cloud and backed up to prevent loss of data due to system malfunctions and errors</li>
+        <li>Data is being transmitted in encrypted form so that others cannot read or copy</li>
+        <li>Main data entry takes place only in one place and others update from related departments, so that there will not be any double work</li>
+        <li>No need to send reports to any persons as they can view reports online at the time when it updates</li>
+        <li>System calculated material summary and performance of resources makes effective monitoring</li>
+        <li>Can be saved in excel and pdf formats</li>
+        <li>Easy to implement and use</li>
+        <li>Permitted customization will be added on request</li>
+        <li>This is a modern python based erp system with built in security so it is trust worthy in current scenario</li>
+     </ul>
+  </div>
+</div>
+
 {% else %}
 
     <div class="container-fluid">
@@ -52,90 +74,54 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="/">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{% url 'admin_page' %}">
-                  <span data-feather="file"></span>
-                  Admin
+                  <span data-feather="folder"></span>
+                  Site Admin
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
+                <a class="nav-link" href="{% url 'client_page' %}">
+                  <span data-feather="folder"></span>
                   Client
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
+                <a class="nav-link" href="{% url 'ch_view' %}">
+                  <span data-feather="folder"></span>
                   Construction Head
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Client
+                <a class="nav-link" href="{% url 'data' %}">
+                  <span data-feather="folder"></span>
+                  Data Entry
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Client
+                <a class="nav-link" href="{% url 'fab_entry' %}">
+                  <span data-feather="folder"></span>
+                  Fabrication
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Client
+                <a class="nav-link" href="{% url 'qc_entry' %}">
+                  <span data-feather="folder"></span>
+                  Quality Control
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="bar-chart-2"></span>
-                  Reports
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
+                <a class="nav-link" href="{% url 'hr_entry' %}">
+                  <span data-feather="folder"></span>
+                  Human Resource
                 </a>
               </li>
             </ul>
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'instruction' %}">
                   <span data-feather="file-text"></span>
-                  Current month
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Last quarter
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Social engagement
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Year-end sale
+                  Instructions
                 </a>
               </li>
             </ul>
@@ -144,18 +130,22 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+            <h1 class="h3">Start up Instructiions</h3>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
               </div>
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-              </button>
             </div>
           </div>
+          <ul>
+            <li><span data-feather="arrow-down-right"></span> Create seven users and assign one department to each user</li>
+            <li><span data-feather="arrow-down-right"></span> Distribute username and password to concerned persons</li>
+            <li><span data-feather="arrow-down-right"></span> At first data entry user can login to the system and start entering datas</li>
+            <li><span data-feather="arrow-down-right"></span> Each department users can login and update the reports on relevent fields on daily basis</li>
+            <li><span data-feather="arrow-down-right"></span> Construction heads and clients can view the reports</li>
+            <li><span data-feather="arrow-down-right"></span> Whenever necessary to remove a user, delete and create a new user and assign to the same department where the user is deleted</li>
+            <li><span data-feather="arrow-down-right"></span> Any kind of difficulties, please feel free to <a href="{% url 'contact' %}">Contact Us<a/></li>
+          </ul>
         </main>
       </div>
     </div>

@@ -11,18 +11,22 @@ User = settings.AUTH_USER_MODEL
 class Owner(models.Model):
     user = models.OneToOneField(User, related_name='owner', on_delete=models.CASCADE, unique=True)
     design = models.ForeignKey(User, related_name='designer',blank=True, null=True, on_delete=models.CASCADE)
-    purchase = models.ForeignKey(User, related_name='purchaser',blank=True, null=True, on_delete=models.CASCADE)
+    # purchase = models.ForeignKey(User, related_name='purchaser',blank=True, null=True, on_delete=models.CASCADE)
     store = models.ForeignKey(User, related_name='store_keeper',blank=True, null=True, on_delete=models.CASCADE)
     fabrication = models.ForeignKey(User, related_name='fabricator',blank=True, null=True, on_delete=models.CASCADE)
     const_head = models.ForeignKey(User, related_name='construction_head',blank=True, null=True, on_delete=models.CASCADE)
     qc = models.ForeignKey(User, related_name='qc',blank=True, null=True, on_delete=models.CASCADE)
     hr = models.ForeignKey(User, related_name='hr',blank=True, null=True, on_delete=models.CASCADE)
+    client = models.ForeignKey(User, related_name='client',blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
 
     def get_edit_url(self):
         return reverse("edit_owner", kwargs={"pk": self.pk})
+
+    class Meta:
+        ordering = ['id']
 
 
 class Project(models.Model):

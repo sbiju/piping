@@ -85,7 +85,7 @@ class OwnerCreateView(CreateView):
     model = Owner
     form_class = OwnerCreateForm
     template_name = 'form.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('owner_list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -337,7 +337,7 @@ class IsoAutocomplete(autocomplete.Select2QuerySetView):
 
 class MatAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Material.objects.all()
+        qs = Material.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -345,7 +345,7 @@ class MatAutocomplete(autocomplete.Select2QuerySetView):
 
 class SizeAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Size.objects.all()
+        qs = Size.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -353,7 +353,7 @@ class SizeAutocomplete(autocomplete.Select2QuerySetView):
 
 class ServiceAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Service.objects.all()
+        qs = Service.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -361,7 +361,7 @@ class ServiceAutocomplete(autocomplete.Select2QuerySetView):
 
 class ScheduleAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Schedule.objects.all()
+        qs = Schedule.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -369,7 +369,7 @@ class ScheduleAutocomplete(autocomplete.Select2QuerySetView):
 
 class LineClassAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = LineClass.objects.all()
+        qs = LineClass.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -377,7 +377,7 @@ class LineClassAutocomplete(autocomplete.Select2QuerySetView):
 
 class GradeAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = BoltGrade.objects.all()
+        qs = BoltGrade.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -385,7 +385,7 @@ class GradeAutocomplete(autocomplete.Select2QuerySetView):
 
 class GasketMatAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = GasketMaterial.objects.all()
+        qs = GasketMaterial.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -393,7 +393,7 @@ class GasketMatAutocomplete(autocomplete.Select2QuerySetView):
 
 class FlangeClassAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = FlangeClass.objects.all()
+        qs = FlangeClass.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -401,7 +401,7 @@ class FlangeClassAutocomplete(autocomplete.Select2QuerySetView):
 
 class SpoolStatusAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = SpoolStatus.objects.all()
+        qs = SpoolStatus.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -409,7 +409,7 @@ class SpoolStatusAutocomplete(autocomplete.Select2QuerySetView):
 
 class PefsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Pefs.objects.all()
+        qs = Pefs.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -417,7 +417,7 @@ class PefsAutocomplete(autocomplete.Select2QuerySetView):
 
 class FitupAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = FitUpStatus.objects.all()
+        qs = FitUpStatus.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -425,7 +425,7 @@ class FitupAutocomplete(autocomplete.Select2QuerySetView):
 
 class WeldAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = WeldStatus.objects.all()
+        qs = WeldStatus.objects.filter(project__owner__user = self.request.user)
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs
@@ -434,6 +434,8 @@ class WeldAutocomplete(autocomplete.Select2QuerySetView):
 # Data
 class IsoListView(ListView):
     model = Iso
+    queryset = Iso.objects.all()
+    paginate_by = 3
 
     def get_queryset(self):
         return Iso.objects.filter(project__owner__user=self.request.user).order_by('service')
@@ -496,7 +498,7 @@ class MatListView(ListView):
 
 
 class Data_Entry(TemplateView):
-    template_name = 'stat/data_entry.html'
+    template_name = 'stat/data.html'
 
 
 class AdminPage(TemplateView):
@@ -505,6 +507,22 @@ class AdminPage(TemplateView):
 
 class Client(TemplateView):
     template_name = 'stat/client.html'
+
+
+class FabEntry(TemplateView):
+    template_name = 'stat/fabrication.html'
+
+
+class QcEntry(TemplateView):
+    template_name = 'stat/qc.html'
+
+
+class HrEntry(TemplateView):
+    template_name = 'stat/hr.html'
+
+
+class ConstHead(TemplateView):
+    template_name = 'stat/ch.html'
 
 
 class AboutUs(TemplateView):

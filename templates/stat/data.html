@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container dataContainer">
+    <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_iso' %}">Add Iso</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_pipe' %}">Add Pipe</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                         <a href="{% url 'add_flange' %}">Add Flange</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_fitting' %}">Add Fittings</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_bolt' %}">Add Bolts/Nuts</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_gasket' %}">Add Gasket</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+     </div>
+     <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_spool' %}">Add Spool</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'iso_list' %}">Iso List</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'spool_list' %}">Spool List</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+     </div>
+     <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'mat_list' %}">Material List</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+            <a data-toggle="modal" data-target="#myModal" style="padding:20px;">
+                    <span data-feather="info"></span> Instructions</a>
+                    <div id="myModal" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Instructions</h4>
+                          </div>
+                          <div class="modal-body">
+                              <ul>
+                                  <li><span data-feather="arrow-down-right"></span> Before adding isometric data, initially add work package number, line class, sections or units, materials of pipes, pipe sizes, schedules, bolt grades etc, which are relevent to the project.</li>
+                                  <li><span data-feather="arrow-down-right"></span> Add isometric numbers and other related informations one by one</li>
+                                  <li><span data-feather="arrow-down-right"></span> After entering isometric initial data enter materials like flange, pipe, gasket bolts etc by clicking on relevent links</li>
+                                  <li><span data-feather="arrow-down-right"></span> Avoid using same user name password from more than one systems at a time.</li>
+                              </ul>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 </div>
+          </div>
+     </div>
+</div>
+
+{% endblock %}

@@ -1,10 +1,12 @@
 
-/**
- * Custom
- */
+.pagination a {
+  border: 1px solid #ddd; /* Gray */
+  margin: 0 4px;
+  padding: 8px 16px;
+}
 
 .bg-dark {
-    background-color: #6c757d !important;
+    background-color: #72b84c !important;
 }
  .footer{
  margin-top:60px;
