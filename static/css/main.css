@@ -22,16 +22,11 @@ body {
     font-weight: 500;
     font-size: 14px;
     color: #000000;
+    height:100%;
 }
 
 html, body {
-    overflow: visible;
-}
-
-ol, ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    overflow-x: hidden;
 }
 
 p {

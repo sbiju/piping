@@ -1,8 +1,10 @@
-
+.btn-info{
+    background-color: #007bff;
+}
 .pagination a {
-  border: 1px solid #ddd; /* Gray */
-  margin: 0 4px;
-  padding: 8px 16px;
+    border: 1px solid #ddd; /* Gray */
+    margin: 0 4px;
+    padding: 8px 16px;
 }
 
 .bg-dark {

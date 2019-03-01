@@ -95,6 +95,11 @@
             }
           });
         </script>
+        <script>
+            $(".alert").delay(2500).slideUp(200, function() {
+            $(this).alert('close');
+            });
+        </script>
 
         {% block custom_js %}
         {% endblock %}

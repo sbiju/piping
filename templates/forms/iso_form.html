@@ -16,8 +16,9 @@
                 {{ form.line_class| as_crispy_field }}
                 <p><a href="{% url 'add_line_class' %}">Couldn't find a Line Class? Add new</a></p>
                 {{ form.is_approved| as_crispy_field }}
-                <input type="submit" class="btn btn-success" value="Save">
+                <input type="submit" class="btn btn-success" value="Save & add More">
             </form>
+            <hr/><a href="{% url 'iso_list' %}" class="btn btn-primary mr-auto">Cancel</a>
         </div>
     </div>
 </div>

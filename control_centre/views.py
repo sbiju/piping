@@ -10,6 +10,7 @@ from django.contrib import messages
 from dal import autocomplete
 from django_weasyprint import WeasyTemplateResponseMixin
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 from construction.resources import IsoResource
 from .forms import UserForm, OwnerCreateForm, LoginForm, ProjectCreateForm, IsoCreateForm, ContactusForm,\
@@ -184,11 +185,12 @@ def add_user(request):
 #     return render(request, "post_form.html", context)
 
 # Design
-class IsoCreateView(CreateView):
+class IsoCreateView(SuccessMessageMixin, CreateView):
     model = Iso
     form_class = IsoCreateForm
     template_name = 'forms/iso_form.html'
-    success_url = reverse_lazy('data')
+    success_url = reverse_lazy('add_iso')
+    success_message = 'iso created successfully!!'
 
     def form_valid(self, form):
         owner = Owner.objects.get(user=self.request.user)
@@ -434,8 +436,7 @@ class WeldAutocomplete(autocomplete.Select2QuerySetView):
 # Data
 class IsoListView(ListView):
     model = Iso
-    queryset = Iso.objects.all()
-    paginate_by = 3
+    paginate_by = 5
 
     def get_queryset(self):
         return Iso.objects.filter(project__owner__user=self.request.user).order_by('service')
