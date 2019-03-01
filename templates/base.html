@@ -38,7 +38,18 @@
         {% endif %}
       </ul>
     </nav>
-      {% block content %} {% endblock %}
+
+    {% if messages %}
+    <div class="col-6 offset-3 alert alert-success" role="alert">
+    <ul class="messages text-center">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+
+    </div>
+    {% endif %}
+    {% block content %} {% endblock %}
         <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

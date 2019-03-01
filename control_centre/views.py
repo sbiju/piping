@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from dal import autocomplete
 from django_weasyprint import WeasyTemplateResponseMixin
+from django.contrib import messages
 
 from construction.resources import IsoResource
 from .forms import UserForm, OwnerCreateForm, LoginForm, ProjectCreateForm, IsoCreateForm, ContactusForm,\
@@ -124,11 +125,13 @@ def add_user(request):
         username = form.cleaned_data.get('username')
         email = request.user.email
         password = form.cleaned_data.get('password')
-        if not user_count > 7:
+        if not user_count > 8:
             new_user = User.objects.create_user(username, email, password)
-        # else: raise messages.error(request, 'You have exceeded user limit')
+            messages.success(request, 'New user has been created successfully.')
+        else:
+            messages.error(request, "You have exceeded the limit of users!")
         return redirect('add_user')
-    return render(request, 'form.html', context)
+    return render(request, 'forms/user_form.html', context)
 
 
 # from django.contrib.auth import update_session_auth_hash
