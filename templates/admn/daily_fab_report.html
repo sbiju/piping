@@ -1,34 +1,97 @@
 {% extends 'base.html' %}
-{% load static %}
-
-
 
 {% block content %}
 
-<div class="container fab-report">
+<div class="container">
+    <div class="row" style="margin-top:20px; margin-bottom:20px;">
+		<form class="search-form">
+			<input type="text" class="form-control" id="search-joint" placeholder="Search ISO/ Joint" name="q" value="{{ request.GET.q }}">
+		</form>
+	</div>
     <div class="row">
-        <div class="table-responsive">
-             <h3>Fabrication Report based on Date</h3>
-              <table class="table table-bordered">
-                  <tr>
-                      <th>Sl.No</th>
-                      <th>DATE</th>
-                      <th>Completed Inch Dia</th>
-                  </tr>
+        <div class="col-sm-12">
+         <div class="table-responsive">
+             <h3>Joint Report</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                         <th>ISO NO./ LINE NO.</th>
+                          <th>Joint No.</th>
+                          <th>Size</th>
+                          <th>Schedule</th>
 
-                  {% for item in date_report %}
-                  <tr>
+                          <th>Time taken for fit-up</th>
+                          <th>fit up date</th>
+                          <th>fit up status</th>
 
-                      <td>{{ forloop.counter }}</td>
-                      <td><h5>{{ item.joint__date_completed }}</h5></td>
-                      <td>{{ item.completed_inch_dia }}</td>
-                  </tr>
-                  {% endfor %}
-              </table>
+                          <th>Time taken for welding</th>
+                          <th>welding date</th>
+                          <th>welding status</th>
+
+                          <th>inch dia</th>
+                          <th>Welder</th>
+                          <th>Fabricator</th>
+                          <th>Supervisor</th>
+                          <th>Engineer</th>
+                          <th>Total Crew</th>
+                          <th>Man Hours Taken</th>
+                          <th>Update</th>
+                      </tr>
+                      {% for item in report %}
+                        <td><h5>{{ item.iso_no }}</h5></td>
+                      <tr>
+                          {% for joint in item.joint_set.all %}
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ joint.joint_no }}</td>
+                            <td>{{ joint.size }}</td>
+                            <td>{{ joint.sch }}</td>
+                            <td>{{ joint.fitup_time }} hrs</td>
+                            <td>{{ joint.date_completed }}</td>
+                            <td>{{ joint.fitup_status }}</td>
+
+                            <td>{% if joint.welding_time %}{{ joint.welding_time }} hrs{% else %}not started{% endif %}</td>
+                            <td>{{ joint.weld_date }}</td>
+                            <td>{{ joint.weld_status }}</td>
+
+                            <td>{{ joint.inch_dia }}</td>
+                            <td>{% if joint.welder %}{{ joint.welder|title }}{% endif %}</td>
+                            <td>{{ joint.fabricator|title }}</td>
+                            <td>{{ joint.supervisor|title }}</td>
+                            <td>{{ joint.engineer|title }}</td>
+                            <td>{{ joint.crew_members }}</td>
+                            <td>{{ joint.man_hours|floatformat:2 }}</td>
+                            <td>{{ joint.get_edit_url }}</td>
+                      </tr>
+                      {% endfor %}{% endfor %}
+
+                  </table>
         </div>
-        <a href="{% url 'iso_pdf_list' %}" class="btn btn-info">Print to PDF</a>
-        <a href="{% url 'iso_csv' %}" class="btn btn-info ml-auto">Save to EXEL</a>
+        </div>
+        <div class="col-sm-12">
+         <div class="table-responsive">
+             <h3>Summary Report</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                      <th>Project</th>
+                      <th>Total Joints</th>
+                      <th>Average Manhours Per Inch</th>
+                      <th>Total Inch Dia</th>
+                      </tr>
 
+
+                      <tr>
+                          {% for item in sum_list %}
+                          <td><h5>{{ item.project__name|title }}</h5></td>
+                          <td>{{ item.total_joint }}</td>
+                          <td>{{ item.avg_man_hours|floatformat:2 }}</td>
+                          <td>{{ item.total_inch_dia }}</td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+        </div>
     </div>
+    <a href="{% url 'report_joint_pdf' %}" class="btn btn-info">Print to PDF</a>
+    <a href="{% url 'iso_csv' %}" class="btn btn-info ml-auto">Save to EXEL</a>
+
 </div>
 {% endblock %}

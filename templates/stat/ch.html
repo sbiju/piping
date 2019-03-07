@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="container dataContainer">
-    <div class="row department">
+     <h5 class="pt-2 pb-2">REPORTS</h5>
+     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'iso_list' %}">ISO List</a>
+                        <a href="{% url 'production_report' %}">Production Report</a>
                     </h5>
                 </div>
             </div>
@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'spool_list' %}">SPOOL List</a>
+                        <a href="{% url 'production_summary' %}">Production Summary</a>
                     </h5>
                 </div>
             </div>
@@ -26,18 +26,18 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'daily_fab_report' %}">Daily Fab Report</a>
+                        <a href="{% url 'daily_weld_report' %}">Daily Weld Report</a>
                     </h5>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row department">
+     </div>  
+     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'daily_joint_report' %}">Joint History</a>
+                        <a href="{% url 'perform_report' %}">Performance Report</a>
                     </h5>
                 </div>
             </div>
@@ -46,12 +46,32 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'daily_joint_report' %}">Joint History</a>
+                        <a href="{% url 'qc_report' %}">QC Report</a>
                     </h5>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+     </div> 
 
+      <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'project_iso_report' %}">Iso List</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'spool_report' %}">Spool List</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+     </div> 
+</div>
 {% endblock %}

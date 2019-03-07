@@ -40,9 +40,6 @@ class JointManager(models.Manager):
             qs = qs.filter(or_lookup).distinct()
         return qs
 
-    # def total_inch_dia(self):
-    #     return self.aggregate(Sum('inch_dia'))
-
     def recent(self):
         return self.get_queryset().order_by('-date_completed')
 
@@ -50,7 +47,10 @@ class JointManager(models.Manager):
         return self.recent().filter(fitup_status__name='fitup_completed')
 
     def welded(self):
-        return self.recent().filter(weld_status__name='welded')
+        return self.get_queryset().filter(weld_status__name='welded')
+    
+    # def total_welded(self):
+    #     return self.welded().aggregate(Sum('inch_dia'))    
 
 
 class Joint(models.Model):
@@ -69,7 +69,7 @@ class Joint(models.Model):
     inch_dia = models.IntegerField(blank=True, null=True)
     actual_inch_dia = models.IntegerField(blank=True, null=True)
     man_hours = models.FloatField(verbose_name='Total Man Hours Taken', blank=True, null=True)
-    fitup_status = models.ForeignKey(FitUpStatus, on_delete=models.CASCADE, blank=True, null=True)
+    fitup_status = models.ForeignKey(FitUpStatus, on_delete=models.CASCADE, default=3)
     weld_status = models.ForeignKey(WeldStatus, on_delete=models.CASCADE, blank=True, null=True)
     weld_date = models.DateField(verbose_name='Welding Date', default=timezone.now)
     iso_comleted = models.BooleanField(verbose_name='Is Mechanical Job Completed for this ISO', default=False)
@@ -89,7 +89,7 @@ class Joint(models.Model):
         return reverse("joint_detail", kwargs={"pk": self.pk})
 
     class Meta:
-        ordering = ['-date_completed']
+        ordering = ['-date_completed', 'iso']
         unique_together = ['iso', 'joint_no']
 
 
@@ -124,6 +124,14 @@ class QcManager(models.Manager):
 
     def hydro_passed(self):
         return self.filter(hydro_test_status__name='passed')
+   
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(iso__iso_no__icontains=query) 
+            )
+            qs = qs.filter(or_lookup).distinct()
+        return qs    
 
 
 class Qc(models.Model):
@@ -137,6 +145,15 @@ class Qc(models.Model):
     hydro_test_inspection_date = models.DateField(blank=True, null=True)
     radiography_status = models.ForeignKey(NdtStatus, related_name='radio_status', on_delete=models.CASCADE, blank=True, null=True)
     radiography_inspection_date = models.DateField(blank=True, null=True)
+    hydro = models.CharField(verbose_name='HYDRO', max_length=50, blank=True, null=True)
+    pneum = models.CharField(verbose_name='PNEUM', max_length=50, blank=True, null=True)
+    pmi = models.CharField(verbose_name='PMI', max_length=50, blank=True, null=True)
+    fn = models.CharField(verbose_name='FN', max_length=50, blank=True, null=True)
+    rt = models.CharField(verbose_name='RT', max_length=50, blank=True, null=True)
+    mt_pt = models.CharField(verbose_name='MT/PT', max_length=50, blank=True, null=True)
+    visual = models.CharField(max_length=50, blank=True, null=True)
+    hardness = models.CharField(max_length=50, blank=True, null=True)
+    sr = models.CharField(verbose_name='Stress Relief',max_length=50, blank=True, null=True)
 
     objects = QcManager()
 
@@ -151,6 +168,9 @@ class Qc(models.Model):
 
     def get_weld_url(self):
         return reverse("qc_weld_update", kwargs={"pk": self.pk})
+    
+    def get_absolute_url(self):
+        return reverse("joint_detail", kwargs={"pk": self.pk})    
 
     class Meta:
         ordering = ['-fitup_inspection_date']
@@ -185,5 +205,12 @@ def total_inch_receiver(sender, instance, *args, **kwargs):
     except:
         man_hours = 0
     instance.man_hours = man_hours
+    
+    try:
+        man_hours =  (crew_members * welding_time) / actual_inch_dia
+    except:
+        man_hours = 0
+    instance.man_hours = man_hours
+
 
 pre_save.connect(total_inch_receiver, sender=Joint)

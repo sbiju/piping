@@ -11,14 +11,15 @@
                 {{ form.iso_no| as_crispy_field }}
                 {{ form.pefs| as_crispy_field }}
                 <p><a href="{% url 'add_pefs' %}">Couldn't find PEFS/ P&ID? Add new</a></p>
+                {{ form.unit| as_crispy_field }}
+                <p><a href="{% url 'add_unit' %}">Couldn't find a Unit? Add new</a></p>
                 {{ form.service| as_crispy_field }}
                 <p><a href="{% url 'add_service' %}">Couldn't find a Service? Add new</a></p>
                 {{ form.line_class| as_crispy_field }}
                 <p><a href="{% url 'add_line_class' %}">Couldn't find a Line Class? Add new</a></p>
                 {{ form.is_approved| as_crispy_field }}
-                <input type="submit" class="btn btn-success" value="Save & add More">
+                <input type="submit" class="btn btn-success" value="Save">
             </form>
-            <hr/><a href="{% url 'iso_list' %}" class="btn btn-primary mr-auto">Cancel</a>
         </div>
     </div>
 </div>

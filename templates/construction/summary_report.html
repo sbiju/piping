@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-sm-12">
+         <h3 class="pb-2">Welding Summary</h3>
+         <div class="table-responsive">
+              <table class="table table-bordered">
+                  <tr>
+                  <th>Total Joints</th>
+                  <th>Average Manhours Per Inch</th>
+                  <th>Total Inch Dia Completed</th>
+                  </tr>
+                  <tr>
+                      {% for item in weld_list %}
+                      <td>{{ item.total_joint }}</td>
+                      <td>{{ item.avg_man_hours|floatformat:2 }}</td>
+                      <td>{{ item.total_inch_dia }}</td>
+                  </tr>
+                  {% endfor %}
+              </table>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-sm-12">
+         <h3 class="pb-2">Fitup Summary</h3>
+         <div class="table-responsive">
+              <table class="table table-bordered">
+                  <tr>
+                  <th>Total Joints</th>
+                  <th>Average Manhours Per Inch</th>
+                  <th>Total Inch Dia Completed</th>
+                  </tr>
+                  <tr>
+                      {% for item in fitup_list %}
+                      <td>{{ item.total_joint }}</td>
+                      <td>{{ item.avg_man_hours|floatformat:2 }}</td>
+                      <td>{{ item.total_inch_dia }}</td>
+                  </tr>
+                  {% endfor %}
+              </table>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -26,7 +26,7 @@
 
 			{% else %}
 			<p>{% blocktrans %}If you have not created an account yet, then please
-			<a href="{{ signup_url }}" class="btn btn-info">Sign up</a> first.{% endblocktrans %}</p>
+			<a href="{{ signup_url }}" class="btn btn-outline-secondary">Sign up</a> first.{% endblocktrans %}</p>
 			{% endif %}
 
 			<form method="POST" action="{% url 'account_login' %}">

@@ -6,8 +6,7 @@
 
 
 {% block content %}
-<div class="container">
-
+<div class="container mt-2">
     <div class="row">
         <div class="col-sm-6">
             <div class="table-responsive">
@@ -23,7 +22,7 @@
                   {% for item in supervisor %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.joint__supervisor__first_name }}</td>
+                      <td>{{ item.supervisor__first_name }}</td>
                       <td>{{ item.total_inch }}</td>
                       <td>{{ item.actual_inch }}</td>
                       <td>{{ item.avg_man_hours|floatformat:2 }}</td>
@@ -42,12 +41,11 @@
                       <th>Total Inch</th>
                       <th>Actua Total Inch</th>
                       <th>Man Hours Taken</th>
-
                   </tr>
                   {% for item in engineer %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.joint__engineer__first_name }}</td>
+                      <td>{{ item.engineer__first_name }}</td>
                       <td>{{ item.total_inch }}</td>
                       <td>{{ item.actual_inch }}</td>
                       <td>{{ item.avg_man_hours|floatformat:2 }}</td>
@@ -55,7 +53,6 @@
                   {% endfor %}
               </table>
             </div>
-
         </div>
     </div>
     <div class="row">
@@ -68,16 +65,13 @@
                   <th>Welder</th>
                   <th>Total Inch</th>
                   <th>Actual Total Inch</th>
-
-
                   </tr>
                   {% for item in welder %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.joint__welder__first_name }}</td>
+                      <td>{{ item.welder__first_name }}</td>
                       <td>{{ item.total_inch }}</td>
                       <td>{{ item.actual_inch }}</td>
-
                   </tr>
                   {% endfor %}
               </table>
@@ -92,19 +86,17 @@
                   <th>Fabricator</th>
                   <th>Total Inch</th>
                   <th>Actua Total Inch</th>
-
                   </tr>
                   {% for item in fabricator %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ item.joint__fabricator__first_name }}</td>
+                      <td>{{ item.fabricator__first_name }}</td>
                       <td>{{ item.total_inch }}</td>
                       <td>{{ item.actual_inch }}</td>
                   </tr>
                   {% endfor %}
               </table>
             </div>
-
         </div>
     </div>
 </div>

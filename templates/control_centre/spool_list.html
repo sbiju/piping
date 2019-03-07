@@ -25,7 +25,7 @@
                   <tr>
                       <td>{{ forloop.counter }}</td>
                       <td><a href="{{ spool.iso.get_absolute_url }}">{{ spool.iso.iso_no }}</a></td>
-                      <td><a href="{{ spool.get_edit_url }}">{{ spool.spool_tag }}</a></td>
+                      <td>{{ spool.spool_tag }}</a></td>
                       <td>{{ spool.spool_status }}</td>
                       <td>{{ spool.timestamp }}</td>
                       <td><a href="{{ spool.get_edit_url }}">Update</a></td>

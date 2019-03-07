@@ -22,30 +22,21 @@ body {
     font-weight: 500;
     font-size: 14px;
     color: #000000;
-    height:100%;
 }
 
 html, body {
-    overflow-x: hidden;
+    overflow: visible;
 }
-
-p {
-    margin: 15px 0 0;
-}
-
 a {
-    color: #1e69c9;
-
+    color: #0F52BA;
     -webkit-transition: all .3s ease-in 0s;
        -moz-transition: all .3s ease-in 0s;
         -ms-transition: all .3s ease-in 0s;
          -o-transition: all .3s ease-in 0s;
             transition: all .3s ease-in 0s;
-
 }
-
 a:focus, a:hover {
-	color: #00aeef;
+	color: #000000;
 }
 
 iframe {

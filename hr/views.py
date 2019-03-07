@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from dal import autocomplete
 from django_weasyprint import WeasyTemplateResponseMixin
 
+from materials.mixins import LoginRequiredMixin
 from .models import Employee, Designation, DailyReport
 from .forms import EmployeeCreateForm, RosterCreateForm
 from control_centre.models import Owner, Project
@@ -63,7 +64,7 @@ class EngineerAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-class EmployeeListView(ListView):
+class EmployeeListView(LoginRequiredMixin, ListView):
     model = Employee
 
     def get_queryset(self):
@@ -75,7 +76,7 @@ class EmployeeListView(ListView):
         return context
 
 
-class EmployeeCreateView(CreateView):
+class EmployeeCreateView(LoginRequiredMixin, CreateView):
     model = Employee
     form_class = EmployeeCreateForm
     template_name = 'forms/employee_form.html'
@@ -112,7 +113,7 @@ def qc_export(request):
     return response
 
 
-class RosterCreateView(CreateView):
+class RosterCreateView(LoginRequiredMixin, CreateView):
     model = DailyReport
     form_class = RosterCreateForm
     template_name = 'form.html'
@@ -135,7 +136,7 @@ class RosterCreateView(CreateView):
     #         raise Http404
 
 
-class RosterListView(ListView):
+class RosterListView(LoginRequiredMixin, ListView):
     model = DailyReport
 
     def get_queryset(self):

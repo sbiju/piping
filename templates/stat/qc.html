@@ -3,12 +3,13 @@
 {% block content %}
 
 <div class="container dataContainer">
+    <h5 class="pt-2 pb-2">ADD QC DATA</h5>
      <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'qc_add' %}">QC Update</a>
+                        <a href="{% url 'qc_add' %}">Fitup Inspection</a>
                     </h5>
                 </div>
             </div>
@@ -17,7 +18,19 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'iso_list' %}">Iso List</a>
+                        <a href="{% url 'qc_joint_list' %}">Update other NDT</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+     </div>
+     <h5 class="pt-2 pb-2">REPORTS</h5>
+      <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'project_iso_report' %}">Iso List</a>
                     </h5>
                 </div>
             </div>
@@ -31,18 +44,7 @@
                 </div>
             </div>
         </div>
-     </div>
-     <div class="row department">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{% url 'mat_list' %}">Material List</a>
-                    </h5>
-                </div>
-            </div>
-        </div>
-    </div>
+     </div>    
     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
@@ -56,10 +58,12 @@
                             <h4 class="modal-title">Instructions</h4>
                           </div>
                           <div class="modal-body">
-                              <ul>
-                                  <li><span data-feather="arrow-down-right"></span> Select required isometric from the dropdown or type the initial letters of the isometric for faster retrieval</li>
-                                  <li><span data-feather="arrow-down-right"></span> Update status of fabrication against each isometric</li>
-                              </ul>
+                          <ul>
+                              <li><span data-feather="arrow-down-right"></span> Select required isometric from the dropdown or type the initial letters of the isometric for faster retrieval</li>
+                              <li><span data-feather="arrow-down-right"></span> Select corresponding joints from the dropdown menu</li>
+                              <li><span data-feather="arrow-down-right"></span> Add status of Inspection against each isometric joints</li>
+                              <li><span data-feather="arrow-down-right"></span> for further updation of the same joint use the update link and select the required iso and joint.</li>
+                          </ul>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

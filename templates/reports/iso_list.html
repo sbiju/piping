@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top:20px; margin-bottom:20px;">
+		<form class="search-form">
+			<input type="text" class="form-control" id="search-iso" placeholder="Search Iso" name="q" value="{{ request.GET.q }}">
+		</form>
+	</div>
+    <div class="row">
+         <div class="table-responsive">
+             <h3 style="margin-bottom:15px;" class="text-center">Iso List</h3>
+              <table class="table table-bordered emp-list">
+                  <tr>
+                      <th>Sl.No</th>
+                      <th>Iso No</th>
+                      <th>Unit/ Section</th>
+                      <th>Service</th>
+                      <th>Line Class</th>
+                  </tr>
+                  {% for iso in object_list %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td><a href="{{ iso.get_absolute_url }}">{{ iso.iso_no }}</a></td>
+                      <td>{{ iso.unit.name }}</td>
+                      <td>{{ iso.service.name }}</td>
+                      <td>{{ iso.line_class.name }}</td>
+                  </tr>
+
+                  {% endfor %}
+              </table>
+        </div>
+       
+        {% if is_paginated %}
+          <ul class="pagination">
+            {% if page_obj.has_previous %}
+              <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+              {% if page_obj.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+              <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+    </div>
+</div>
+<div class="row mt-5">
+  <div class="container">
+      <a href="{% url 'iso_pdf_list' %}" class="btn btn-outline-secondary">Print to PDF</a>
+      <a href="{% url 'iso_csv' %}" class="btn btn-outline-secondary ml-auto">Save to EXEL</a>
+      <form>
+      <input type=button class="btn btn-outline-secondary ml-auto" value="Print me!" onClick="javascript:window.print()">
+      </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,8 +1,19 @@
 from django.contrib import admin
 
 from .models import Iso, Owner, Size, Fitting, Flange, Service, Pipe, Material, Schedule, LineClass, BoltGrade, \
-    Bolt, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, FitUpStatus, WeldStatus, Pefs
+    Bolt, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, FitUpStatus, WeldStatus, Pefs, BoltSize, \
+    Valve, ValveEnd, ValveType, Elbow, Coupling, Tee, BranchFitting, Reducer, Unit
 
+admin.site.register(Unit)
+admin.site.register(Coupling)
+admin.site.register(Tee)
+admin.site.register(BranchFitting)
+admin.site.register(Reducer)
+admin.site.register(Elbow)
+admin.site.register(Valve)
+admin.site.register(ValveEnd)
+admin.site.register(ValveType)
+admin.site.register(BoltSize)
 admin.site.register(Pefs)
 admin.site.register(FitUpStatus)
 admin.site.register(WeldStatus)

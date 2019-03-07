@@ -7,6 +7,7 @@ from django_weasyprint import WeasyTemplateResponseMixin
 from django.db.models import Sum
 import datetime
 from django.utils import timezone
+from django.db.models import Count, Sum, Avg
 from dal import autocomplete
 
 from .models import Joint, Qc, NdtStatus
@@ -43,6 +44,51 @@ class JointListView(LoginRequiredMixin, ListView):
         return context
 
 
+class ProductionReportView(LoginRequiredMixin, ListView):
+    model = Joint
+    template_name = 'construction/daily_prod_report.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductionReportView, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['report'] = Joint.objects.filter(iso__project__owner__user=user)
+        return context
+        
+        
+class ProductionReportSummary(LoginRequiredMixin, ListView):
+    model = Joint
+    template_name = 'construction/summary_report.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductionReportSummary, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['weld_list'] = Joint.objects.welded().filter(iso__project__owner__user=user) \
+            .values('iso__project') \
+            .order_by('iso__project') \
+            .annotate(total_joint=Count('joint_no')) \
+            .annotate(avg_man_hours=Avg('man_hours')) \
+            .annotate(total_inch_dia=Sum('inch_dia'))
+        context['fitup_list'] = Joint.objects.filter(iso__project__owner__user=user) \
+            .values('iso__project') \
+            .order_by('iso__project') \
+            .annotate(total_joint=Count('joint_no')) \
+            .annotate(avg_man_hours=Avg('man_hours')) \
+            .annotate(total_inch_dia=Sum('inch_dia'))    
+        return context
+        
+
+class QcProductionReport(LoginRequiredMixin, ListView):
+    model = Qc
+    template_name = 'construction/qc_prod_report.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(QcProductionReport, self).get_context_data(**kwargs)
+        user = self.request.user
+        context['joint_list'] = Qc.objects.filter(iso__project__owner__user=user)
+        context['heading'] = 'Total Joint List'
+        return context
+        
+        
 class FitupListView(LoginRequiredMixin, ListView):
     model = Joint
     template_name = 'construction/fitup_list.html'
@@ -166,15 +212,27 @@ class NdtStatusAutocomplete(autocomplete.Select2QuerySetView):
 
 
 class QcJointListView(LoginRequiredMixin, ListView):
-    model = Qc
+    model = Joint
     template_name = 'construction/qc_joint_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(QcJointListView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['joint_list'] = Qc.objects.filter(iso__project__owner__user=user)
-        context['heading'] = 'Inspection Completed Joint List'
+        context['joint_list'] = Joint.objects.filter(iso__project__owner__user=user)
+        context['heading'] = 'Joint List'
         return context
+        
+
+# class QcJointListView(LoginRequiredMixin, ListView):
+#     model = Qc
+#     template_name = 'construction/qc_joint_list.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super(QcJointListView, self).get_context_data(**kwargs)
+#         user = self.request.user
+#         context['joint_list'] = Qc.objects.filter(iso__project__owner__user=user)
+#         context['heading'] = 'Inspection Completed Joint List'
+#         return context
 
 
 class FitupPassedList(LoginRequiredMixin, ListView):
@@ -311,6 +369,10 @@ class QcJointUpdateView(UpdateView):
     success_url = reverse_lazy('qc_joint_list')
 
 
+class QcJointDetailView(DetailView):
+    model = Qc
+    
+
 def search_joint(request):
     query = request.GET.get('term', '')
     if query is not None:
@@ -321,3 +383,15 @@ def search_joint(request):
         return HttpResponse(json.dumps(res))
     else:
         Joint.objects.none()
+   
+        
+def search_qc(request):
+    query = request.GET.get('term', '')
+    if query is not None:
+        queryset = Qc.objects.search(query)
+        res = [dict(id=qc.pk, label=[ qc.joint],
+                value=qc.joint, url=qc.get_absolute_url())
+                for qc in queryset]
+        return HttpResponse(json.dumps(res))
+    else:
+        Joint.objects.none()        

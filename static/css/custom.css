@@ -1,17 +1,34 @@
-.btn-info{
-    background-color: #007bff;
+.nav-link {
+    color: #fff;
+}
+.navbar-brand:hover {
+    color: #000000;
+}
+.side-link {
+    color: #A9A9A9;
+}
+.form-control {
+    border: 1px solid #939ba2 !important;
+}
+.card{
+    border-radius: 0;
 }
 .pagination a {
     border: 1px solid #ddd; /* Gray */
     margin: 0 4px;
     padding: 8px 16px;
 }
-
 .bg-dark {
-    background-color: #72b84c !important;
+    background-color: #A9A9A9 !important;
+} 
+.bg-light {
+    background-color: #fff !important;
 }
- .footer{
- margin-top:60px;
+/*.bg-dark {
+    background-color: #72b84c !important;
+} */
+.footer{
+     margin-top: 400px;
  }
 .department{
     margin-bottom: 15px;
@@ -37,6 +54,7 @@ padding-top:15px;
     background-color: #fff;
     border-radius: 0px;
 }
+
  @page { size: A3;
          margin: 1cm;
         }

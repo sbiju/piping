@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top:15px;">
+		<form class="search-form">
+			<input type="text" class="form-control" id="search-spool" placeholder="Search Spool" name="q" value="{{ request.GET.q }}">
+		</form>
+	</div>
+    <div class="row">
+         <div class="table-responsive">
+             <h3 style="margin-bottom:15px;">Spool List</h3>
+              <table class="table table-bordered emp-list">
+                  <tr>
+                      <th>Sl.No</th>
+                      <th>Iso No</th>
+                      <th>Spool No</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                  </tr>
+                  {% for spool in object_list %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td><a href="{{ spool.iso.get_absolute_url }}">{{ spool.iso.iso_no }}</a></td>
+                      <td>{{ spool.spool_tag }}</a></td>
+                      <td>{{ spool.spool_status }}</td>
+                      <td>{{ spool.timestamp }}</td>
+                  </tr>
+
+                  {% endfor %}
+              </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

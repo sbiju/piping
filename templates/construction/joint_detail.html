@@ -57,13 +57,3 @@
 </div>
 
 {% endblock %}
-crew_members = models.IntegerField(verbose_name='No.of Crew', blank=True, null=True)
-    date_completed = models.DateField(verbose_name='Fit-Up Date', default=timezone.now)
-    fitup_time = models.IntegerField(verbose_name='Time taken for Fit-Up', blank=True, null=True)
-    welding_time = models.IntegerField(verbose_name='Time taken for Welding', blank=True, null=True)
-    inch_dia = models.IntegerField(blank=True, null=True)
-    actual_inch_dia = models.IntegerField(blank=True, null=True)
-    man_hours = models.FloatField(verbose_name='Total Man Hours Taken', blank=True, null=True)
-    fitup_status = models.ForeignKey(FitUpStatus, on_delete=models.CASCADE, blank=True, null=True)
-    weld_status = models.ForeignKey(WeldStatus, on_delete=models.CASCADE, blank=True, null=True)
-    weld_date = models.DateField(verbose_name='Welding Date', default=timezone.now)

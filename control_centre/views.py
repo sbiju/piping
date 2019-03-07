@@ -9,19 +9,20 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from dal import autocomplete
 from django_weasyprint import WeasyTemplateResponseMixin
-from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
+from materials.mixins import LoginRequiredMixin
 
 from construction.resources import IsoResource
 from .forms import UserForm, OwnerCreateForm, LoginForm, ProjectCreateForm, IsoCreateForm, ContactusForm,\
     PipeCreateForm, FittingCreateForm, FlangeCreateForm, BoltCreateForm, GasketCreateForm, \
-    SpoolAddForm
+    SpoolAddForm, ValveCreateForm, ElbowCreateForm, CouplingCreateForm, TeeCreateForm, ReducerCreateForm, \
+    BrfCreateForm
 
 from .models import Owner, Iso, Project, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
     Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FitUpStatus, \
-    WeldStatus, Pefs
-import json
+    WeldStatus, Pefs, BoltSize, Valve, ValveEnd, ValveType, Elbow, Coupling, Tee, BranchFitting, Reducer, \
+    MaterialGrade
 
+import json
 User = get_user_model()
 
 
@@ -33,7 +34,7 @@ class HomeView(TemplateView):
         return context
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Owner
     form_class = ProjectCreateForm
     template_name = 'form.html'
@@ -74,7 +75,7 @@ class OwnerListView(ListView):
         return Owner.objects.filter(user=self.request.user)
 
 
-class UserListView(ListView):
+class UserListView(LoginRequiredMixin, ListView):
     model = User
     template_name = 'control_centre/user_list.html'
 
@@ -82,11 +83,11 @@ class UserListView(ListView):
         return User.objects.filter(email=self.request.user.email)
 
 
-class OwnerCreateView(CreateView):
+class OwnerCreateView(LoginRequiredMixin, CreateView):
     model = Owner
     form_class = OwnerCreateForm
     template_name = 'form.html'
-    success_url = reverse_lazy('owner_list')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -96,7 +97,7 @@ class OwnerCreateView(CreateView):
             return HttpResponse('Error! You are not authorized to perform this!!')
 
 
-class OwnerEditView(UpdateView):
+class OwnerEditView(LoginRequiredMixin, UpdateView):
     model = Owner
     form_class = OwnerCreateForm
     template_name = 'form.html'
@@ -126,11 +127,9 @@ def add_user(request):
         username = form.cleaned_data.get('username')
         email = request.user.email
         password = form.cleaned_data.get('password')
-        if not user_count > 8:
+        if not user_count > 7:
             new_user = User.objects.create_user(username, email, password)
-            messages.success(request, 'New user has been created successfully.')
-        else:
-            messages.error(request, "You have exceeded the limit of users!")
+        # else: raise messages.error(request, 'You have exceeded user limit')
         return redirect('add_user')
     return render(request, 'forms/user_form.html', context)
 
@@ -185,12 +184,11 @@ def add_user(request):
 #     return render(request, "post_form.html", context)
 
 # Design
-class IsoCreateView(SuccessMessageMixin, CreateView):
+class IsoCreateView(LoginRequiredMixin, CreateView):
     model = Iso
     form_class = IsoCreateForm
     template_name = 'forms/iso_form.html'
-    success_url = reverse_lazy('add_iso')
-    success_message = 'iso created successfully!!'
+    success_url = reverse_lazy('data')
 
     def form_valid(self, form):
         owner = Owner.objects.get(user=self.request.user)
@@ -207,17 +205,19 @@ class IsoCreateView(SuccessMessageMixin, CreateView):
         return context
 
 
-class PipeCreateView(CreateView):
+class PipeCreateView(LoginRequiredMixin, CreateView):
     model = Pipe
     form_class = PipeCreateForm
     template_name = 'forms/pipe_form.html'
     success_url = reverse_lazy('data')
 
-    def form_valid(self, form):
-        owner = Owner.objects.get(user=self.request.user)
-        form.instance.owner = owner
-        valid_data = super(PipeCreateView, self).form_valid(form)
-        return valid_data
+    # def form_valid(self, form):
+    #     owner = Owner.objects.get(user=self.request.user)
+    #     form.instance.owner = owner
+    #     iso = Iso.objects.get(project__owner__user = self.request.user)
+    #     form.instance.iso = iso
+    #     valid_data = super(PipeCreateView, self).form_valid(form)
+    #     return valid_data
 
     def get_context_data(self, **kwargs):
         context = super(PipeCreateView, self).get_context_data(**kwargs)
@@ -225,17 +225,11 @@ class PipeCreateView(CreateView):
         return context
 
 
-class FlangeCreateView(CreateView):
+class FlangeCreateView(LoginRequiredMixin, CreateView):
     model = Flange
     form_class = FlangeCreateForm
     template_name = 'forms/flange_form.html'
     success_url = reverse_lazy('data')
-
-    def form_valid(self, form):
-        owner = Owner.objects.get(user=self.request.user)
-        form.instance.owner = owner
-        valid_data = super(FlangeCreateView, self).form_valid(form)
-        return valid_data
 
     def get_context_data(self, **kwargs):
         context = super(FlangeCreateView, self).get_context_data(**kwargs)
@@ -243,17 +237,11 @@ class FlangeCreateView(CreateView):
         return context
 
 
-class FittingCreateView(CreateView):
+class FittingCreateView(LoginRequiredMixin, CreateView):
     model = Fitting
     form_class = FittingCreateForm
     template_name = 'forms/fitting_form.html'
     success_url = reverse_lazy('data')
-
-    def form_valid(self, form):
-        owner = Owner.objects.get(user=self.request.user)
-        form.instance.owner = owner
-        valid_data = super(FittingCreateView, self).form_valid(form)
-        return valid_data
 
     def get_context_data(self, **kwargs):
         context = super(FittingCreateView, self).get_context_data(**kwargs)
@@ -261,17 +249,11 @@ class FittingCreateView(CreateView):
         return context
 
 
-class BoltCreateView(CreateView):
+class BoltCreateView(LoginRequiredMixin, CreateView):
     model = Bolt
     form_class = BoltCreateForm
     template_name = 'forms/bolt_form.html'
     success_url = reverse_lazy('data')
-
-    def form_valid(self, form):
-        owner = Owner.objects.get(user=self.request.user)
-        form.instance.owner = owner
-        valid_data = super(BoltCreateView, self).form_valid(form)
-        return valid_data
 
     def get_context_data(self, **kwargs):
         context = super(BoltCreateView, self).get_context_data(**kwargs)
@@ -279,17 +261,83 @@ class BoltCreateView(CreateView):
         return context
 
 
-class GasketCreateView(CreateView):
+class ValveCreateView(LoginRequiredMixin, CreateView):
+    model = Valve
+    form_class = ValveCreateForm
+    template_name = 'forms/valve_form.html'
+    success_url = reverse_lazy('data')
+
+    def get_context_data(self, **kwargs):
+        context = super(ValveCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Valve'
+        return context
+        
+        
+class ElbowCreateView(LoginRequiredMixin, CreateView):
+    model = Elbow
+    form_class = ElbowCreateForm
+    template_name = 'forms/elbow_form.html'
+    success_url = reverse_lazy('data')
+
+    def get_context_data(self, **kwargs):
+        context = super(ElbowCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Fittings'
+        return context
+ 
+ 
+class TeeCreateView(LoginRequiredMixin, CreateView):
+    model = Tee
+    form_class = TeeCreateForm
+    template_name = 'forms/elbow_form.html'
+    success_url = reverse_lazy('data')
+
+    def get_context_data(self, **kwargs):
+        context = super(TeeCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Fittings'
+        return context
+
+
+class CouplingCreateView(LoginRequiredMixin, CreateView):
+    model = Coupling
+    form_class = CouplingCreateForm
+    template_name = 'forms/elbow_form.html'
+    success_url = reverse_lazy('data')
+
+    def get_context_data(self, **kwargs):
+        context = super(CouplingCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Fittings'
+        return context
+     
+        
+class ReducerCreateView(LoginRequiredMixin, CreateView):
+    model = Reducer
+    form_class = ReducerCreateForm
+    template_name = 'forms/reducer_form.html'
+    success_url = reverse_lazy('data')
+
+    def get_context_data(self, **kwargs):
+        context = super(ReducerCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Fittings'
+        return context
+
+
+class BrfCreateView(LoginRequiredMixin, CreateView):
+    model = BranchFitting
+    form_class = BrfCreateForm
+    template_name = 'forms/elbow_form.html'
+    success_url = reverse_lazy('data')
+
+    def get_context_data(self, **kwargs):
+        context = super(BrfCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Fittings'
+        return context
+        
+        
+class GasketCreateView(LoginRequiredMixin, CreateView):
     model = Gasket
     form_class = GasketCreateForm
     template_name = 'forms/gasket_form.html'
     success_url = reverse_lazy('data')
-
-    def form_valid(self, form):
-        owner = Owner.objects.get(user=self.request.user)
-        form.instance.owner = owner
-        valid_data = super(GasketCreateView, self).form_valid(form)
-        return valid_data
 
     def get_context_data(self, **kwargs):
         context = super(GasketCreateView, self).get_context_data(**kwargs)
@@ -297,17 +345,11 @@ class GasketCreateView(CreateView):
         return context
 
 
-class SpoolAddView(CreateView):
+class SpoolAddView(LoginRequiredMixin, CreateView):
     model = Spool
     form_class = SpoolAddForm
     template_name = 'forms/spool_form.html'
     success_url = reverse_lazy('data')
-
-    def form_valid(self, form):
-        owner = Owner.objects.get(user=self.request.user)
-        form.instance.owner = owner
-        valid_data = super(SpoolAddView, self).form_valid(form)
-        return valid_data
 
     def get_context_data(self, **kwargs):
         context = super(SpoolAddView, self).get_context_data(**kwargs)
@@ -315,7 +357,7 @@ class SpoolAddView(CreateView):
         return context
 
 
-class PipeEditView(UpdateView):
+class PipeEditView(LoginRequiredMixin, UpdateView):
     model = Pipe
     form_class = PipeCreateForm
     template_name = 'form.html'
@@ -329,114 +371,11 @@ class PipeEditView(UpdateView):
             return HttpResponse('Error! You are not authorized to perform this!!')
 
 
-class IsoAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = Iso.objects.filter(project__owner__user=self.request.user)
-        if self.q:
-            qs = qs.filter(iso_no__icontains=self.q)
-        return qs
-
-
-class MatAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = Material.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class SizeAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = Size.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class ServiceAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = Service.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class ScheduleAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = Schedule.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class LineClassAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = LineClass.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class GradeAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = BoltGrade.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class GasketMatAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = GasketMaterial.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class FlangeClassAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = FlangeClass.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class SpoolStatusAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = SpoolStatus.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class PefsAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = Pefs.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class FitupAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = FitUpStatus.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
-class WeldAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = WeldStatus.objects.filter(project__owner__user = self.request.user)
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-        return qs
-
-
 # Data
-class IsoListView(ListView):
+class IsoListView(LoginRequiredMixin, ListView):
     model = Iso
-    paginate_by = 5
+    paginate_by = 15
+    queryset = Iso.objects.all() 
 
     def get_queryset(self):
         return Iso.objects.filter(project__owner__user=self.request.user).order_by('service')
@@ -462,31 +401,38 @@ def iso_export(request):
     return response
 
 
-class IsoDetailView(DetailView):
+class IsoDetailView(LoginRequiredMixin, DetailView):
     model = Iso
 
 
-class SpoolListView(ListView):
+class IsoEditView(LoginRequiredMixin, UpdateView):
+    model = Iso
+    form_class = IsoCreateForm
+    template_name = 'forms/iso_form.html'
+    success_url = reverse_lazy('iso_list')
+    
+    
+class SpoolListView(LoginRequiredMixin, ListView):
     model = Spool
     template_name = 'control_centre/spool_list.html'
 
     def get_queryset(self):
-        return Spool.objects.filter(iso__project__owner__user=self.request.user).order_by('iso__iso_no')
+        return Spool.objects.filter(iso__project__owner__user=self.request.user).order_by('-timestamp', 'iso__iso_no')
 
 
-class SpoolDetailView(DetailView):
+class SpoolDetailView(LoginRequiredMixin, DetailView):
     model = Spool
     template_name = 'control_centre/spool_detail.html'
 
 
-class SpoolUpdateView(UpdateView):
+class SpoolUpdateView(LoginRequiredMixin, UpdateView):
     model = Spool
     form_class = SpoolAddForm
     template_name = 'forms/spool_form.html'
     success_url = reverse_lazy('spool_list')
 
 
-class MatListView(ListView):
+class MatListView(LoginRequiredMixin, ListView):
     model = Iso
     template_name = 'control_centre/mat_list.html'
 
@@ -498,29 +444,28 @@ class MatListView(ListView):
         return context
 
 
+class MatDetailView(LoginRequiredMixin, DetailView):
+    model = Iso
+    
+
 class Data_Entry(TemplateView):
     template_name = 'stat/data.html'
-
-
-class AdminPage(TemplateView):
-    template_name = 'stat/admin.html'
-
-
-class Client(TemplateView):
-    template_name = 'stat/client.html'
 
 
 class FabEntry(TemplateView):
     template_name = 'stat/fabrication.html'
 
-
 class QcEntry(TemplateView):
-    template_name = 'stat/qc.html'
-
+    template_name = 'stat/qc.html'    
 
 class HrEntry(TemplateView):
-    template_name = 'stat/hr.html'
+    template_name = 'stat/hr.html'        
+    
+class AdminPage(TemplateView):
+    template_name = 'stat/admin.html'
 
+class Client(TemplateView):
+    template_name = 'stat/client.html'
 
 class ConstHead(TemplateView):
     template_name = 'stat/ch.html'
@@ -548,7 +493,7 @@ class ReadMore(TemplateView):
 
 class Instruction(TemplateView):
     template_name = 'stat/instructions.html'
-
+    
 
 def contact_us(request):
     form = ContactusForm(request.POST or None)

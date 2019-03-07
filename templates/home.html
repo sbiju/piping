@@ -14,7 +14,7 @@
             <div class="carousel-item active">
               <img src="{% static 'images/slide/ref_2.jpg' %}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Tool to manage construction piping data effectively as a
+                    <h5 class="text-dark">Tool to manage construction piping data effectively as a
                          reporting tool, performance evaluation tool and much more...</h5>
                 </div>
             </div>
@@ -28,7 +28,7 @@
             <div class="carousel-item">
               <img src="{% static 'images/slide/ref_3.jpg' %}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Tool to manage construction piping data effectively as a
+                    <h5 class="text-dark">Tool to manage construction piping data effectively as a
                          reporting tool, performance evaluation tool and much more...</h5>
                 </div>
             </div>
@@ -45,11 +45,13 @@
     </div>
 </div>
 <div class="row mt-3">
-  <div class="container text-justify">
-    <h6>Welcome to the new erp application to ease data entry jobs in plant piping. This cloud erp system is made exclusively to improve data handlling and document processing during
-    construction phase of process plant piping, this enables to connect different departments and summarize the reports in effective way and save time in documentation.
+  <div class="container text-justify" id="productsSub">
+    <h6>Welcome to the new erp application to ease data entry jobs in plant piping. This cloud erp system is made exclusively to improve data handlling and document processing during 
+    construction phase of process plant piping, this enables to connect different departments and summarize the reports in effective way and save time in documentation. 
     Different depattment staff can perform their jobs and view reports and status.</h6>
-    <h5>Main features of the application are:</h5>
+  </div> 
+    <div class="container text-justify" id="feature">
+    <h5 class="mt-2 mb-2">Main features of the application are:</h5>
       <ul>
         <li>Effective and timely co-ordination of different departments</li>
         <li>Enable to enter and view the various reliorts status easily without delay and errors</li>
@@ -62,7 +64,10 @@
         <li>Easy to implement and use</li>
         <li>Permitted customization will be added on request</li>
         <li>This is a modern python based erp system with built in security so it is trust worthy in current scenario</li>
+        <li>Take a free trial for one month and experience the features</li>
+        <li>Individual applications are also available on request</li>
      </ul>
+   </div>
   </div>
 </div>
 
@@ -74,43 +79,43 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'admin_page' %}">
+                <a class="nav-link side-link" href="{% url 'admin_page' %}">
                   <span data-feather="folder"></span>
                   Site Admin
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'client_page' %}">
+                <a class="nav-link side-link" href="{% url 'client_page' %}">
                   <span data-feather="folder"></span>
                   Client
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'ch_view' %}">
+                <a class="nav-link side-link" href="{% url 'ch_view' %}">
                   <span data-feather="folder"></span>
                   Construction Head
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'data' %}">
+                <a class="nav-link side-link" href="{% url 'data' %}">
                   <span data-feather="folder"></span>
                   Data Entry
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'fab_entry' %}">
+                <a class="nav-link side-link" href="{% url 'fab_entry' %}">
                   <span data-feather="folder"></span>
                   Fabrication
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'qc_entry' %}">
+                <a class="nav-link side-link" href="{% url 'qc_entry' %}">
                   <span data-feather="folder"></span>
                   Quality Control
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'hr_entry' %}">
+                <a class="nav-link side-link" href="{% url 'hr_entry' %}">
                   <span data-feather="folder"></span>
                   Human Resource
                 </a>
@@ -119,7 +124,7 @@
 
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'instruction' %}">
+                <a class="nav-link side-link" href="{% url 'instruction' %}">
                   <span data-feather="file-text"></span>
                   Instructions
                 </a>
@@ -128,23 +133,20 @@
           </div>
         </nav>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="productsSub">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h3">Start up Instructiions</h3>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-              </div>
-            </div>
+            <h1 class="h3">Start up Instructions</h3>
           </div>
           <ul>
-            <li><span data-feather="arrow-down-right"></span> Create seven users and assign one department to each user</li>
-            <li><span data-feather="arrow-down-right"></span> Distribute username and password to concerned persons</li>
-            <li><span data-feather="arrow-down-right"></span> At first data entry user can login to the system and start entering datas</li>
-            <li><span data-feather="arrow-down-right"></span> Each department users can login and update the reports on relevent fields on daily basis</li>
-            <li><span data-feather="arrow-down-right"></span> Construction heads and clients can view the reports</li>
-            <li><span data-feather="arrow-down-right"></span> Whenever necessary to remove a user, delete and create a new user and assign to the same department where the user is deleted</li>
-            <li><span data-feather="arrow-down-right"></span> Any kind of difficulties, please feel free to <a href="{% url 'contact' %}">Contact Us<a/></li>
+            <li> Click on the Site Admin Link and Create seven users,  and assign one department to each user</li>
+            <li> Distribute username and password to concerned users.</li>
+            <li> Add a project with project name using the add project link.</li>
+            <li> Initially data entry user can login to the system and start entering datas</li>
+            <li> Each department users can login and update the reports on relevent fields on daily basis</li>
+            <li> Construction heads and clients can view the reports</li>
+            <li> Whenever necessary to remove a user, delete and create a new user and assign to the same department where the user is deleted</li>
+            <li> Instructiions for each users can be seen on their respective pages.</li>
+            <li> For asiistance from us, please feel free to <a href="{% url 'contact' %}">Contact Us<a/></li>
           </ul>
         </main>
       </div>

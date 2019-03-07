@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container fab-report">
+    <div class="row">
+         <div class="table-responsive">
+             <h3 class="pb-2">{{ heading }}</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                          <th>Sl.No</th>
+                          <th>ISO NO./ LINE NO.</th>
+                          <th>Joint No.</th>
+                          <th>Fitup Status</th>
+                          <th>Fitup Insp. Date</th>
+                          <th>Welding Status</th>
+                          <th>Welding Insp. Date</th>
+                          <th>Radiography Status</th>
+                          <th>Radiography Insp. Date</th>
+                      </tr>
+                      {% for item in joint_list %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ item.iso.iso_no }}</td>
+                          <td>{{ item.joint.joint_no }}</td>
+                          <td>{{ item.fitup_status.name }}</td>
+                          <td>{% if item.fitup_inspection_date %}{{ item.fitup_inspection_date }}{% endif %}</td>
+                          <td>{{ item.welding_status.name }}</td>
+                          <td>{% if item.welding_inspection_date %}{{ item.welding_inspection_date }}{% endif %}</td>
+                          <td>{{ item.radiography_status }}</td>
+                          <td>{% if item.radiography_inspection_date %}{{ item.radiography_inspection_date }}{% endif %}</td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+
+    </div>
+    <a href="{% url 'qc_pdf' %}" class="btn btn-info">Print to PDF</a>
+    <a href="{% url 'qc_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
+
+</div>
+{% endblock %}

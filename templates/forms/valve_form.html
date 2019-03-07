@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container form-class">
+    <h3 class="text-center">{{ heading }}</h3>
+    <div class="row">
+        <div class="col-sm-6 offset-3">
+            <form method="POST">{% csrf_token %}
+                {{ form.iso| as_crispy_field }}
+                <p><a href="{% url 'add_iso' %}">Couldn't find Iso? Add new</a></p>
+                {{ form.size| as_crispy_field }}
+                <p><a href="{% url 'add_size' %}">Couldn't find right Size? Add new</a></p>
+                {{ form.type| as_crispy_field }}
+                <p><a href="{% url 'add_valve_type' %}">Couldn't find valve Type? Add new</a></p>
+                {{ form.end_type| as_crispy_field }}
+                <p><a href="{% url 'add_valve_end' %}">Couldn't find End Type? Add new</a></p>
+                {{ form.quantity| as_crispy_field }}
+                <input type="submit" class="btn btn-success" value="Save">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block custom_js %}
+{{ form.media }}
+{% endblock %}

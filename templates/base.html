@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <!--<link rel="icon" href="../../../../favicon.ico">-->
 
     <title>Piping Application</title>
 
     <!-- Bootstrap core CSS -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" type="text/css" />
- <link type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}">
- <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" type="text/css" />
+   <link type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}">
+   <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
   </head>
 
   <body>
@@ -23,12 +23,15 @@
       <ul class="nav justify-content-end">
         {% if not request.user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link active" href="{% url 'account_login' %}">Login</a>
+          <a class="nav-link" href="{% url 'account_login' %}">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="{% url 'account_signup' %}">Sign Up</a>
+          <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
         </li>
         {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Subscribe</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'contact' %}">Contact</a>
         </li>
@@ -38,28 +41,14 @@
         {% endif %}
       </ul>
     </nav>
-
-    {% if messages %}
-    <div class="col-6 offset-3 alert alert-success" role="alert">
-    <ul class="messages text-center">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-
-    </div>
-    {% endif %}
-    {% block content %} {% endblock %}
-    <div class="row">
-        <div class="container pb-4 mt-6">
-          <div class="mx-auto text-muted" style="width: 600px;">
-            <p>© Copyright GBA INFORMATION TECHNOLOGY. ALL RIGHTS RESERVED.</p>
-          </div>
-        </div>
+      {% block content %} {% endblock %}
+    <div class="container pb-4 footer">
+      <div class="mx-auto text-muted" style="width: 600px;">
+        <p>© Copyright GBA INFORMATION TECHNOLOGY. ALL RIGHTS RESERVED.</p>
+      </div>
     </div>
         <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
@@ -70,8 +59,23 @@
     <script>
       feather.replace()
     </script>
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <!--<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+      <script>
+          window.sr = ScrollReveal();
+          sr.reveal('#productsSub', {
+              duration: 1500,
+              origin:'bottom',
+              distance:'300px',
+          });
+          window.sr = ScrollReveal();
+          sr.reveal('#feature', {
+              duration: 2200,
+              origin:'bottom',
+              distance:'300px',
+          });
+       </script>
        <script type="text/javascript">
         $('#search-iso').autocomplete({
             source: '/search/',
@@ -94,17 +98,17 @@
               window.location.href = ui.item.url;
             }
           });
-        </script>
-        <script>
-            $(".alert").delay(2500).slideUp(200, function() {
-            $(this).alert('close');
-            });
+        $('#search-qc').autocomplete({
+            source: '/search_qc/',
+            minLength: 2,
+            select: function(event, ui) {
+              window.location.href = ui.item.url;
+            }
+          });  
         </script>
 
         {% block custom_js %}
         {% endblock %}
-
-
         {% block jquery %}
         {% endblock %}
   </body>

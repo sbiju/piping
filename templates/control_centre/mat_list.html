@@ -3,11 +3,17 @@
 
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container employees">
+<div class="col-sm-4 mx-auto pt-2">
+<form class="search-form">
+	<input type="text" class="form-control" id="search-iso" placeholder="Search Iso/ Material" name="q" value="{{ request.GET.q }}">
+</form>
+</div>
+
+<div class="container">
     <div class="row">
          <div class="table-responsive">
              <div class="table-responsive">
-                <h2>Material List</h2>
+                <h3>Material List</h3>
               <table class="table table-bordered">
 
                 {% for iso in object_list %}
@@ -24,7 +30,7 @@
                   {% for pipe in iso.pipe_set.all %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ pipe.size }}</td>
+                          <td>{{ pipe.size.name }}</td>
                           <td>{{ pipe.material }}"</td>
                           <td>{{ pipe.schedule }}</td>
                           <td>{{ pipe.length }} MTR</td>
@@ -47,18 +53,82 @@
                       </tr>
                   {% endfor %}
                   <tr>
-                      <th>FITTINGS</th>
-                      <th>NAME</th>
-                      <th>MATERIAL</th>
+                      <th>Elbow</th>
                       <th>SIZE</th>
+                      <th>Grade</th>
+                      <th></th>
                       <th>QUANTITY</th>
                   </tr>
-                  {% for fit in iso.fitting_set.all %}
+                  {% for fit in iso.elbow_set.all %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ fit.name }}</td>
-                          <td>{{ fit.material }}"</td>
                           <td>{{ fit.size }}</td>
+                          <td>{{ fit.grade }}</td>
+                          <td></td>
+                          <td>{{ fit.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                   <tr>
+                      <th>Tee</th>
+                      <th>SIZE</th>
+                      <th>Grade</th>
+                      <th></th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for fit in iso.tee_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ fit.size }}</td>
+                          <td>{{ fit.grade }}</td>
+                          <td></td>
+                          <td>{{ fit.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                   <tr>
+                      <th>Coupling</th>
+                      <th>SIZE</th>
+                      <th>Grade</th>
+                      <th></th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for fit in iso.coupling_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ fit.size }}</td>
+                          <td>{{ fit.grade }}</td>
+                          <td></td>
+                          <td>{{ fit.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                   <tr>
+                      <th>Branch Fitting</th>
+                      <th>SIZE</th>
+                      <th>Grade</th>
+                      <th></th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for fit in iso.branchfitting_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ fit.size }}</td>
+                          <td>{{ fit.grade }}</td>
+                          <td></td>
+                          <td>{{ fit.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                   <tr>
+                      <th>Reducer</th>
+                      <th>SIZE</th>
+                      <th>Grade</th>
+                      <th></th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for fit in iso.reducer_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ fit.size }}</td>
+                          <td>{{ fit.grade }}</td>
+                          <td></td>
                           <td>{{ fit.quantity }} NOS</td>
                       </tr>
                   {% endfor %}
@@ -73,7 +143,7 @@
                       <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ gasket.size }}</td>
-                          <td>{{ gasket.gasket_class.name }}"</td>
+                          <td>{{ gasket.gasket_class.name }}</td>
                           <td>{{ gasket.gasket_material }}</td>
                           <td>{{ gasket.quantity }} NOS</td>
                       </tr>
@@ -89,7 +159,7 @@
                       <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ bolt.size }}</td>
-                          <td>{{ bolt.length }}"</td>
+                          <td>{{ bolt.length }}</td>
                           <td>{{ bolt.grade }}</td>
                           <td>{{ bolt.quantity }} NOS</td>
                       </tr>

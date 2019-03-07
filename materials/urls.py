@@ -1,9 +1,9 @@
 from django.conf.urls import url
 from .views import MaterialCreateView, DesignlListView, MaterialUpdateView, MaterialDetailView, \
     PurchaseListView, PurchaseUpdateView, AdminListView, DesignUpdateView, StoreListView, StoreUpdateView,\
-    FabListView, FabUpdateView, JointReportView, FabIsoReportView, PerformReportView, FabDailyReportView,\
+    FabListView, FabUpdateView, JointReportView, PerformReportView,\
     FabSumReportView, MyModelViewPrintView, FabDailyReportApiView, ProductionChartView, FabDailyReportAjaxView, \
-    material_create, FabPrintView
+    FabPrintView
 
 
 urlpatterns = [
@@ -16,8 +16,8 @@ urlpatterns = [
     url(r'^report_joint_pdf/$', FabPrintView.as_view(), name='report_joint_pdf'),
     url(r'^performance/$', PerformReportView.as_view(), name='perform_report'),
 
-    url(r'^report_iso/$', FabIsoReportView.as_view(), name='iso_fab_report'),
-    url(r'^report_daily/$', FabDailyReportView.as_view(), name='daily_fab_report'),
+    # url(r'^report_iso/$', FabIsoReportView.as_view(), name='iso_fab_report'),
+    # url(r'^report_daily/$', FabDailyReportView.as_view(), name='daily_fab_report'),
     url(r'^report_summary/$', FabSumReportView.as_view(), name='daily_sum_report'),
     url(r'^pdf/$', MyModelViewPrintView.as_view(), name='pdf_report'),
     url(r'^chart/$', ProductionChartView.as_view(), name='chart'),
@@ -33,5 +33,5 @@ urlpatterns = [
 
     url(r'^fabrication/$', FabListView.as_view(), name='fab_list'),
     url(r'^fabrication/(?P<pk>[\w-]+)/$', FabUpdateView.as_view(), name='fab_update'),
-    url(r'^mat_add/$', material_create, name='material_add'),
+    # url(r'^mat_add/$', material_create, name='material_add'),
 ]

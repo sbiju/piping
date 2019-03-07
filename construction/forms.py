@@ -36,7 +36,8 @@ class QcJointForm(forms.ModelForm):
         model = Qc
         fields = ['iso', 'joint', 'fitup_status', 'fitup_inspection_date', 'welding_status',
                   'welding_inspection_date', 'hydro_test_status', 'hydro_test_inspection_date',
-                  'radiography_status', 'radiography_inspection_date',]
+                  'radiography_status', 'radiography_inspection_date', 'hydro', 'pneum', 'pmi', 'fn',
+                   'rt', 'mt_pt', 'visual', 'hardness', 'sr',]
 
         widgets = {
             'joint': autocomplete.ModelSelect2(url='joint_auto',

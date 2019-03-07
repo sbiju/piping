@@ -47,12 +47,12 @@
                             <td>{{ joint.date_completed }}</td>
                             <td>{{ joint.fitup_status }}</td>
 
-                            <td>{{ joint.welding_time }} hrs</td>
+                            <td>{% if joint.welding_time %}{{ joint.welding_time }} hrs{% else %}not started{% endif %}</td>
                             <td>{{ joint.weld_date }}</td>
                             <td>{{ joint.weld_status }}</td>
 
                             <td>{{ joint.inch_dia }}</td>
-                            <td>{{ joint.welder|title }}</td>
+                            <td>{% if joint.welder %}{{ joint.welder|title }}{% endif %}</td>
                             <td>{{ joint.fabricator|title }}</td>
                             <td>{{ joint.supervisor|title }}</td>
                             <td>{{ joint.engineer|title }}</td>

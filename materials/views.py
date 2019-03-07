@@ -35,24 +35,6 @@ from construction.models import Joint
 #             'materialdata__size', ).annotate(total_quantity=Sum('materialdata__quantity'))
 #         return context
 
-# class AdminListView(LoginRequiredMixin, ListView):
-#     model = Project
-#     queryset = Project.objects.all()
-#     template_name = 'admn/material_list.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(AdminListView, self).get_context_data(**kwargs)
-#         user = self.request.user
-#         context['mat_list'] = Project.objects.filter(owner__user=user)
-#         context['department'] = 'Administration Department'
-#         context['sum_list'] = Project.objects.filter(owner__user=user).values(
-#             'iso__materialdata__name',
-#             'iso__materialdata__size',
-#             'iso__materialdata__unit').order_by(
-#             'iso__materialdata__name',
-#             'iso__materialdata__size', ).annotate(total_quantity=Sum('iso__materialdata__quantity'))
-#         return context
-
 
 # administration
 class AdminListView(LoginRequiredMixin, ListView):
@@ -74,20 +56,20 @@ class AdminListView(LoginRequiredMixin, ListView):
         return context
 
 
-# administration
-class FabIsoReportView(LoginRequiredMixin, ListView):
-    model = Iso
-    queryset = Iso.objects.all()
-    template_name = 'admn/iso_report.html'
+# # administration
+# class FabIsoReportView(LoginRequiredMixin, ListView):
+#     model = Iso
+#     queryset = Iso.objects.all()
+#     template_name = 'admn/iso_report.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(FabIsoReportView, self).get_context_data(**kwargs)
-        user = self.request.user
-        context['total'] = Iso.objects.filter(project__owner__user=user).total_inch_dia()
+#     def get_context_data(self, **kwargs):
+#         context = super(FabIsoReportView, self).get_context_data(**kwargs)
+#         user = self.request.user
+#         context['total'] = Iso.objects.filter(project__owner__user=user)
 
-        context['report'] = Iso.objects.filter(project__owner__user=user).values('iso_no', 'inch_dia') \
-            .annotate(completed_inch_dia=Sum('joint__inch_dia'))
-        return context
+#         # context['report'] = Iso.objects.filter(project__owner__user=user).values('iso_no', 'inch_dia') \
+#         #     .annotate(completed_inch_dia=Sum('joint__inch_dia'))
+#         return context
 
 
 class MyModelViewPrintView(WeasyTemplateResponseMixin, ListView):
@@ -102,18 +84,24 @@ class MyModelViewPrintView(WeasyTemplateResponseMixin, ListView):
         return context
 
 
-# administration
+# fabrication
 class FabDailyReportView(LoginRequiredMixin, ListView):
     model = Iso
     template_name = 'admn/daily_fab_report.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super(FabDailyReportView, self).get_context_data(**kwargs)
         user = self.request.user
+        context['report'] = Iso.objects.filter(project__owner__user=user)
+        context['sum_list'] = Iso.objects.filter(project__owner__user=user) \
+            .values('project', 'project__name') \
+            .annotate(total_joint=Count('joint__joint_no')) \
+            .annotate(avg_man_hours=Avg('joint__man_hours')) \
+            .annotate(total_inch_dia=Sum('joint__inch_dia'))
         context['date_report'] = Iso.objects.filter(project__owner__user=user).values('joint__date_completed') \
-            .annotate(completed_inch_dia=Sum('joint__inch_dia'))
+            .annotate(completed_inch_dia=Sum('joint__inch_dia'))    
         return context
-
+    
 
 # administration
 class FabDailyReportAjaxView(View):
@@ -134,11 +122,11 @@ class FabDailyReportAjaxView(View):
         qs = Joint.objects.filter(iso__project__owner__user=user)
         new_qs = qs.filter(date_completed__day=new_time.day, date_completed__month=new_time.month)
         print(new_qs)
-        day_total = new_qs.total_inch_dia()['inch_dia__sum']
-        if day_total is None:
-            day_total=0
-        print(day_total)
-        dia_items.append(day_total)
+        # day_total = new_qs.total_inch_dia()['inch_dia__sum']
+        # if day_total is None:
+        #     day_total=0
+        # print(day_total)
+        # dia_items.append(day_total)
         labels = labels
         dia_items = dia_items
         data = {'labels': labels, 'default': dia_items,}
@@ -178,7 +166,6 @@ class FabSumReportView(LoginRequiredMixin, ListView):
 # administration
 class JointReportView(LoginRequiredMixin, ListView):
     model = Iso
-    # queryset = Iso.objects.all()
     template_name = 'admn/daily_joint_report.html'
 
     def get_context_data(self, **kwargs):
@@ -218,65 +205,28 @@ class PerformReportView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(PerformReportView, self).get_context_data(**kwargs)
         user = self.request.user
-        context['welder'] = Iso.objects.filter(project__owner__user=user).values('joint__welder__first_name') \
-            .order_by('joint__welder').annotate(total_inch=Sum('joint__inch_dia')) \
-            .annotate(actual_inch=Sum('joint__actual_inch_dia'))
-        context['fabricator'] = Iso.objects.filter(project__owner__user=user).values('joint__fabricator__first_name') \
-            .order_by('joint__fabricator').annotate(total_inch=Sum('joint__inch_dia')) \
-            .annotate(actual_inch=Sum('joint__actual_inch_dia'))
-        context['supervisor'] = Iso.objects.filter(project__owner__user=user).values('joint__supervisor__first_name') \
-            .order_by('joint__supervisor').annotate(total_inch=Sum('joint__inch_dia')) \
-            .annotate(actual_inch=Sum('joint__actual_inch_dia')) \
-            .annotate(avg_man_hours=Avg('joint__man_hours'))
-        context['engineer'] = Iso.objects.filter(project__owner__user=user).values('joint__engineer__first_name') \
-            .order_by('joint__engineer').annotate(total_inch=Sum('joint__inch_dia')) \
-            .annotate(actual_inch=Sum('joint__actual_inch_dia')) \
-            .annotate(avg_man_hours=Avg('joint__man_hours'))
+        # context['welder'] = Iso.objects.filter(project__owner__user=user).values('joint__welder__first_name') \
+        #     .order_by('joint__welder').annotate(total_inch=Sum('joint__inch_dia')) \
+        #     .annotate(actual_inch=Sum('joint__actual_inch_dia'))
+        context['welder'] = Joint.objects.welded().filter(iso__project__owner__user=user).values('welder__first_name') \
+            .order_by('welder').annotate(total_inch=Sum('inch_dia')) \
+            .annotate(actual_inch=Sum('actual_inch_dia'))
+        context['fabricator'] = Joint.objects.welded().filter(iso__project__owner__user=user).values('fabricator__first_name') \
+            .order_by('fabricator').annotate(total_inch=Sum('inch_dia')) \
+            .annotate(actual_inch=Sum('actual_inch_dia'))
+        context['supervisor'] = Joint.objects.welded().filter(iso__project__owner__user=user).values('supervisor__first_name') \
+            .order_by('supervisor').annotate(total_inch=Sum('inch_dia')) \
+            .annotate(actual_inch=Sum('actual_inch_dia')) \
+            .annotate(avg_man_hours=Avg('man_hours'))
+        context['engineer'] = Joint.objects.welded().filter(iso__project__owner__user=user).values('engineer__first_name') \
+            .order_by('engineer').annotate(total_inch=Sum('inch_dia')) \
+            .annotate(actual_inch=Sum('actual_inch_dia')) \
+            .annotate(avg_man_hours=Avg('man_hours'))
+        context['day_report'] = Joint.objects.welded().filter(iso__project__owner__user=user).values('weld_date') \
+            .order_by('weld_date').annotate(total_inch=Sum('inch_dia')) \
+            .annotate(actual_inch=Sum('actual_inch_dia')) \
+            .annotate(avg_man_hours=Avg('man_hours'))    
         return context
-
-
-# class GeneratePdf(View):
-#
-#     def get(self, request, *args, **kwargs):
-#         data = {
-#             'amount': 39.99,
-#             'customer_name': 'Cooper Mann',
-#             'order_id': 1233434,
-#         }
-#         pdf = render_to_pdf('admn/pdf_report.html', data)
-#         return HttpResponse(pdf, content_type='application/pdf')
-
-
-# class GeneratePdf(View):
-#
-#     def get(self, request, *args, **kwargs):
-#      template = get_template('admn/pdf_report.html')
-#      user = request.user
-#      sum_list = Iso.objects.filter(project__owner__user=user) \
-#          .values('project', 'project__name') \
-#          .annotate(completed_inch_dia=Sum('joint__inch_dia')) \
-#          .annotate(total_inch_dia=Sum('inch_dia'))
-#      date_report = Iso.objects.filter(project__owner__user=user).values('joint__date_completed') \
-#             .annotate(completed_inch_dia=Sum('joint__inch_dia'))
-#      report = Iso.objects.filter(project__owner__user=user).values('iso_no', 'inch_dia') \
-#             .annotate(completed_inch_dia=Sum('joint__inch_dia'))
-#      context = {
-#          'sum_list': sum_list,
-#          'date_report': date_report,
-#          'report': report,
-#      }
-#      html = template.render(context)
-#      pdf = render_to_pdf('admn/pdf_report.html', context)
-#      if pdf:
-#          response = HttpResponse(pdf, content_type='application/pdf')
-#          filename = "Invoice_%s.pdf" %("12341231")
-#          content = "inline; filename='%s'" %(filename)
-#          download = request.GET.get("download")
-#          if download:
-#              content = "attachment; filename='%s'" %(filename)
-#          response['Content-Disposition'] = content
-#          return response
-#      return HttpResponse("Not found")
 
 
 # Design
@@ -315,21 +265,21 @@ class MaterialCreateView(CreateView):
         return valid_data
 
 
-def material_create(request):
-    materialFormset = modelformset_factory(Material, form=MaterialForm)
-    formset = materialFormset(request.POST or None, queryset=Material.objects.filter
-    (iso__project__owner__user=request.user))
+# def material_create(request):
+#     materialFormset = modelformset_factory(Material, form=MaterialForm)
+#     formset = materialFormset(request.POST or None, queryset=Material.objects.filter(iso__project__owner__user=request.user))
+    
 
-    if formset.is_valid():
-        for form in formset:
-            obj = form.save(commit=False)
-            if form.cleaned_data:
-                owner = Owner.objects.get(user=request.user)
-                form.instance.iso.project.owner = owner
-                obj.save()
-    context = {'formset': formset}
-    return render(request, 'formset.html', context)
-    # return HttpResponse('')
+#     if formset.is_valid():
+#         for form in formset:
+#             obj = form.save(commit=False)
+#             if form.cleaned_data:
+#                 owner = Owner.objects.get(user=request.user)
+#                 form.instance.iso.project.owner = owner
+#                 obj.save()
+#     context = {'formset': formset}
+#     return render(request, 'formset.html', context)
+#     # return HttpResponse('')
 
 
 class PurchaseListView(ListView):

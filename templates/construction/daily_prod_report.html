@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row" style="margin-top:20px; margin-bottom:20px;">
+		<form class="search-form">
+			<input type="text" class="form-control" id="search-joint" placeholder="Search ISO/ Joint" name="q" value="{{ request.GET.q }}">
+		</form>
+	</div>
+    <div class="row">
+        <div class="col-sm-12">
+         <div class="table-responsive">
+             <h3>Production Report</h3>
+                  <table class="table table-bordered">
+                      <tr>
+                          <th>fit up date</th>
+                          <th>Iso NO./ Line NO.</th>
+                          <th>Joint No.</th>
+                          <th>Size</th>
+                          <th>Schedule</th>
+                          <th>Time taken for fit-up</th>
+                          <th>fit up status</th>
+                          <th>Time taken for welding</th>
+                          <th>welding date</th>
+                          <th>welding status</th>
+                          <th>inch dia</th>
+                          <th>Welder</th>
+                          <th>Fabricator</th>
+                          <th>Supervisor</th>
+                          <th>Engineer</th>
+                          <th>Total Crew</th>
+                          <th>Man Hours Taken</th>
+                     </tr>
+                     
+                          {% for joint in report %}
+                           <tr>
+                            <td>{{ joint.date_completed }}</td>   
+                            <td>{{ joint.iso.iso_no }}</td>
+                            <td>{{ joint.joint_no }}</td>
+                            <td>{{ joint.size }}</td>
+                            <td>{{ joint.sch }}</td>
+                            <td>{{ joint.fitup_time }} hrs</td>
+                            <td>{{ joint.fitup_status }}</td>
+
+                            <td>{% if joint.welding_time %}{{ joint.welding_time }} hrs{% else %}not started{% endif %}</td>
+                            <td>{{ joint.weld_date }}</td>
+                            <td>{{ joint.weld_status }}</td>
+
+                            <td>{{ joint.inch_dia }}</td>
+                            <td>{% if joint.welder %}{{ joint.welder|title }}{% endif %}</td>
+                            <td>{{ joint.fabricator|title }}</td>
+                            <td>{{ joint.supervisor|title }}</td>
+                            <td>{{ joint.engineer|title }}</td>
+                            <td>{{ joint.crew_members }}</td>
+                            <td>{{ joint.man_hours|floatformat:2 }}</td>
+                           </tr>
+                          {% endfor %}
+                         
+
+                  </table>
+        </div>
+        </div>
+    </div>
+    <a href="{% url 'report_joint_pdf' %}" class="btn btn-info">Print to PDF</a>
+    <a href="{% url 'iso_csv' %}" class="btn btn-info ml-auto">Save to EXEL</a>
+
+</div>
+{% endblock %}

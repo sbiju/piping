@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^', include('control_centre.urls')),
     url(r'^', include('materials.urls')),
     url(r'^', include('hr.urls')),
+    url(r'^', include('reports.urls')),
     url(r'^terms/$', Terms.as_view(), name='terms'),
     url(r'^data/$', Data_Entry.as_view(), name='data'),
     url(r'^admin_view/$', AdminPage.as_view(), name='admin_page'),

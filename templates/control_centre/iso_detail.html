@@ -9,15 +9,15 @@
              <h3 class="text-center" style="margin:15px;"><b>{{ object.iso_no }}</b></h3>
               <table class="table table-bordered emp-list">
                   <tr>
+                      <th>Unit</th>
                       <th>Service</th>
-                      <th></th>
                       <th></th>
                       <td></td>
                       <th>Line Class</th>
                   </tr>
                   <tr>
+                      <td>{{ object.unit.name }}</td>
                       <td>{{ object.service.name }}</td>
-                      <td></td>
                       <td></td>
                       <td></td>
                       <td>{{ object.line_class.name }}</td>
@@ -55,19 +55,99 @@
                       </tr>
                   {% endfor %}
                   <tr>
-                      <th>FITTINGS</th>
-                      <th>NAME</th>
-                      <th>MATERIAL</th>
+                      <th>Elbow</th>
+                      <th>Grade</th>
+                      <th></th>
                       <th>SIZE</th>
                       <th>QUANTITY</th>
                   </tr>
-                  {% for fit in iso.fitting_set.all %}
+                  {% for fit in iso.elbow_set.all %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ fit.name }}</td>
-                          <td>{{ fit.material }}"</td>
-                          <td>{{ fit.size }}</td>
+                          <td>{{ fit.grade.name }}</td>
+                          <td></td>
+                          <td>{{ fit.size.name }}</td>
                           <td>{{ fit.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                  <tr>
+                      <th>Reducer</th>
+                      <th>Type</th>
+                      <th>Grade</th>
+                      <th>SIZE</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for red in iso.reducer_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ red.type }}</td>
+                          <td>{{ red.grade.name }}</td>
+                          <td>{{ red.size.name }}</td>
+                          <td>{{ red.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                  <tr>
+                      <th>Tee</th>
+                      <th>Grade</th>
+                      <th></th>
+                      <th>SIZE</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for tee in iso.tee_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ tee.grade.name }}</td>
+                          <td></td>
+                          <td>{{ tee.size.name }}</td>
+                          <td>{{ tee.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                   <tr>
+                      <th>Coupling</th>
+                      <th>Grade</th>
+                      <th></th>
+                      <th>SIZE</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for coupl in iso.coupling_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ coupl.grade.name }}</td>
+                          <td></td>
+                          <td>{{ coupl.size.name }}</td>
+                          <td>{{ coupl.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                    <tr>
+                      <th>Brach Fitting</th>
+                      <th>Grade</th>
+                      <th></th>
+                      <th>SIZE</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for brf in iso.branchfitting_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ brf.grade.name }}</td>
+                          <td></td>
+                          <td>{{ brf.size.name }}</td>
+                          <td>{{ brf.quantity }} NOS</td>
+                      </tr>
+                  {% endfor %}
+                   <tr>
+                      <th>VALVE</th>
+                      <th>SIZE</th>
+                      <th>TYPE</th>
+                      <th>END</th>
+                      <th>QUANTITY</th>
+                  </tr>
+                  {% for valve in iso.valve_set.all %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ valve.size }}</td>
+                          <td>{{ valve.type.name }}</td>
+                          <td>{{ valve.end_type.name }}</td>
+                          <td>{{ valve.quantity }} NOS</td>
                       </tr>
                   {% endfor %}
                   <tr>
@@ -82,7 +162,7 @@
                           <td>{{ forloop.counter }}</td>
                           <td>{{ gasket.size }}</td>
                           <td>{{ gasket.gasket_class.name }}"</td>
-                          <td>{{ gasket.gasket_material }}</td>
+                          <td>{{ gasket.gasket_material.name }}</td>
                           <td>{{ gasket.quantity }} NOS</td>
                       </tr>
                   {% endfor %}
@@ -96,7 +176,7 @@
                   {% for bolt in iso.bolt_set.all %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ bolt.size }}</td>
+                          <td>{{ bolt.size.name }}</td>
                           <td>{{ bolt.length }}"</td>
                           <td>{{ bolt.grade }}</td>
                           <td>{{ bolt.quantity }} NOS</td>
@@ -106,16 +186,16 @@
                       <th>SPOOL</th>
                       <th>TAG NO.</th>
                       <th></th>
-                      <th></th>
                       <th>STATUS</th>
+                      <th>Date</th>
                   </tr>
                   {% for spool in iso.spool_set.all %}
                       <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ spool.spool_tag }}</td>
                           <td></td>
-                          <td></td>
                           <td>{{ spool.spool_status.name }}</td>
+                          <td>{{ spool.timestamp }}</td>
                       </tr>
                   {% endfor %}
 

@@ -1,7 +1,8 @@
 from django import forms
 from .models import Owner, Project, Iso, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
-    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, WeldStatus, \
-    FitUpStatus, Pefs
+    Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, SpoolStatus, Spool, WeldStatus, MaterialGrade, \
+    FitUpStatus, Pefs, BoltSize, Valve, ValveEnd, ValveType, Elbow, Coupling, Tee, BranchFitting, Reducer, \
+    Unit
 
 from django.contrib.auth import get_user_model
 from dal import autocomplete
@@ -10,6 +11,10 @@ from dal import autocomplete
 User = get_user_model()
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+    
+    
 class IsoCreateForm(forms.ModelForm):
     service = forms.ModelChoiceField(
         queryset=Service.objects.all(),
@@ -23,11 +28,16 @@ class IsoCreateForm(forms.ModelForm):
         queryset=Pefs.objects.all(),
         widget=autocomplete.ModelSelect2(url='pefs_auto'),
     )
+    unit = forms.ModelChoiceField(
+        queryset=Unit.objects.all(),
+        widget=autocomplete.ModelSelect2(url='unit_auto'),
+    )
 
     class Meta:
         model = Iso
         fields = ['iso_no',
                   'pefs',
+                  'unit',
                   'service',
                   'line_class',
                   'is_approved',
@@ -62,6 +72,153 @@ class PipeCreateForm(forms.ModelForm):
                   ]
 
 
+class ElbowCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    grade = forms.ModelChoiceField(
+        queryset=MaterialGrade.objects.all(),
+        widget=autocomplete.ModelSelect2(url='mat_grade_auto'),
+    )
+   
+
+    class Meta:
+        model = Elbow
+        fields = [ 'iso',
+                   'size',
+                   'grade',
+                   'quantity',
+                  ]
+
+
+class CouplingCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    grade = forms.ModelChoiceField(
+        queryset=MaterialGrade.objects.all(),
+        widget=autocomplete.ModelSelect2(url='mat_grade_auto'),
+    )
+   
+
+    class Meta:
+        model = Coupling
+        fields = [ 'iso',
+                   'size',
+                   'grade',
+                   'quantity',
+                  ]                  
+
+
+class TeeCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    grade = forms.ModelChoiceField(
+        queryset=MaterialGrade.objects.all(),
+        widget=autocomplete.ModelSelect2(url='mat_grade_auto'),
+    )
+   
+
+    class Meta:
+        model = Tee
+        fields = [ 'iso',
+                   'size',
+                   'grade',
+                   'quantity',
+                  ]    
+                  
+
+class ReducerCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    grade = forms.ModelChoiceField(
+        queryset=MaterialGrade.objects.all(),
+        widget=autocomplete.ModelSelect2(url='mat_grade_auto'),
+    )
+    class Meta:
+        model = Reducer
+        fields = [ 'iso',
+                   'size',
+                   'type',
+                   'grade',
+                   'quantity',
+                  ]  
+                  
+                   
+class BrfCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    grade = forms.ModelChoiceField(
+        queryset=MaterialGrade.objects.all(),
+        widget=autocomplete.ModelSelect2(url='mat_grade_auto'),
+    )
+   
+
+    class Meta:
+        model = BranchFitting
+        fields = [ 'iso',
+                   'size',
+                   'grade',
+                   'quantity',
+                  ]  
+                  
+                  
+class ValveCreateForm(forms.ModelForm):
+    iso = forms.ModelChoiceField(
+        queryset=Iso.objects.all(),
+        widget=autocomplete.ModelSelect2(url='iso_auto'),
+    )
+    size = forms.ModelChoiceField(
+        queryset=Size.objects.all(),
+        widget=autocomplete.ModelSelect2(url='size_auto'),
+    )
+    type = forms.ModelChoiceField(
+        queryset=ValveType.objects.all(),
+        widget=autocomplete.ModelSelect2(url='valve_type_auto'),
+    )
+    end_type = forms.ModelChoiceField(
+        queryset=ValveEnd.objects.all(),
+        widget=autocomplete.ModelSelect2(url='valve_end_type_auto'),
+    )
+
+    class Meta:
+        model = Valve
+        fields = [ 'iso',
+                   'type',
+                   'size',
+                   'end_type',
+                   'quantity',
+                  ]
+                  
+                  
 class FittingCreateForm(forms.ModelForm):
     iso = forms.ModelChoiceField(
         queryset=Iso.objects.all(),
@@ -131,12 +288,8 @@ class BoltCreateForm(forms.ModelForm):
     )
 
     size = forms.ModelChoiceField(
-        queryset=Size.objects.all(),
-        widget=autocomplete.ModelSelect2(url='size_auto'),
-    )
-    length = forms.ModelChoiceField(
-        queryset=Size.objects.all(),
-        widget=autocomplete.ModelSelect2(url='size_auto'),
+        queryset=BoltSize.objects.all(),
+        widget=autocomplete.ModelSelect2(url='bolt_size_auto'),
     )
     class Meta:
         model = Bolt
@@ -193,7 +346,7 @@ class SpoolAddForm(forms.ModelForm):
                    'timestamp',
                   ]
         widgets = {
-            'timestamp': forms.DateInput(attrs={'class': 'datepicker'}),
+            'timestamp': DateInput(),
         }
 
 
@@ -210,6 +363,13 @@ class ServiceCreateForm(forms.ModelForm):
         model = Service
         fields = ['name']
 
+
+class UnitCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Unit
+        fields = ['name']
+        
 
 class SizeCreateForm(forms.ModelForm):
 
@@ -253,6 +413,13 @@ class GradeCreateForm(forms.ModelForm):
         fields = ['name']
 
 
+class MaterialGradeCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = MaterialGrade
+        fields = ['name']
+        
+
 class GasketMaterialCreateForm(forms.ModelForm):
 
     class Meta:
@@ -267,6 +434,20 @@ class SpoolStatusCreateForm(forms.ModelForm):
         fields = ['name']
 
 
+class ValveTypeCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = ValveType
+        fields = ['name']
+        
+
+class ValveEndTypeCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = ValveEnd
+        fields = ['name']
+        
+        
 class ProjectCreateForm(forms.ModelForm):
 
     class Meta:
@@ -288,7 +469,7 @@ class OwnerCreateForm(forms.ModelForm):
         queryset=User.objects.all(),
         widget=autocomplete.ModelSelect2(url='user_auto')
     )
-    client = forms.ModelChoiceField(
+    purchase = forms.ModelChoiceField(
         queryset=User.objects.all(),
         widget=autocomplete.ModelSelect2(url='user_auto')
     )
@@ -307,7 +488,7 @@ class OwnerCreateForm(forms.ModelForm):
 
     class Meta:
         model = Owner
-        fields = ['const_head', 'hr', 'design', 'store', 'fabrication','qc', 'client']
+        fields = ['const_head', 'hr', 'design', 'purchase', 'store', 'fabrication','qc']
         # labels = {'user': 'Admin'}
 
 

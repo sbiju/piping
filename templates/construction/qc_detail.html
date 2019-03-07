@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+         <div class="table-responsive">
+             <h3 style="margin-bottom:15px;">Joint Detail</h3>
+              <table class="table table-bordered emp-list">
+                  <tr>
+                      <th>ISO NO./ LINE NO.</th>
+                      <th>Joint No.</th>
+                      <th>Fitup Status</th>
+                      <th>Fitup Inspection Date</th>
+
+                      <th>Welding Status</th>
+                      <th>Welding Inspection date</th>
+                      <th>Hydro test status</th>
+
+                      <th>Hydro test Inspection Date</th>
+                      <th>Radiography Status</th>
+                      <th>Radiography Inspection Date</th>
+                      <th>Edit</th>
+                  </tr>
+                  <tr>
+                      <td>{{ object.iso.iso_no }}</td>
+                      <td>{{ object.joint.joint_no }}</td>
+                      <td>{{ object.fitup_status }}</td>
+                      <td>{{ object.fitup_inspection_date }}</td>
+
+                      <td>{{ object.welding_status }} hrs</td>
+                      <td>{{ object.welding_inspection_date }}</td>
+                      <td>{{ object.hydro_test_status }}</td>
+
+                      <td>{{ object.hydro_test_inspection_date }}</td>
+                      <td>{{ object.radiography_status }}</td>
+                      <td>{{ object.radiography_inspection_date }}</td>
+                      <td><a href="{{ object.get_weld_url }}">Edit</a></td>
+                  </tr>
+              </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

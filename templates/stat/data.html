@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class="container dataContainer">
+    <h5 class="pt-2 pb-2">ISOMETRIC</h5>
     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
@@ -13,6 +14,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <h5 class="pt-2 pb-2">PIPES AND FLANGE</h5>
+       <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
@@ -31,17 +35,50 @@
                 </div>
             </div>
         </div>
+      </div>
+    <h5 class="pt-2 pb-2">FITTINGS</h5>
+    <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                       <a href="{% url 'add_tee' %}">Add Tee</a>
+                    </h5>
+                 </div>    
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                       <a href="{% url 'add_coupling' %}">Add Coupling</a>
+                    </h5>
+                 </div>    
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                       <a href="{% url 'add_brf' %}">Add BranchFitting</a>
+                    </h5>
+                 </div>    
+            </div>
+        </div>
     </div>
     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'add_fitting' %}">Add Fittings</a>
+                       <a href="{% url 'add_reducer' %}">Add Reducer</a>
                     </h5>
-                </div>
+                 </div>    
             </div>
         </div>
+    </div>
+    <h5 class="pt-2 pb-2">BOLTS AND GASKETS</h5>
+    <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
@@ -61,6 +98,19 @@
             </div>
         </div>
      </div>
+     <h5 class="pt-2 pb-2">VALVES</h5>
+    <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'add_valve' %}">Add Valve</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+     </div>
+     <h5 class="pt-2 pb-2">SPOOLS</h5>
      <div class="row department">
         <div class="col-sm-4">
             <div class="card">
@@ -71,6 +121,9 @@
                 </div>
             </div>
         </div>
+     </div>
+     <h5 class="pt-2 pb-2">REPORTS</h5>
+     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
@@ -89,8 +142,6 @@
                 </div>
             </div>
         </div>
-     </div>
-     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
@@ -101,7 +152,6 @@
             </div>
         </div>
     </div>
-
     <div class="row department">
         <div class="col-sm-4">
             <div class="card">

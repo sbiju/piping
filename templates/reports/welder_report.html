@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="pb-2">Summary Report</h3>
+         <div class="table-responsive">
+              <table class="table table-bordered">
+                  <tr>
+                  <th>Total Joints</th>
+                  <th>Total Inch Dia Completed</th>
+                  </tr>
+                   {% for item in welding %}
+                  <tr>
+                      <td>{{ item.welder__first_name }}</td>
+                      <td>{{ item.inch_dia }}</td>
+                  </tr>
+                  {% endfor %}
+              </table>
+        </div>
+        </div>
+    </div>
+    <!--<a href="{% url 'report_joint_pdf' %}" class="btn btn-info">Print to PDF</a>-->
+    <!--<a href="{% url 'iso_csv' %}" class="btn btn-info ml-auto">Save to EXEL</a>-->
+</div>
+{% endblock %}

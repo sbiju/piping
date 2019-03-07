@@ -1,18 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="container dataContainer">
+     <h5 class="pt-2 pb-2">JOINTS</h5>
      <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'joint_add' %}">Add Joints</a>
+                        <a href="{% url 'joint_add' %}">Add Fitup-Data</a>
                     </h5>
                 </div>
             </div>
         </div>
+     </div>
+     <h5 class="pt-2 pb-2">UPDATE WELD STATUS</h5>
+     <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'joint_list' %}">Update</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+     </div>    
+     <h5 class="pt-2 pb-2">REPORTS</h5>
+     <div class="row department">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'production_report' %}">Production Report</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'production_summary' %}">Production Summary</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+     </div>  
+     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
@@ -31,18 +66,7 @@
                 </div>
             </div>
         </div>
-     </div>
-     <div class="row department">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{% url 'mat_list' %}">Material List</a>
-                    </h5>
-                </div>
-            </div>
-        </div>
-    </div>
+     </div> 
     <div class="row department">
         <div class="col-sm-4">
             <div class="card">
@@ -57,8 +81,10 @@
                           </div>
                           <div class="modal-body">
                               <ul>
+                                  <li><span data-feather="arrow-down-right"></span> Click on add joints link</li>
                                   <li><span data-feather="arrow-down-right"></span> Select required isometric from the dropdown or type the initial letters of the isometric for faster retrieval</li>
-                                  <li><span data-feather="arrow-down-right"></span> Update status of fabrication against each isometric</li>
+                                  <li><span data-feather="arrow-down-right"></span> Add the fitup data on selected Isometric and save</li>
+                                  <li><span data-feather="arrow-down-right"></span> For updating weld status select the isometric in the joint list and use the update link</li>
                               </ul>
                           </div>
                           <div class="modal-footer">
@@ -71,5 +97,4 @@
           </div>
      </div>
 </div>
-
 {% endblock %}

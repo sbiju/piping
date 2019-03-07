@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'control_centre',
     'materials',
     'hr',
+    'reports',
 ]
 
 SITE_ID = 1

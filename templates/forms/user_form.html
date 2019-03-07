@@ -8,9 +8,10 @@
         <div class="col-sm-6 offset-3">
             <form method="POST">{% csrf_token %}
                 {{ form|crispy }}
-                <input type="submit" class="btn btn-success" value="Save and Add More">
-            </form><hr/>
-            <a href="/" class="btn btn-primary mr-auto">Cancel</a>
+                <p class="text-muted">*Attention! Total eight users needed.</p>
+                <input type="submit" class="btn btn-success" value="Save">
+            </form>
+            
         </div>
     </div>
 </div>

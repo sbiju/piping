@@ -6,11 +6,11 @@ from django.urls import reverse_lazy
 from dal import autocomplete
 from .forms import ServiceCreateForm, SizeCreateForm, MaterialCreateForm, FlangeClassCreateForm, \
     ScheduleCreateForm, LineClassCreateForm, GradeCreateForm, GasketMaterialCreateForm, SpoolStatusCreateForm, \
-    PefsCreateForm
+    PefsCreateForm, ValveTypeCreateForm, ValveEndTypeCreateForm, MaterialGradeCreateForm, UnitCreateForm
 
 from .models import Owner, Iso, Project, Pipe, Material, Size, Service, Schedule, LineClass, Fitting, Flange, \
     Bolt, BoltGrade, FlangeClass, GasketMaterial, Gasket, Spool, SpoolStatus, FitUpStatus, \
-    WeldStatus, Pefs
+    WeldStatus, Pefs, ValveType, ValveEnd, MaterialGrade, Unit
 import json
 
 User = get_user_model()
@@ -35,6 +35,26 @@ class ServiceCreateView(CreateView):
         context['heading'] = 'Add Service'
         return context
 
+
+class UnitCreateView(CreateView):
+    model = Unit
+    form_class = UnitCreateForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('data')
+
+    def form_valid(self, form):
+        owner = Owner.objects.get(user=self.request.user)
+        form.instance.owner = owner
+        project = Project.objects.get(owner__user = self.request.user)
+        form.instance.project = project
+        valid_data = super(UnitCreateView, self).form_valid(form)
+        return valid_data
+
+    def get_context_data(self, **kwargs):
+        context = super(UnitCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Service'
+        return context
+        
 
 class SizeCreateView(CreateView):
     model = Size
@@ -192,6 +212,66 @@ class PefsAddView(CreateView):
         context = super(PefsAddView, self).get_context_data(**kwargs)
         context['heading'] = 'Add PEFS/ P&ID'
         return context
+
+
+class ValveTypeCreateView(CreateView):
+    model = ValveType
+    form_class = ValveTypeCreateForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('data')
+
+    def form_valid(self, form):
+        owner = Owner.objects.get(user=self.request.user)
+        form.instance.owner = owner
+        project = Project.objects.get(owner__user = self.request.user)
+        form.instance.project = project
+        valid_data = super(ValveTypeCreateView, self).form_valid(form)
+        return valid_data
+
+    def get_context_data(self, **kwargs):
+        context = super(ValveTypeCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Valve Type'
+        return context
+        
+
+class ValveEndTypeCreateView(CreateView):
+    model = ValveEnd
+    form_class = ValveEndTypeCreateForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('data')
+
+    def form_valid(self, form):
+        owner = Owner.objects.get(user=self.request.user)
+        form.instance.owner = owner
+        project = Project.objects.get(owner__user = self.request.user)
+        form.instance.project = project
+        valid_data = super(ValveEndTypeCreateView, self).form_valid(form)
+        return valid_data
+
+    def get_context_data(self, **kwargs):
+        context = super(ValveEndTypeCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Valve Type'
+        return context
+
+
+class MaterialGradeCreateView(CreateView):
+    model = MaterialGrade
+    form_class = MaterialGradeCreateForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('data')
+
+    def form_valid(self, form):
+        owner = Owner.objects.get(user=self.request.user)
+        form.instance.owner = owner
+        project = Project.objects.get(owner__user = self.request.user)
+        form.instance.project = project
+        valid_data = super(MaterialGradeCreateView, self).form_valid(form)
+        return valid_data
+
+    def get_context_data(self, **kwargs):
+        context = super(MaterialGradeCreateView, self).get_context_data(**kwargs)
+        context['heading'] = 'Add Valve Type'
+        return context        
 
 
 class SpoolStatusCreateView(CreateView):

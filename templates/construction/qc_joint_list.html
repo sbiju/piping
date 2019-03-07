@@ -3,6 +3,63 @@
 {% block content %}
 
 <div class="container fab-report">
+    <div class="row" style="margin-top:20px; margin-bottom:20px;">
+	<form class="search-form">
+		<input type="text" class="form-control" id="search-qc" placeholder="Search Joint" name="q" value="{{ request.GET.q }}">
+	</form>
+</div>
+    <div class="row">
+         <div class="table-responsive">
+             <h3>{{ heading }}</h3>
+             <p>(Blanks are pending Inspection)</p>
+             (<a href="{% url 'fitup_passed' %}"> Fitup Passed List</a>,
+             <a href="{% url 'fitup_failed' %}"> Fitup Failed List</a>,
+             <a href="{% url 'weld_passed' %}"> Welding Passed List</a>,
+             <a href="{% url 'weld_failed' %}"> Welding Failed List</a>,
+             <a href="{% url 'radio_failed' %}"> Radiography Failed List</a>,
+             <a href="{% url 'radio_passed' %}"> Radiography Passed List </a>)
+             <a href="{% url 'qc_add' %}" style="float: right;">Add New Fitup Inspection</a>
+
+                  <table class="table table-bordered">
+                      <tr>
+                          <th>Sl.No</th>
+                          <th>ISO NO./ LINE NO.</th>
+                          <th>Joint No.</th>
+                          <th>Fitup Insp Status</th>
+                          <th>Fitup Insp. Date</th>
+                          <th>Weld Status</th>
+                          <th>Welding Insp. Date</th>
+                          <th>Radiography Status</th>
+                          <th>Radiography Insp. Date</th> 
+                      </tr>
+                      {% for item in joint_list %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ item.iso.iso_no }}</td>
+                          <td>{{ item.joint_no }}</td>
+                        
+                          {% for insp in item.qc_set.all %}
+                          <td>{{ insp.fitup_status }}<a href="{{ insp.get_fitup_url }}"> (Edit)</a></td>
+                          <td>{{ insp.fitup_inspection_date }}</td> 
+                          <td>{{ insp.welding_status }}<a href="{{ insp.get_weld_url }}"> (Edit)</a></td>
+                          <td>{{ insp.welding_inspection_date }}</td>
+                          <td>{{ insp.radiography_status }}<a href="{{ insp.get_radio_url }}"> (Edit)</a></td>
+                          <td>{{ insp.radiography_inspection_date }}</td>
+                          {% endfor %}
+                          
+                      </tr>
+                      {% endfor %}
+                  </table>
+        </div>
+
+    </div>
+    <a href="{% url 'qc_pdf' %}" class="btn btn-info">Print to PDF</a>
+    <a href="{% url 'qc_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
+
+</div>
+{% endblock %}
+
+<div class="container fab-report">
     <div class="row">
          <div class="table-responsive">
              <h3>{{ heading }} </h3>
@@ -49,4 +106,3 @@
     <a href="{% url 'qc_csv' %}" class="btn btn-info" style="float: right;">Save to EXEL</a>
 
 </div>
-{% endblock %}
