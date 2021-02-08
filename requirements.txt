@@ -18,7 +18,7 @@ django-weasyprint==0.5.2
 djangorestframework==3.8.2
 et-xmlfile==1.0.1
 html5lib==1.0.1
-httplib2==0.11.3
+httplib2==0.19.0
 idna==2.7
 jdcal==1.4
 oauthlib==2.1.0
