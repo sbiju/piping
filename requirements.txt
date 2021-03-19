@@ -15,7 +15,7 @@ django-import-export==1.0.1
 django-querysetsequence==0.10
 django-tempus-dominus==5.1.2.1
 django-weasyprint==0.5.2
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 et-xmlfile==1.0.1
 html5lib==1.0.1
 httplib2==0.11.3
