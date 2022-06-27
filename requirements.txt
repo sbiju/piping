@@ -32,7 +32,7 @@ Pyphen==0.9.4
 python3-openid==3.1.0
 pytz==2017.3
 PyYAML==3.12
-reportlab==3.4.0
+reportlab==3.5.55
 requests==2.19.1
 requests-oauthlib==1.0.0
 six==1.11.0
